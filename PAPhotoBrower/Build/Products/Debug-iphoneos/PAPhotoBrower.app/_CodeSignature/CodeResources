@@ -35,7 +35,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			dGWOrJgehNgAoiaKtwsP4ZRjioE=
+			2FJpGjByLeGiDce0WIfej2XPbLY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -53,7 +53,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			qHfi0gy7O26bIDTzgyP8RaEwrf8=
+			LggY7uoUEwNW0WuQTgExNJaVzjY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -69,6 +69,22 @@
 		<key>embedded.mobileprovision</key>
 		<data>
 		/gWgKDF88uPqP92RqWzQoR8h878=
+		</data>
+		<key>icon_back@3x.png</key>
+		<data>
+		nEbWpq/wGncLvRBztmWCzxW26DA=
+		</data>
+		<key>photo_localSelected_camera@3x.png</key>
+		<data>
+		VX0Tq5cM+DC0l++pRq8wXMa2nhQ=
+		</data>
+		<key>photo_localSelected_tag@3x.png</key>
+		<data>
+		B8sMitbQZr4pPyP0SVTlWP/y2x4=
+		</data>
+		<key>photo_localUnselected_tag@3x.png</key>
+		<data>
+		LT1x3EaTZK2ci61ZGzvVT5rSrUo=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -104,7 +120,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			dGWOrJgehNgAoiaKtwsP4ZRjioE=
+			2FJpGjByLeGiDce0WIfej2XPbLY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -122,7 +138,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			qHfi0gy7O26bIDTzgyP8RaEwrf8=
+			LggY7uoUEwNW0WuQTgExNJaVzjY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -130,6 +146,22 @@
 		<key>embedded.mobileprovision</key>
 		<data>
 		/gWgKDF88uPqP92RqWzQoR8h878=
+		</data>
+		<key>icon_back@3x.png</key>
+		<data>
+		nEbWpq/wGncLvRBztmWCzxW26DA=
+		</data>
+		<key>photo_localSelected_camera@3x.png</key>
+		<data>
+		VX0Tq5cM+DC0l++pRq8wXMa2nhQ=
+		</data>
+		<key>photo_localSelected_tag@3x.png</key>
+		<data>
+		B8sMitbQZr4pPyP0SVTlWP/y2x4=
+		</data>
+		<key>photo_localUnselected_tag@3x.png</key>
+		<data>
+		LT1x3EaTZK2ci61ZGzvVT5rSrUo=
 		</data>
 	</dict>
 	<key>rules</key>

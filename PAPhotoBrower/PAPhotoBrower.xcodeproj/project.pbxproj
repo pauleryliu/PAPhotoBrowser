@@ -15,6 +15,19 @@
 		994696181C07631A00333CC7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 994696161C07631A00333CC7 /* LaunchScreen.storyboard */; };
 		994696231C07631A00333CC7 /* PAPhotoBrowerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 994696221C07631A00333CC7 /* PAPhotoBrowerTests.m */; };
 		9946962E1C07631A00333CC7 /* PAPhotoBrowerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9946962D1C07631A00333CC7 /* PAPhotoBrowerUITests.m */; };
+		994696441C07E5C700333CC7 /* PAImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 994696411C07E5C700333CC7 /* PAImagePickerController.m */; };
+		994696451C07E5C700333CC7 /* PAImagePickerGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 994696431C07E5C700333CC7 /* PAImagePickerGroupController.m */; };
+		994696481C07E5CF00333CC7 /* PAImagePickerPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 994696471C07E5CF00333CC7 /* PAImagePickerPreviewViewController.m */; };
+		9946964B1C07E5E700333CC7 /* PAImagePickerPreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9946964A1C07E5E700333CC7 /* PAImagePickerPreviewCell.m */; };
+		994696501C07E5F300333CC7 /* PAImagePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9946964D1C07E5F300333CC7 /* PAImagePickerCell.m */; };
+		994696511C07E5F300333CC7 /* PAImagePickerTakePhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9946964F1C07E5F300333CC7 /* PAImagePickerTakePhotoCell.m */; };
+		9946965C1C07EAE100333CC7 /* photo_localSelected_tag@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9946965A1C07EAE100333CC7 /* photo_localSelected_tag@3x.png */; };
+		9946965D1C07EAE100333CC7 /* photo_localSelected_camera@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9946965B1C07EAE100333CC7 /* photo_localSelected_camera@3x.png */; };
+		9946965F1C07EAF300333CC7 /* photo_localUnselected_tag@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9946965E1C07EAF300333CC7 /* photo_localUnselected_tag@3x.png */; };
+		994696611C07EB1D00333CC7 /* icon_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 994696601C07EB1D00333CC7 /* icon_back@3x.png */; };
+		994696691C07ECD700333CC7 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994696681C07ECD700333CC7 /* Photos.framework */; };
+		9946966B1C07ECDE00333CC7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9946966A1C07ECDE00333CC7 /* AVFoundation.framework */; };
+		994696701C082DE800333CC7 /* PAPhotoBrowserHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9946966F1C082DE800333CC7 /* PAPhotoBrowserHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +64,26 @@
 		994696291C07631A00333CC7 /* PAPhotoBrowerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PAPhotoBrowerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9946962D1C07631A00333CC7 /* PAPhotoBrowerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PAPhotoBrowerUITests.m; sourceTree = "<group>"; };
 		9946962F1C07631A00333CC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		994696401C07E5C700333CC7 /* PAImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAImagePickerController.h; sourceTree = "<group>"; };
+		994696411C07E5C700333CC7 /* PAImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImagePickerController.m; sourceTree = "<group>"; };
+		994696421C07E5C700333CC7 /* PAImagePickerGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAImagePickerGroupController.h; sourceTree = "<group>"; };
+		994696431C07E5C700333CC7 /* PAImagePickerGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImagePickerGroupController.m; sourceTree = "<group>"; };
+		994696461C07E5CF00333CC7 /* PAImagePickerPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAImagePickerPreviewViewController.h; sourceTree = "<group>"; };
+		994696471C07E5CF00333CC7 /* PAImagePickerPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImagePickerPreviewViewController.m; sourceTree = "<group>"; };
+		994696491C07E5E700333CC7 /* PAImagePickerPreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAImagePickerPreviewCell.h; sourceTree = "<group>"; };
+		9946964A1C07E5E700333CC7 /* PAImagePickerPreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImagePickerPreviewCell.m; sourceTree = "<group>"; };
+		9946964C1C07E5F300333CC7 /* PAImagePickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAImagePickerCell.h; sourceTree = "<group>"; };
+		9946964D1C07E5F300333CC7 /* PAImagePickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImagePickerCell.m; sourceTree = "<group>"; };
+		9946964E1C07E5F300333CC7 /* PAImagePickerTakePhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAImagePickerTakePhotoCell.h; sourceTree = "<group>"; };
+		9946964F1C07E5F300333CC7 /* PAImagePickerTakePhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAImagePickerTakePhotoCell.m; sourceTree = "<group>"; };
+		9946965A1C07EAE100333CC7 /* photo_localSelected_tag@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_localSelected_tag@3x.png"; sourceTree = "<group>"; };
+		9946965B1C07EAE100333CC7 /* photo_localSelected_camera@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_localSelected_camera@3x.png"; sourceTree = "<group>"; };
+		9946965E1C07EAF300333CC7 /* photo_localUnselected_tag@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_localUnselected_tag@3x.png"; sourceTree = "<group>"; };
+		994696601C07EB1D00333CC7 /* icon_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_back@3x.png"; sourceTree = "<group>"; };
+		994696681C07ECD700333CC7 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		9946966A1C07ECDE00333CC7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9946966E1C082DE800333CC7 /* PAPhotoBrowserHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAPhotoBrowserHelper.h; sourceTree = "<group>"; };
+		9946966F1C082DE800333CC7 /* PAPhotoBrowserHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAPhotoBrowserHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +91,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9946966B1C07ECDE00333CC7 /* AVFoundation.framework in Frameworks */,
+				994696691C07ECD700333CC7 /* Photos.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				994696071C07631A00333CC7 /* PAPhotoBrower */,
+				9946966D1C07ECF500333CC7 /* Frameworks */,
 				994696211C07631A00333CC7 /* PAPhotoBrowerTests */,
 				9946962C1C07631A00333CC7 /* PAPhotoBrowerUITests */,
 				994696061C07631A00333CC7 /* Products */,
@@ -101,15 +137,8 @@
 		994696071C07631A00333CC7 /* PAPhotoBrower */ = {
 			isa = PBXGroup;
 			children = (
-				9946960B1C07631A00333CC7 /* AppDelegate.h */,
-				9946960C1C07631A00333CC7 /* AppDelegate.m */,
-				9946960E1C07631A00333CC7 /* ViewController.h */,
-				9946960F1C07631A00333CC7 /* ViewController.m */,
-				994696111C07631A00333CC7 /* Main.storyboard */,
-				994696141C07631A00333CC7 /* Assets.xcassets */,
-				994696161C07631A00333CC7 /* LaunchScreen.storyboard */,
-				994696191C07631A00333CC7 /* Info.plist */,
-				994696081C07631A00333CC7 /* Supporting Files */,
+				994696631C07EBF700333CC7 /* Demo */,
+				9946963C1C07E58A00333CC7 /* PAPhotoBrowser */,
 			);
 			path = PAPhotoBrower;
 			sourceTree = "<group>";
@@ -138,6 +167,153 @@
 				9946962F1C07631A00333CC7 /* Info.plist */,
 			);
 			path = PAPhotoBrowerUITests;
+			sourceTree = "<group>";
+		};
+		9946963C1C07E58A00333CC7 /* PAPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				994696541C07E9A400333CC7 /* Feature */,
+				9946963D1C07E59800333CC7 /* ViewController */,
+				9946963E1C07E5A000333CC7 /* Cell */,
+				9946963F1C07E5A800333CC7 /* Model */,
+				994696621C07EBC200333CC7 /* Helper */,
+				994696521C07E94C00333CC7 /* Resource */,
+			);
+			name = PAPhotoBrowser;
+			sourceTree = "<group>";
+		};
+		9946963D1C07E59800333CC7 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				994696401C07E5C700333CC7 /* PAImagePickerController.h */,
+				994696411C07E5C700333CC7 /* PAImagePickerController.m */,
+				994696421C07E5C700333CC7 /* PAImagePickerGroupController.h */,
+				994696431C07E5C700333CC7 /* PAImagePickerGroupController.m */,
+				994696461C07E5CF00333CC7 /* PAImagePickerPreviewViewController.h */,
+				994696471C07E5CF00333CC7 /* PAImagePickerPreviewViewController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		9946963E1C07E5A000333CC7 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9946964C1C07E5F300333CC7 /* PAImagePickerCell.h */,
+				9946964D1C07E5F300333CC7 /* PAImagePickerCell.m */,
+				9946964E1C07E5F300333CC7 /* PAImagePickerTakePhotoCell.h */,
+				9946964F1C07E5F300333CC7 /* PAImagePickerTakePhotoCell.m */,
+				994696491C07E5E700333CC7 /* PAImagePickerPreviewCell.h */,
+				9946964A1C07E5E700333CC7 /* PAImagePickerPreviewCell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		9946963F1C07E5A800333CC7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		994696521C07E94C00333CC7 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				994696531C07E95400333CC7 /* Image */,
+			);
+			name = Resource;
+			sourceTree = "<group>";
+		};
+		994696531C07E95400333CC7 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				9946965A1C07EAE100333CC7 /* photo_localSelected_tag@3x.png */,
+				9946965B1C07EAE100333CC7 /* photo_localSelected_camera@3x.png */,
+				9946965E1C07EAF300333CC7 /* photo_localUnselected_tag@3x.png */,
+				994696601C07EB1D00333CC7 /* icon_back@3x.png */,
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
+		994696541C07E9A400333CC7 /* Feature */ = {
+			isa = PBXGroup;
+			children = (
+				994696551C07E9AB00333CC7 /* TestA */,
+			);
+			name = Feature;
+			sourceTree = "<group>";
+		};
+		994696551C07E9AB00333CC7 /* TestA */ = {
+			isa = PBXGroup;
+			children = (
+				994696591C07E9C300333CC7 /* Model */,
+				994696581C07E9BE00333CC7 /* Model */,
+				994696571C07E9B900333CC7 /* Cell */,
+				994696561C07E9B200333CC7 /* ViewController */,
+			);
+			name = TestA;
+			sourceTree = "<group>";
+		};
+		994696561C07E9B200333CC7 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		994696571C07E9B900333CC7 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		994696581C07E9BE00333CC7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		994696591C07E9C300333CC7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		994696621C07EBC200333CC7 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				9946966E1C082DE800333CC7 /* PAPhotoBrowserHelper.h */,
+				9946966F1C082DE800333CC7 /* PAPhotoBrowserHelper.m */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
+		994696631C07EBF700333CC7 /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				9946960B1C07631A00333CC7 /* AppDelegate.h */,
+				9946960C1C07631A00333CC7 /* AppDelegate.m */,
+				9946960E1C07631A00333CC7 /* ViewController.h */,
+				9946960F1C07631A00333CC7 /* ViewController.m */,
+				994696111C07631A00333CC7 /* Main.storyboard */,
+				994696141C07631A00333CC7 /* Assets.xcassets */,
+				994696161C07631A00333CC7 /* LaunchScreen.storyboard */,
+				994696191C07631A00333CC7 /* Info.plist */,
+				994696081C07631A00333CC7 /* Supporting Files */,
+			);
+			name = Demo;
+			sourceTree = "<group>";
+		};
+		9946966D1C07ECF500333CC7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9946966A1C07ECDE00333CC7 /* AVFoundation.framework */,
+				994696681C07ECD700333CC7 /* Photos.framework */,
+			);
+			name = Frameworks;
+			path = PAPhotoBrower;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,8 +419,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9946965D1C07EAE100333CC7 /* photo_localSelected_camera@3x.png in Resources */,
+				9946965C1C07EAE100333CC7 /* photo_localSelected_tag@3x.png in Resources */,
 				994696181C07631A00333CC7 /* LaunchScreen.storyboard in Resources */,
 				994696151C07631A00333CC7 /* Assets.xcassets in Resources */,
+				9946965F1C07EAF300333CC7 /* photo_localUnselected_tag@3x.png in Resources */,
+				994696611C07EB1D00333CC7 /* icon_back@3x.png in Resources */,
 				994696131C07631A00333CC7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,8 +450,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				994696481C07E5CF00333CC7 /* PAImagePickerPreviewViewController.m in Sources */,
+				994696451C07E5C700333CC7 /* PAImagePickerGroupController.m in Sources */,
+				994696701C082DE800333CC7 /* PAPhotoBrowserHelper.m in Sources */,
+				994696501C07E5F300333CC7 /* PAImagePickerCell.m in Sources */,
+				994696441C07E5C700333CC7 /* PAImagePickerController.m in Sources */,
 				994696101C07631A00333CC7 /* ViewController.m in Sources */,
+				9946964B1C07E5E700333CC7 /* PAImagePickerPreviewCell.m in Sources */,
 				9946960D1C07631A00333CC7 /* AppDelegate.m in Sources */,
+				994696511C07E5F300333CC7 /* PAImagePickerTakePhotoCell.m in Sources */,
 				9946960A1C07631A00333CC7 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -496,6 +683,7 @@
 				994696341C07631A00333CC7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		994696351C07631A00333CC7 /* Build configuration list for PBXNativeTarget "PAPhotoBrowerTests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +692,7 @@
 				994696371C07631A00333CC7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		994696381C07631A00333CC7 /* Build configuration list for PBXNativeTarget "PAPhotoBrowerUITests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +701,7 @@
 				9946963A1C07631A00333CC7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

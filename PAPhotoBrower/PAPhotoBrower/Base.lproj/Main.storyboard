@@ -16,12 +16,31 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSQ-22-M1O">
+                                <rect key="frame" x="207" y="279" width="186" height="42"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="PAPhotoBrowser"/>
+                                <connections>
+                                    <action selector="paPhotoBrowserButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pZv-xX-ic2"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZSQ-22-M1O" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NA5-7c-TDD"/>
+                            <constraint firstItem="ZSQ-22-M1O" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="XJw-C7-D0e"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="paPhotoBrowserButton" destination="ZSQ-22-M1O" id="DlG-Gj-Lsi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="283" y="285"/>
         </scene>
     </scenes>
 </document>
