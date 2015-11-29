@@ -3,14 +3,20 @@
 <plist version="1.0">
 <dict>
 	<key>application-identifier</key>
-	<string>T5TN3E6VN3.com.feiwa.PAPhotoBrower</string>
+	<string>GRT532Z4Z7.com.feiwa.PAPhotoBrower</string>
+	<key>aps-environment</key>
+	<string>development</string>
+	<key>com.apple.developer.pass-type-identifiers</key>
+	<array>
+		<string>GRT532Z4Z7.*</string>
+	</array>
 	<key>com.apple.developer.team-identifier</key>
-	<string>T5TN3E6VN3</string>
+	<string>GRT532Z4Z7</string>
 	<key>get-task-allow</key>
 	<true/>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>T5TN3E6VN3.com.feiwa.PAPhotoBrower</string>
+		<string>GRT532Z4Z7.com.feiwa.PAPhotoBrower</string>
 	</array>
 </dict>
 </plist>

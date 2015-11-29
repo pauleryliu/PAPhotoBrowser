@@ -155,7 +155,7 @@ static NSString * const reuseIdentifier = @"Cell";
 {
     if (self.selectedAsserts.count >= self.maxNumberOfPhotos && ![self.rightBarBtn isSelected]) {
         // 超过范围
-        NSString *tip = [NSString stringWithFormat:@"最多只能选取%ld张图片哦",self.maxNumberOfPhotos];
+//        NSString *tip = [NSString stringWithFormat:@"最多只能选取%ld张图片哦",self.maxNumberOfPhotos];
 //        PostMsg(tip);
         return;
     }

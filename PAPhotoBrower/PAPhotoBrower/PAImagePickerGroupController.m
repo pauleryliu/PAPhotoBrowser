@@ -32,7 +32,7 @@ alpha:1.0]
     self.title = @"本地照片";
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0x8f8f95)}];
-    
+
     [self setupAssert];
     [self setNavigationBar];
     
@@ -47,11 +47,6 @@ alpha:1.0]
     [self.view addSubview:self.tableView];
     self.tableView.contentInset = UIEdgeInsetsMake(0, -15, 0, 0);
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, -15);
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Private Method

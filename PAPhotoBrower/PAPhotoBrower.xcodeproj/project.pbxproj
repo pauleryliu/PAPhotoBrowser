@@ -7,6 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		993EFD701C0A9D2100F0CA84 /* PAVideoHandlerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 993EFD6E1C0A9D2100F0CA84 /* PAVideoHandlerViewController.m */; };
+		993EFD711C0A9D2100F0CA84 /* PAVideoHandlerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 993EFD6F1C0A9D2100F0CA84 /* PAVideoHandlerViewController.xib */; };
+		993EFD761C0A9D2D00F0CA84 /* PAVideoCropHanderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 993EFD731C0A9D2D00F0CA84 /* PAVideoCropHanderView.m */; };
+		993EFD771C0A9D2D00F0CA84 /* PAVideoCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 993EFD751C0A9D2D00F0CA84 /* PAVideoCropView.m */; };
+		993EFD801C0A9D7200F0CA84 /* SDAVAssetExportSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 993EFD7B1C0A9D7200F0CA84 /* SDAVAssetExportSession.m */; };
+		993EFD811C0A9D7200F0CA84 /* PAVideoRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 993EFD7D1C0A9D7200F0CA84 /* PAVideoRecorder.m */; };
+		993EFD821C0A9D7200F0CA84 /* PAVideoRecorderHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 993EFD7F1C0A9D7200F0CA84 /* PAVideoRecorderHelper.m */; };
+		993EFD8A1C0A9D9A00F0CA84 /* PAVideoAssetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 993EFD841C0A9D9A00F0CA84 /* PAVideoAssetViewController.m */; };
+		993EFD8B1C0A9D9A00F0CA84 /* PAVideoGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 993EFD861C0A9D9A00F0CA84 /* PAVideoGroupViewController.m */; };
+		993EFD8C1C0A9D9A00F0CA84 /* PAVideoRecorderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 993EFD881C0A9D9A00F0CA84 /* PAVideoRecorderVC.m */; };
+		993EFD8D1C0A9D9A00F0CA84 /* PAVideoRecorderVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 993EFD891C0A9D9A00F0CA84 /* PAVideoRecorderVC.xib */; };
+		993EFD921C0AA05A00F0CA84 /* video_crop_handle_left@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993EFD8F1C0AA05A00F0CA84 /* video_crop_handle_left@3x.png */; };
+		993EFD931C0AA05A00F0CA84 /* video_crop_handle_right@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993EFD901C0AA05A00F0CA84 /* video_crop_handle_right@3x.png */; };
+		993EFD941C0AA05A00F0CA84 /* video_localSelected_mask@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993EFD911C0AA05A00F0CA84 /* video_localSelected_mask@3x.png */; };
+		993EFDA51C0AA06100F0CA84 /* video_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993EFD951C0AA06100F0CA84 /* video_camera@2x.png */; };
+		993EFDA61C0AA06100F0CA84 /* video_flash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993EFD961C0AA06100F0CA84 /* video_flash@2x.png */; };
+		993EFDA71C0AA06100F0CA84 /* video_flash_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993EFD971C0AA06100F0CA84 /* video_flash_on@2x.png */; };
+		993EFDA81C0AA06100F0CA84 /* video_localSelected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993EFD981C0AA06100F0CA84 /* video_localSelected@3x.png */; };
+		993EFDA91C0AA06100F0CA84 /* video_finish_disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993EFD991C0AA06100F0CA84 /* video_finish_disable@2x.png */; };
+		993EFDAA1C0AA06100F0CA84 /* video_finish@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993EFD9A1C0AA06100F0CA84 /* video_finish@2x.png */; };
+		993EFDAB1C0AA06100F0CA84 /* video_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993EFD9B1C0AA06100F0CA84 /* video_close@2x.png */; };
+		993EFDAC1C0AA06100F0CA84 /* video_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993EFD9C1C0AA06100F0CA84 /* video_delete@2x.png */; };
+		993EFDAD1C0AA06100F0CA84 /* video_delete_disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993EFD9D1C0AA06100F0CA84 /* video_delete_disable@2x.png */; };
+		993EFDAE1C0AA06100F0CA84 /* videoEncodeLoading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993EFD9E1C0AA06100F0CA84 /* videoEncodeLoading@2x.png */; };
+		993EFDAF1C0AA06100F0CA84 /* video_pointToBottomArrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993EFD9F1C0AA06100F0CA84 /* video_pointToBottomArrow@3x.png */; };
+		993EFDB01C0AA06100F0CA84 /* video_recorder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993EFDA01C0AA06100F0CA84 /* video_recorder@2x.png */; };
+		993EFDB11C0AA06100F0CA84 /* video_pointToTopArrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993EFDA11C0AA06100F0CA84 /* video_pointToTopArrow@3x.png */; };
+		993EFDB21C0AA06100F0CA84 /* video_recorder_shine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993EFDA21C0AA06100F0CA84 /* video_recorder_shine@2x.png */; };
+		993EFDB31C0AA06100F0CA84 /* video_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993EFDA31C0AA06100F0CA84 /* video_play@2x.png */; };
+		993EFDB41C0AA06100F0CA84 /* video_recorder_focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993EFDA41C0AA06100F0CA84 /* video_recorder_focus@2x.png */; };
+		993EFDB81C0AA5CB00F0CA84 /* QBImageLoadingProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 993EFDB71C0AA5CB00F0CA84 /* QBImageLoadingProgressBar.m */; };
+		993EFDBB1C0AA61400F0CA84 /* TKProgressBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 993EFDBA1C0AA61400F0CA84 /* TKProgressBarView.m */; };
 		9946960A1C07631A00333CC7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 994696091C07631A00333CC7 /* main.m */; };
 		9946960D1C07631A00333CC7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9946960C1C07631A00333CC7 /* AppDelegate.m */; };
 		994696101C07631A00333CC7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9946960F1C07631A00333CC7 /* ViewController.m */; };
@@ -28,6 +60,7 @@
 		994696691C07ECD700333CC7 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994696681C07ECD700333CC7 /* Photos.framework */; };
 		9946966B1C07ECDE00333CC7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9946966A1C07ECDE00333CC7 /* AVFoundation.framework */; };
 		994696701C082DE800333CC7 /* PAPhotoBrowserHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9946966F1C082DE800333CC7 /* PAPhotoBrowserHelper.m */; };
+		BCD5D085FBB2A28D8FC1A0F2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FBF5999C5E93E9DD5CFEEDB /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +81,51 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08C4DFE3A7E5CFBFC496D9E5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		0FBF5999C5E93E9DD5CFEEDB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		993EFD6D1C0A9D2100F0CA84 /* PAVideoHandlerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAVideoHandlerViewController.h; sourceTree = "<group>"; };
+		993EFD6E1C0A9D2100F0CA84 /* PAVideoHandlerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAVideoHandlerViewController.m; sourceTree = "<group>"; };
+		993EFD6F1C0A9D2100F0CA84 /* PAVideoHandlerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PAVideoHandlerViewController.xib; sourceTree = "<group>"; };
+		993EFD721C0A9D2D00F0CA84 /* PAVideoCropHanderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAVideoCropHanderView.h; sourceTree = "<group>"; };
+		993EFD731C0A9D2D00F0CA84 /* PAVideoCropHanderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAVideoCropHanderView.m; sourceTree = "<group>"; };
+		993EFD741C0A9D2D00F0CA84 /* PAVideoCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAVideoCropView.h; sourceTree = "<group>"; };
+		993EFD751C0A9D2D00F0CA84 /* PAVideoCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAVideoCropView.m; sourceTree = "<group>"; };
+		993EFD7A1C0A9D7200F0CA84 /* SDAVAssetExportSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAVAssetExportSession.h; sourceTree = "<group>"; };
+		993EFD7B1C0A9D7200F0CA84 /* SDAVAssetExportSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDAVAssetExportSession.m; sourceTree = "<group>"; };
+		993EFD7C1C0A9D7200F0CA84 /* PAVideoRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAVideoRecorder.h; sourceTree = "<group>"; };
+		993EFD7D1C0A9D7200F0CA84 /* PAVideoRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAVideoRecorder.m; sourceTree = "<group>"; };
+		993EFD7E1C0A9D7200F0CA84 /* PAVideoRecorderHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAVideoRecorderHelper.h; sourceTree = "<group>"; };
+		993EFD7F1C0A9D7200F0CA84 /* PAVideoRecorderHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAVideoRecorderHelper.m; sourceTree = "<group>"; };
+		993EFD831C0A9D9A00F0CA84 /* PAVideoAssetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAVideoAssetViewController.h; sourceTree = "<group>"; };
+		993EFD841C0A9D9A00F0CA84 /* PAVideoAssetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAVideoAssetViewController.m; sourceTree = "<group>"; };
+		993EFD851C0A9D9A00F0CA84 /* PAVideoGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAVideoGroupViewController.h; sourceTree = "<group>"; };
+		993EFD861C0A9D9A00F0CA84 /* PAVideoGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAVideoGroupViewController.m; sourceTree = "<group>"; };
+		993EFD871C0A9D9A00F0CA84 /* PAVideoRecorderVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAVideoRecorderVC.h; sourceTree = "<group>"; };
+		993EFD881C0A9D9A00F0CA84 /* PAVideoRecorderVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAVideoRecorderVC.m; sourceTree = "<group>"; };
+		993EFD891C0A9D9A00F0CA84 /* PAVideoRecorderVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PAVideoRecorderVC.xib; sourceTree = "<group>"; };
+		993EFD8F1C0AA05A00F0CA84 /* video_crop_handle_left@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_crop_handle_left@3x.png"; sourceTree = "<group>"; };
+		993EFD901C0AA05A00F0CA84 /* video_crop_handle_right@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_crop_handle_right@3x.png"; sourceTree = "<group>"; };
+		993EFD911C0AA05A00F0CA84 /* video_localSelected_mask@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_localSelected_mask@3x.png"; sourceTree = "<group>"; };
+		993EFD951C0AA06100F0CA84 /* video_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_camera@2x.png"; sourceTree = "<group>"; };
+		993EFD961C0AA06100F0CA84 /* video_flash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_flash@2x.png"; sourceTree = "<group>"; };
+		993EFD971C0AA06100F0CA84 /* video_flash_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_flash_on@2x.png"; sourceTree = "<group>"; };
+		993EFD981C0AA06100F0CA84 /* video_localSelected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_localSelected@3x.png"; sourceTree = "<group>"; };
+		993EFD991C0AA06100F0CA84 /* video_finish_disable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_finish_disable@2x.png"; sourceTree = "<group>"; };
+		993EFD9A1C0AA06100F0CA84 /* video_finish@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_finish@2x.png"; sourceTree = "<group>"; };
+		993EFD9B1C0AA06100F0CA84 /* video_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_close@2x.png"; sourceTree = "<group>"; };
+		993EFD9C1C0AA06100F0CA84 /* video_delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_delete@2x.png"; sourceTree = "<group>"; };
+		993EFD9D1C0AA06100F0CA84 /* video_delete_disable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_delete_disable@2x.png"; sourceTree = "<group>"; };
+		993EFD9E1C0AA06100F0CA84 /* videoEncodeLoading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "videoEncodeLoading@2x.png"; sourceTree = "<group>"; };
+		993EFD9F1C0AA06100F0CA84 /* video_pointToBottomArrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_pointToBottomArrow@3x.png"; sourceTree = "<group>"; };
+		993EFDA01C0AA06100F0CA84 /* video_recorder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_recorder@2x.png"; sourceTree = "<group>"; };
+		993EFDA11C0AA06100F0CA84 /* video_pointToTopArrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_pointToTopArrow@3x.png"; sourceTree = "<group>"; };
+		993EFDA21C0AA06100F0CA84 /* video_recorder_shine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_recorder_shine@2x.png"; sourceTree = "<group>"; };
+		993EFDA31C0AA06100F0CA84 /* video_play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_play@2x.png"; sourceTree = "<group>"; };
+		993EFDA41C0AA06100F0CA84 /* video_recorder_focus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_recorder_focus@2x.png"; sourceTree = "<group>"; };
+		993EFDB61C0AA5CB00F0CA84 /* QBImageLoadingProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBImageLoadingProgressBar.h; sourceTree = "<group>"; };
+		993EFDB71C0AA5CB00F0CA84 /* QBImageLoadingProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBImageLoadingProgressBar.m; sourceTree = "<group>"; };
+		993EFDB91C0AA61400F0CA84 /* TKProgressBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKProgressBarView.h; sourceTree = "<group>"; };
+		993EFDBA1C0AA61400F0CA84 /* TKProgressBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKProgressBarView.m; sourceTree = "<group>"; };
 		994696051C07631A00333CC7 /* PAPhotoBrower.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PAPhotoBrower.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		994696091C07631A00333CC7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9946960B1C07631A00333CC7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -84,6 +162,7 @@
 		9946966A1C07ECDE00333CC7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9946966E1C082DE800333CC7 /* PAPhotoBrowserHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAPhotoBrowserHelper.h; sourceTree = "<group>"; };
 		9946966F1C082DE800333CC7 /* PAPhotoBrowserHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAPhotoBrowserHelper.m; sourceTree = "<group>"; };
+		AFC74990D486F9047C6234E4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +172,7 @@
 			files = (
 				9946966B1C07ECDE00333CC7 /* AVFoundation.framework in Frameworks */,
 				994696691C07ECD700333CC7 /* Photos.framework in Frameworks */,
+				BCD5D085FBB2A28D8FC1A0F2 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +193,112 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		993EFD671C0A9C6900F0CA84 /* PAVideoRecorder */ = {
+			isa = PBXGroup;
+			children = (
+				993EFD681C0A9CD400F0CA84 /* Feature */,
+				993EFD781C0A9D5000F0CA84 /* ViewController */,
+				993EFD791C0A9D6100F0CA84 /* Helper */,
+				993EFD8E1C0A9F1800F0CA84 /* Resource */,
+			);
+			name = PAVideoRecorder;
+			sourceTree = "<group>";
+		};
+		993EFD681C0A9CD400F0CA84 /* Feature */ = {
+			isa = PBXGroup;
+			children = (
+				993EFD691C0A9CE300F0CA84 /* PAVideoEditHandler */,
+			);
+			name = Feature;
+			sourceTree = "<group>";
+		};
+		993EFD691C0A9CE300F0CA84 /* PAVideoEditHandler */ = {
+			isa = PBXGroup;
+			children = (
+				993EFD6A1C0A9CF900F0CA84 /* ViewController */,
+				993EFD6B1C0A9D0400F0CA84 /* View */,
+			);
+			name = PAVideoEditHandler;
+			sourceTree = "<group>";
+		};
+		993EFD6A1C0A9CF900F0CA84 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				993EFD6D1C0A9D2100F0CA84 /* PAVideoHandlerViewController.h */,
+				993EFD6E1C0A9D2100F0CA84 /* PAVideoHandlerViewController.m */,
+				993EFD6F1C0A9D2100F0CA84 /* PAVideoHandlerViewController.xib */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		993EFD6B1C0A9D0400F0CA84 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				993EFD721C0A9D2D00F0CA84 /* PAVideoCropHanderView.h */,
+				993EFD731C0A9D2D00F0CA84 /* PAVideoCropHanderView.m */,
+				993EFD741C0A9D2D00F0CA84 /* PAVideoCropView.h */,
+				993EFD751C0A9D2D00F0CA84 /* PAVideoCropView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		993EFD781C0A9D5000F0CA84 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				993EFD831C0A9D9A00F0CA84 /* PAVideoAssetViewController.h */,
+				993EFD841C0A9D9A00F0CA84 /* PAVideoAssetViewController.m */,
+				993EFD851C0A9D9A00F0CA84 /* PAVideoGroupViewController.h */,
+				993EFD861C0A9D9A00F0CA84 /* PAVideoGroupViewController.m */,
+				993EFD871C0A9D9A00F0CA84 /* PAVideoRecorderVC.h */,
+				993EFD881C0A9D9A00F0CA84 /* PAVideoRecorderVC.m */,
+				993EFD891C0A9D9A00F0CA84 /* PAVideoRecorderVC.xib */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		993EFD791C0A9D6100F0CA84 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				993EFDB91C0AA61400F0CA84 /* TKProgressBarView.h */,
+				993EFDBA1C0AA61400F0CA84 /* TKProgressBarView.m */,
+				993EFDB61C0AA5CB00F0CA84 /* QBImageLoadingProgressBar.h */,
+				993EFDB71C0AA5CB00F0CA84 /* QBImageLoadingProgressBar.m */,
+				993EFD7A1C0A9D7200F0CA84 /* SDAVAssetExportSession.h */,
+				993EFD7B1C0A9D7200F0CA84 /* SDAVAssetExportSession.m */,
+				993EFD7C1C0A9D7200F0CA84 /* PAVideoRecorder.h */,
+				993EFD7D1C0A9D7200F0CA84 /* PAVideoRecorder.m */,
+				993EFD7E1C0A9D7200F0CA84 /* PAVideoRecorderHelper.h */,
+				993EFD7F1C0A9D7200F0CA84 /* PAVideoRecorderHelper.m */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
+		993EFD8E1C0A9F1800F0CA84 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				993EFD8F1C0AA05A00F0CA84 /* video_crop_handle_left@3x.png */,
+				993EFD901C0AA05A00F0CA84 /* video_crop_handle_right@3x.png */,
+				993EFD911C0AA05A00F0CA84 /* video_localSelected_mask@3x.png */,
+				993EFD951C0AA06100F0CA84 /* video_camera@2x.png */,
+				993EFD961C0AA06100F0CA84 /* video_flash@2x.png */,
+				993EFD971C0AA06100F0CA84 /* video_flash_on@2x.png */,
+				993EFD981C0AA06100F0CA84 /* video_localSelected@3x.png */,
+				993EFD991C0AA06100F0CA84 /* video_finish_disable@2x.png */,
+				993EFD9A1C0AA06100F0CA84 /* video_finish@2x.png */,
+				993EFD9B1C0AA06100F0CA84 /* video_close@2x.png */,
+				993EFD9C1C0AA06100F0CA84 /* video_delete@2x.png */,
+				993EFD9D1C0AA06100F0CA84 /* video_delete_disable@2x.png */,
+				993EFD9E1C0AA06100F0CA84 /* videoEncodeLoading@2x.png */,
+				993EFD9F1C0AA06100F0CA84 /* video_pointToBottomArrow@3x.png */,
+				993EFDA01C0AA06100F0CA84 /* video_recorder@2x.png */,
+				993EFDA11C0AA06100F0CA84 /* video_pointToTopArrow@3x.png */,
+				993EFDA21C0AA06100F0CA84 /* video_recorder_shine@2x.png */,
+				993EFDA31C0AA06100F0CA84 /* video_play@2x.png */,
+				993EFDA41C0AA06100F0CA84 /* video_recorder_focus@2x.png */,
+			);
+			name = Resource;
+			sourceTree = "<group>";
+		};
 		994695FC1C07631A00333CC7 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +307,7 @@
 				994696211C07631A00333CC7 /* PAPhotoBrowerTests */,
 				9946962C1C07631A00333CC7 /* PAPhotoBrowerUITests */,
 				994696061C07631A00333CC7 /* Products */,
+				F1F1FA3155D2F8BBE4C85B24 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				994696631C07EBF700333CC7 /* Demo */,
+				993EFD671C0A9C6900F0CA84 /* PAVideoRecorder */,
 				9946963C1C07E58A00333CC7 /* PAPhotoBrowser */,
 			);
 			path = PAPhotoBrower;
@@ -311,9 +499,19 @@
 			children = (
 				9946966A1C07ECDE00333CC7 /* AVFoundation.framework */,
 				994696681C07ECD700333CC7 /* Photos.framework */,
+				0FBF5999C5E93E9DD5CFEEDB /* libPods.a */,
 			);
 			name = Frameworks;
 			path = PAPhotoBrower;
+			sourceTree = "<group>";
+		};
+		F1F1FA3155D2F8BBE4C85B24 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				08C4DFE3A7E5CFBFC496D9E5 /* Pods.debug.xcconfig */,
+				AFC74990D486F9047C6234E4 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,9 +521,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 994696321C07631A00333CC7 /* Build configuration list for PBXNativeTarget "PAPhotoBrower" */;
 			buildPhases = (
+				8C06EE5477F2F5E1BD401A12 /* Check Pods Manifest.lock */,
 				994696011C07631A00333CC7 /* Sources */,
 				994696021C07631A00333CC7 /* Frameworks */,
 				994696031C07631A00333CC7 /* Resources */,
+				550A5E46397FCC234EE4DDAF /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -419,13 +619,34 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				993EFD921C0AA05A00F0CA84 /* video_crop_handle_left@3x.png in Resources */,
 				9946965D1C07EAE100333CC7 /* photo_localSelected_camera@3x.png in Resources */,
+				993EFDA81C0AA06100F0CA84 /* video_localSelected@3x.png in Resources */,
+				993EFDB41C0AA06100F0CA84 /* video_recorder_focus@2x.png in Resources */,
+				993EFD941C0AA05A00F0CA84 /* video_localSelected_mask@3x.png in Resources */,
+				993EFDB31C0AA06100F0CA84 /* video_play@2x.png in Resources */,
+				993EFD8D1C0A9D9A00F0CA84 /* PAVideoRecorderVC.xib in Resources */,
+				993EFDAC1C0AA06100F0CA84 /* video_delete@2x.png in Resources */,
+				993EFDB01C0AA06100F0CA84 /* video_recorder@2x.png in Resources */,
+				993EFDB11C0AA06100F0CA84 /* video_pointToTopArrow@3x.png in Resources */,
 				9946965C1C07EAE100333CC7 /* photo_localSelected_tag@3x.png in Resources */,
+				993EFDAE1C0AA06100F0CA84 /* videoEncodeLoading@2x.png in Resources */,
 				994696181C07631A00333CC7 /* LaunchScreen.storyboard in Resources */,
+				993EFDAA1C0AA06100F0CA84 /* video_finish@2x.png in Resources */,
+				993EFD711C0A9D2100F0CA84 /* PAVideoHandlerViewController.xib in Resources */,
 				994696151C07631A00333CC7 /* Assets.xcassets in Resources */,
+				993EFDA91C0AA06100F0CA84 /* video_finish_disable@2x.png in Resources */,
 				9946965F1C07EAF300333CC7 /* photo_localUnselected_tag@3x.png in Resources */,
+				993EFDB21C0AA06100F0CA84 /* video_recorder_shine@2x.png in Resources */,
+				993EFDAD1C0AA06100F0CA84 /* video_delete_disable@2x.png in Resources */,
+				993EFDA71C0AA06100F0CA84 /* video_flash_on@2x.png in Resources */,
+				993EFDA51C0AA06100F0CA84 /* video_camera@2x.png in Resources */,
 				994696611C07EB1D00333CC7 /* icon_back@3x.png in Resources */,
+				993EFDAF1C0AA06100F0CA84 /* video_pointToBottomArrow@3x.png in Resources */,
+				993EFD931C0AA05A00F0CA84 /* video_crop_handle_right@3x.png in Resources */,
 				994696131C07631A00333CC7 /* Main.storyboard in Resources */,
+				993EFDA61C0AA06100F0CA84 /* video_flash@2x.png in Resources */,
+				993EFDAB1C0AA06100F0CA84 /* video_close@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,19 +666,63 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		550A5E46397FCC234EE4DDAF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8C06EE5477F2F5E1BD401A12 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		994696011C07631A00333CC7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				993EFD8B1C0A9D9A00F0CA84 /* PAVideoGroupViewController.m in Sources */,
+				993EFD761C0A9D2D00F0CA84 /* PAVideoCropHanderView.m in Sources */,
 				994696481C07E5CF00333CC7 /* PAImagePickerPreviewViewController.m in Sources */,
 				994696451C07E5C700333CC7 /* PAImagePickerGroupController.m in Sources */,
 				994696701C082DE800333CC7 /* PAPhotoBrowserHelper.m in Sources */,
 				994696501C07E5F300333CC7 /* PAImagePickerCell.m in Sources */,
+				993EFD801C0A9D7200F0CA84 /* SDAVAssetExportSession.m in Sources */,
+				993EFDBB1C0AA61400F0CA84 /* TKProgressBarView.m in Sources */,
 				994696441C07E5C700333CC7 /* PAImagePickerController.m in Sources */,
+				993EFDB81C0AA5CB00F0CA84 /* QBImageLoadingProgressBar.m in Sources */,
 				994696101C07631A00333CC7 /* ViewController.m in Sources */,
 				9946964B1C07E5E700333CC7 /* PAImagePickerPreviewCell.m in Sources */,
+				993EFD771C0A9D2D00F0CA84 /* PAVideoCropView.m in Sources */,
+				993EFD8C1C0A9D9A00F0CA84 /* PAVideoRecorderVC.m in Sources */,
+				993EFD8A1C0A9D9A00F0CA84 /* PAVideoAssetViewController.m in Sources */,
+				993EFD811C0A9D7200F0CA84 /* PAVideoRecorder.m in Sources */,
+				993EFD701C0A9D2100F0CA84 /* PAVideoHandlerViewController.m in Sources */,
 				9946960D1C07631A00333CC7 /* AppDelegate.m in Sources */,
+				993EFD821C0A9D7200F0CA84 /* PAVideoRecorderHelper.m in Sources */,
 				994696511C07E5F300333CC7 /* PAImagePickerTakePhotoCell.m in Sources */,
 				9946960A1C07631A00333CC7 /* main.m in Sources */,
 			);
@@ -550,9 +815,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -587,8 +852,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -596,9 +862,15 @@
 		};
 		994696331C07631A00333CC7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08C4DFE3A7E5CFBFC496D9E5 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PAPhotoBrower",
+				);
 				INFOPLIST_FILE = PAPhotoBrower/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.feiwa.PAPhotoBrower;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -607,9 +879,15 @@
 		};
 		994696341C07631A00333CC7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AFC74990D486F9047C6234E4 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PAPhotoBrower",
+				);
 				INFOPLIST_FILE = PAPhotoBrower/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.feiwa.PAPhotoBrower;
 				PRODUCT_NAME = "$(TARGET_NAME)";
