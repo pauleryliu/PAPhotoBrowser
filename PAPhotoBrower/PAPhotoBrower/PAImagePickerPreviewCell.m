@@ -32,12 +32,16 @@
     [self.contentView addSubview:self.thumbNailImageView];
     ALAssetRepresentation *rep = [asset defaultRepresentation];
     if ([self isGifWithFileName:[rep filename]]) {
-        Byte *imageBuffer = (Byte*)malloc(rep.size);
-        NSUInteger bufferSize = [rep getBytes:imageBuffer fromOffset:0.0 length:rep.size error:nil];
-        NSData *imageData = [NSData dataWithBytesNoCopy:imageBuffer length:bufferSize freeWhenDone:YES];
-        gifRef = CGImageSourceCreateWithData((__bridge CFDataRef)imageData, NULL);
-        count = CGImageSourceGetCount(gifRef);
-        [self.timer fire];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            Byte *imageBuffer = (Byte*)malloc(rep.size);
+            NSUInteger bufferSize = [rep getBytes:imageBuffer fromOffset:0.0 length:rep.size error:nil];
+            NSData *imageData = [NSData dataWithBytesNoCopy:imageBuffer length:bufferSize freeWhenDone:YES];
+            gifRef = CGImageSourceCreateWithData((__bridge CFDataRef)imageData, NULL);
+            count = CGImageSourceGetCount(gifRef);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.timer fire];
+            });
+        });
     }else{
         CGImageRef ref = [rep fullScreenImage];
         self.thumbNailImageView.image = [UIImage imageWithCGImage:ref];
