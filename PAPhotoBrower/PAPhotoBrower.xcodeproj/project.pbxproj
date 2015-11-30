@@ -60,6 +60,7 @@
 		994696691C07ECD700333CC7 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994696681C07ECD700333CC7 /* Photos.framework */; };
 		9946966B1C07ECDE00333CC7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9946966A1C07ECDE00333CC7 /* AVFoundation.framework */; };
 		994696701C082DE800333CC7 /* PAPhotoBrowserHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9946966F1C082DE800333CC7 /* PAPhotoBrowserHelper.m */; };
+		9960B8261C0C889000BCE1B0 /* video_switch@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9960B8251C0C889000BCE1B0 /* video_switch@3x.png */; };
 		BCD5D085FBB2A28D8FC1A0F2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FBF5999C5E93E9DD5CFEEDB /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -162,6 +163,7 @@
 		9946966A1C07ECDE00333CC7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9946966E1C082DE800333CC7 /* PAPhotoBrowserHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAPhotoBrowserHelper.h; sourceTree = "<group>"; };
 		9946966F1C082DE800333CC7 /* PAPhotoBrowserHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAPhotoBrowserHelper.m; sourceTree = "<group>"; };
+		9960B8251C0C889000BCE1B0 /* video_switch@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_switch@3x.png"; sourceTree = "<group>"; };
 		AFC74990D486F9047C6234E4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -283,6 +285,7 @@
 				993EFD961C0AA06100F0CA84 /* video_flash@2x.png */,
 				993EFD971C0AA06100F0CA84 /* video_flash_on@2x.png */,
 				993EFD981C0AA06100F0CA84 /* video_localSelected@3x.png */,
+				9960B8251C0C889000BCE1B0 /* video_switch@3x.png */,
 				993EFD991C0AA06100F0CA84 /* video_finish_disable@2x.png */,
 				993EFD9A1C0AA06100F0CA84 /* video_finish@2x.png */,
 				993EFD9B1C0AA06100F0CA84 /* video_close@2x.png */,
@@ -646,6 +649,7 @@
 				993EFD931C0AA05A00F0CA84 /* video_crop_handle_right@3x.png in Resources */,
 				994696131C07631A00333CC7 /* Main.storyboard in Resources */,
 				993EFDA61C0AA06100F0CA84 /* video_flash@2x.png in Resources */,
+				9960B8261C0C889000BCE1B0 /* video_switch@3x.png in Resources */,
 				993EFDAB1C0AA06100F0CA84 /* video_close@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

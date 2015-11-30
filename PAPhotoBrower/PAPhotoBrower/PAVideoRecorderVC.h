@@ -30,9 +30,15 @@
 // videoRecorderShine
 #define VIDEORECORDERSHINE_DURATION 1
 
-
 @interface PAVideoRecorderVC : UIViewController<PAVideoRecorderDelegate>
 
+typedef enum {
+    PAMediaTypePhotoAndVideo = 0,   // Default
+    PAMediaTypePhoto = 1,
+    PAMediaTypeVideo = 2,
+} PAMediaType;
+
 @property (nonatomic, copy) void (^recordVCDismssCallback)(void);
+@property (nonatomic, assign) PAMediaType paMediaType;
 
 @end

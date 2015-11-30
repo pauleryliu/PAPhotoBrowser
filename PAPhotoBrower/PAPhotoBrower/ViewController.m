@@ -35,7 +35,7 @@
 {
     NSLog(@"paPhotoBrowserButtonPressed");
     
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"视频",@"相册", nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照和录视频",@"拍照",@"录视频",@"本地相册", nil];
     actionSheet.delegate = self;
     [actionSheet showInView:self.view];
 }
@@ -47,21 +47,42 @@
     switch (buttonIndex) {
         case 0:
         {
-            NSLog(@"拍照");
+            NSLog(@"拍照和录视频");
+            PAVideoRecorderVC *videoRecorderVC = [[PAVideoRecorderVC alloc] initWithNibName:@"PAVideoRecorderVC" bundle:[NSBundle mainBundle]];
+            videoRecorderVC.paMediaType = PAMediaTypePhotoAndVideo;
+            //  PAVideoRecorderVC.delegate = (id)self;
+            [self presentViewController:videoRecorderVC animated:YES completion:^{
+                
+            }];
+            
         }
             break;
         case 1:
         {
+            NSLog(@"拍照");
+            PAVideoRecorderVC *videoRecorderVC = [[PAVideoRecorderVC alloc] initWithNibName:@"PAVideoRecorderVC" bundle:[NSBundle mainBundle]];
+            videoRecorderVC.paMediaType = PAMediaTypePhoto;
+            // PAVideoRecorderVC.delegate = (id)self;
+            [self presentViewController:videoRecorderVC animated:YES completion:^{
+                
+            }];
+            
+        }
+            break;
+        case 2:
+        {
             NSLog(@"录视频");
             PAVideoRecorderVC *videoRecorderVC = [[PAVideoRecorderVC alloc] initWithNibName:@"PAVideoRecorderVC" bundle:[NSBundle mainBundle]];
-//            PAVideoRecorderVC.delegate = (id)self;
+            videoRecorderVC.paMediaType = PAMediaTypeVideo;
+            // PAVideoRecorderVC.delegate = (id)self;
             [self presentViewController:videoRecorderVC animated:YES completion:^{
                 
             }];
         }
             break;
-        case 2:
+        case 3:
         {
+            // 本地选图
             NSUInteger maxNumberOfPhotos = 6;
             UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc]init];
             [layout setScrollDirection:UICollectionViewScrollDirectionVertical];

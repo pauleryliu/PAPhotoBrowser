@@ -6,7 +6,7 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoRecorderVC">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PAVideoRecorderVC">
             <connections>
                 <outlet property="backBtn" destination="OAN-xm-LDr" id="EDD-rl-Al0"/>
                 <outlet property="bottonLayoutView" destination="Kt7-ka-z2i" id="SYT-w2-K2F"/>
@@ -33,6 +33,7 @@
                 <outlet property="videoRecorderFocusImageView" destination="p4L-NN-0Ry" id="3t9-dL-bHX"/>
                 <outlet property="videoRecorderShineImageView" destination="xAS-7W-X5n" id="abb-Zy-APj"/>
                 <outlet property="videoSelectBtn" destination="elt-y2-Ssg" id="7X4-j0-KPn"/>
+                <outlet property="videoSwitchBtn" destination="HMo-wK-NiZ" id="N7D-ve-1HT"/>
                 <outlet property="videoWaterMaskImageView" destination="3l4-gj-aBv" id="9f5-In-g1w"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -130,10 +131,12 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0bk-0l-QL5">
+                            <rect key="frame" x="-91" y="-19" width="53" height="27"/>
                             <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6tE-Ka-xj5" userLabel="VideoEncodeMaskView">
+                            <rect key="frame" x="93" y="48" width="57" height="22"/>
                             <animations/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
@@ -389,6 +392,17 @@
                                 <constraint firstAttribute="width" constant="110" id="sIQ-cN-lhv"/>
                             </constraints>
                         </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HMo-wK-NiZ" userLabel="videoSwitch">
+                            <rect key="frame" x="30" y="69.5" width="60" height="60"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="3Na-Lf-Dhk"/>
+                                <constraint firstAttribute="width" constant="60" id="ija-ig-5h5"/>
+                            </constraints>
+                            <connections>
+                                <action selector="videoSwitchBtnPressed:" destination="-1" eventType="touchUpInside" id="XnC-NR-hPX"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -400,6 +414,8 @@
                         <constraint firstAttribute="trailing" secondItem="elt-y2-Ssg" secondAttribute="trailing" constant="30" id="dFj-Ur-dyL"/>
                         <constraint firstAttribute="trailing" secondItem="j7b-Z7-GRy" secondAttribute="trailing" constant="30" id="gem-eg-Bf3"/>
                         <constraint firstAttribute="centerY" secondItem="SNC-3J-BAa" secondAttribute="centerY" id="hJ0-Sq-1Dk"/>
+                        <constraint firstItem="HMo-wK-NiZ" firstAttribute="centerY" secondItem="SNC-3J-BAa" secondAttribute="centerY" id="ilM-hM-JE8"/>
+                        <constraint firstItem="HMo-wK-NiZ" firstAttribute="centerX" secondItem="SNC-3J-BAa" secondAttribute="centerX" id="mUv-hL-DZV"/>
                         <constraint firstAttribute="centerY" secondItem="elt-y2-Ssg" secondAttribute="centerY" id="pvW-Mt-p5y"/>
                         <constraint firstItem="SNC-3J-BAa" firstAttribute="leading" secondItem="Kt7-ka-z2i" secondAttribute="leading" constant="30" id="ugK-e4-fHL"/>
                         <constraint firstAttribute="centerX" secondItem="H1e-ak-hlR" secondAttribute="centerX" id="vSi-uo-rRB"/>

@@ -18,11 +18,17 @@
  *  用途：视频拍摄功能封装
  */
 
-typedef NS_ENUM(NSUInteger, VideoRecoderState) {
+typedef enum {
     VideoRecoderStateInit = 1,              // 初始化
-    VideoRecoderStateReadyToRecord,     // 随时准备拍摄，。。。写文件
-    VideoRecoderStateRecording,         // 拍摄中，。。。写文件
-};
+    VideoRecoderStateReadyToRecord = 2,     // 随时准备拍摄，。。。写文件
+    VideoRecoderStateRecording = 3,         // 拍摄中，。。。写文件
+}VideoRecoderState;
+
+typedef enum
+{
+    PACurrentPhotoModel = 0,    // Default
+    PACurrentVideoModel = 1,
+}PACurrentModel;
 
 @class PAVideoRecorder;
 
@@ -36,6 +42,7 @@ typedef NS_ENUM(NSUInteger, VideoRecoderState) {
 
 @interface PAVideoRecorder : NSObject<AVCaptureFileOutputRecordingDelegate>
 
+@property (nonatomic,assign) PACurrentModel paCurrentModel;
 @property (nonatomic,weak) id <PAVideoRecorderDelegate>delegate;
 @property (nonatomic,strong) AVCaptureSession *captureSession;
 @property (nonatomic,strong) AVCaptureMovieFileOutput *movieFileOutput;
@@ -53,6 +60,7 @@ typedef NS_ENUM(NSUInteger, VideoRecoderState) {
 // Actions
 - (void)openTorch:(BOOL)open;
 - (void)switchCamera;
+- (void)takePhoto;
 - (CGFloat)getVideoDuration; // recorded time
 - (void)startRecordingOutputFile;
 - (void)stopCurrentVideoRecording;

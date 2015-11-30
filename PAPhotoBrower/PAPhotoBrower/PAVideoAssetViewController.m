@@ -108,8 +108,6 @@ alpha:1.0]
     label.text = [PAVideoRecorderHelper convertTime:[[asset valueForProperty:ALAssetPropertyDuration] floatValue]];
     [maskView addSubview:label];
     
-
-    
     [cell.contentView addSubview:imageView];
     
     return cell;

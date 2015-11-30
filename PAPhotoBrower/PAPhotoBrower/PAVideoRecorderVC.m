@@ -23,6 +23,8 @@ alpha:1.0]
 
 @interface PAVideoRecorderVC ()
 
+@property (assign,nonatomic) PACurrentModel paCurrentModel;
+
 // recorder
 @property (strong, nonatomic) PAVideoRecorder *videoRecorder;    // video recorder
 @property (strong, nonatomic) AVPlayer *player;  // video preview
@@ -39,6 +41,7 @@ alpha:1.0]
 @property (weak, nonatomic) IBOutlet UIButton *torchBtn;
 @property (weak, nonatomic) IBOutlet UIButton *switchBtn;
 @property (weak, nonatomic) IBOutlet UIButton *videoPlayBtn;
+@property (weak, nonatomic) IBOutlet UIButton *videoSwitchBtn;
 @property (weak, nonatomic) IBOutlet UIView *preView;
 @property (weak, nonatomic) IBOutlet UIButton *videoRecorderBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *videoRecorderShineImageView;
@@ -76,7 +79,6 @@ alpha:1.0]
 @property (nonatomic) CGFloat videoRecorderFinishedBtnOriginCenterX;
 @property (assign, nonatomic) CGRect disRect;
 
-
 // outlet
 - (IBAction)backBtnPressed:(id)sender;
 - (IBAction)torchBtnPressed:(id)sender;
@@ -85,6 +87,7 @@ alpha:1.0]
 - (IBAction)videoDeleteBtnPressed:(id)sender;
 - (IBAction)videoRecorderFinishedBtnPressed:(id)sender;
 - (IBAction)videoSelectBtn:(id)sender;
+- (IBAction)videoSwitchBtnPressed:(id)sender;
 
 
 @end
@@ -109,6 +112,27 @@ alpha:1.0]
     
     // add Notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dissmissVC) name:@"dismissVideoRecorderVCWhenCropVideoFinished" object:nil];
+    
+    // CurrentModel
+    switch (self.paMediaType) {
+        case PAMediaTypePhotoAndVideo:
+        {
+            self.paCurrentModel = PACurrentPhotoModel;
+        }
+            break;
+        case PAMediaTypePhoto:
+        {
+            self.paCurrentModel = PACurrentPhotoModel;
+        }
+            break;
+        case PAMediaTypeVideo:
+        {
+            self.paCurrentModel = PACurrentVideoModel;
+        }
+            break;
+        default:
+            break;
+    }
     
     // init Video Recorder
     [self initRecorder];
@@ -219,7 +243,10 @@ alpha:1.0]
 {
     NSLog(@"%s", __func__);
     // video Recorder
-    self.videoRecorder = [[PAVideoRecorder alloc] init];
+    if (!self.videoRecorder) {
+        self.videoRecorder = [[PAVideoRecorder alloc] init];
+    }
+    self.videoRecorder.paCurrentModel = self.paCurrentModel;
     
     dispatch_queue_t sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL);
     [self setSessionQueue:sessionQueue];
@@ -229,7 +256,6 @@ alpha:1.0]
         [self.videoRecorder initCaptureDevice];
     });
     
-        
     self.videoRecorder.delegate = self;
     self.videoRecorder.videoPreview.frame = self.preView.layer.bounds;
     [self.preView.layer addSublayer:self.videoRecorder.videoPreview];
@@ -258,24 +284,26 @@ alpha:1.0]
         [self.videoFirstTipBubbleView setHidden:NO];
     }
     if ([PAVideoRecorderHelper onlyShowForTheFirstTimeForKey:@"VideoRecorderVC_LessThan3SecondsBubbleView"]){
-        self.videoLessThan3SecondsTipBubbleViewLeft.constant = CGRectGetWidth(self.view.frame)*0.3 - CGRectGetWidth(self.videoLessThan3SecondsTipBubbleView.frame)/2;
+        self.videoLessThan3SecondsTipBubbleViewLeft.constant = CGRectGetWidth(self.view.frame) * 0.3 - CGRectGetWidth(self.videoLessThan3SecondsTipBubbleView.frame) / 2;
         self.videoLessThan3SecondsTipBubbleRectangleLabel.layer.masksToBounds = YES;
         self.videoLessThan3SecondsTipBubbleView.clipsToBounds = YES;
         self.videoLessThan3SecondsTipBubbleRectangleLabel.layer.cornerRadius = 5;
         self.videoLessThan3SecondsTipBubbleTritangleImageView.transform = CGAffineTransformMakeRotation(M_PI_4);
     }
     
-    // progress
-    CGRect preViewRect = self.preView.frame;
-    self.progressBar = [[QBImageLoadingProgressBar alloc] initWithFrame:CGRectMake(0,preViewRect.origin.y + CGRectGetHeight(preViewRect), CGRectGetWidth(preViewRect), 5) andBackgroundColor:[UIColor colorWithRed:32.0/255.0 green:32.0/255.0 blue:40.0/255.0 alpha:1]];
-    [self.progressBar setProgress:0.0];
-    [self.view addSubview:self.progressBar];
-    
-    // progressTagView
-    UIView *progressTagView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.progressBar.frame)*0.3, 0, 1, CGRectGetHeight(self.progressBar.frame))];
-    progressTagView.backgroundColor = [UIColor colorWithRed:255/255.0 green:160/255.0 blue:21/255.0 alpha:1];
-    self.progressBar.layer.zPosition = -1;
-    [self.progressBar addSubview:progressTagView];
+    if (self.paMediaType == PAMediaTypePhotoAndVideo || self.paMediaType == PAMediaTypeVideo) {
+        // progress
+        CGRect preViewRect = self.preView.frame;
+        self.progressBar = [[QBImageLoadingProgressBar alloc] initWithFrame:CGRectMake(0,preViewRect.origin.y + CGRectGetHeight(preViewRect), CGRectGetWidth(preViewRect), 5) andBackgroundColor:[UIColor colorWithRed:32.0/255.0 green:32.0/255.0 blue:40.0/255.0 alpha:1]];
+        [self.progressBar setProgress:0.0];
+        [self.view addSubview:self.progressBar];
+        
+        // progressTagView
+        UIView *progressTagView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.progressBar.frame)*0.3, 0, 1, CGRectGetHeight(self.progressBar.frame))];
+        progressTagView.backgroundColor = [UIColor colorWithRed:255/255.0 green:160/255.0 blue:21/255.0 alpha:1];
+        self.progressBar.layer.zPosition = -1;
+        [self.progressBar addSubview:progressTagView];
+    }
     
     // other Btns
     [self.backBtn setImage:[UIImage imageNamed:@"video_close"] forState:UIControlStateNormal];
@@ -284,18 +312,17 @@ alpha:1.0]
     [self.switchBtn setImage:[UIImage imageNamed:@"video_camera"] forState:UIControlStateNormal];
     [self.videoRecorderBtn setImage:[UIImage imageNamed:@"video_recorder"] forState:UIControlStateNormal];
     [self.videoPlayBtn setImage:[UIImage imageNamed:@"video_play"] forState:UIControlStateNormal];
-    [self.videoDeleteBtn setImage:[UIImage imageNamed:@"video_delete"] forState:UIControlStateNormal];
+    [self.videoSwitchBtn setImage:[UIImage imageNamed:@"video_switch"] forState:UIControlStateNormal];
     [self.videoDeleteBtn setImage:[UIImage imageNamed:@"video_delete_disable"] forState:UIControlStateDisabled];
     [self.videoRecorderFinishedBtn setImage:[UIImage imageNamed:@"video_finish"] forState:UIControlStateNormal];
     [self.videoRecorderFinishedBtn setImage:[UIImage imageNamed:@"video_finish_disable"] forState:UIControlStateDisabled];
     [self.videoRecorderShineImageView setImage:[UIImage imageNamed:@"video_recorder_shine"]];
+    [self.videoDeleteBtn setImage:[UIImage imageNamed:@"video_delete"] forState:UIControlStateNormal];
+    
     [self.videoRecorderShineImageView setHidden:YES];
     self.videoDeleteBtnOriginCenterX = self.videoDeleteBtn.center.x;
     self.videoRecorderFinishedBtnOriginCenterX = self.videoRecorderFinishedBtn.center.x;
     [self.videoSelectBtn setImage:[UIImage imageNamed:@"video_localSelected"] forState:UIControlStateNormal];
-//    if (![UIDevice currentDevice].isIOS7AndAbove) {
-        self.videoSelectBtn.hidden = YES;
-//    }
     
     // torch btn hidden when launch on ipod touch
     if (![self.videoRecorder isTorchSupported]) {
@@ -335,6 +362,12 @@ alpha:1.0]
     [self.videoPlayBtn setHidden:YES];
     [self.videoDeleteBtn setHidden:YES];
     [self.videoRecorderFinishedBtn setHidden:YES];
+    
+    if (self.paMediaType == PAMediaTypePhotoAndVideo) {
+        [self.videoSwitchBtn setHidden:NO];
+    } else {
+        [self.videoSwitchBtn setHidden:YES];
+    }
     
     // gesture
     self.tapToFocusGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(focusTap:)];
@@ -570,7 +603,7 @@ alpha:1.0]
     [self.encoder exportAsynchronouslyWithCompletionHandler:^{
         if (self.encoder.status == AVAssetExportSessionStatusCompleted) {
             NSLog(@"AVAssetExportSessionStatusCompleted");
-            UIImage *videoPreViewImage = [self getVideoPreViewImageWithFileURL:outputURL];
+//            UIImage *videoPreViewImage = [self getVideoPreViewImageWithFileURL:outputURL];
             // TODO：转码后的视频URL：outputURL，处理后的视频URL；videoPreViewImage 视频预览图
 //            dispatch_async(dispatch_get_main_queue(), ^{
 //                if ([_delegate respondsToSelector:@selector(onImageEdited:)])
@@ -598,7 +631,12 @@ alpha:1.0]
 
 #pragma mark - Outlet
 - (void)recorderButtonTouchBegin
-{// 拍摄按钮按下
+{
+    if (self.paCurrentModel == PACurrentPhotoModel) {
+        return;
+    }
+    
+    // 拍摄按钮按下
     if (self.videoRecorder.state == VideoRecoderStateInit)
     {
         NSLog(@"%s videoRecorder.state == VideoRecoderStateInit", __func__);
@@ -630,6 +668,12 @@ alpha:1.0]
 
 - (void)recorderButtonTouchEnd
 {
+    if (self.paCurrentModel == PACurrentPhotoModel) {
+        // TODO:拍照
+        [self.videoRecorder takePhoto];
+        return;
+    }
+    
     if (self.videoRecorder.state != VideoRecoderStateRecording)
     {
         NSLog(@"%s videoRecorder.state != VideoRecoderStateRecording", __func__);
@@ -738,7 +782,8 @@ alpha:1.0]
     [self convertVideoToLowQuailtyWithInputURL:self.videoOutputFileURL outputURL:self.videoEncodedFileURL];
 }
 
-- (IBAction)videoSelectBtn:(id)sender {
+- (IBAction)videoSelectBtn:(id)sender
+{
     NSLog(@"%s", __func__);
     PAVideoGroupViewController *videoGroupVC = [[PAVideoGroupViewController alloc] init];
 //    videoGroupVC.postDelegate = self.delegate;
@@ -746,6 +791,17 @@ alpha:1.0]
     nav.navigationBar.tintColor = [UIColor redColor];
     [self presentViewController:nav animated:YES completion:^(void){
     }];
+}
+
+- (IBAction)videoSwitchBtnPressed:(id)sender
+{
+    NSLog(@"videoSwitchBtnPressed");
+    if (self.paCurrentModel == PACurrentPhotoModel) {
+        self.paCurrentModel = PACurrentVideoModel;
+    }
+    if (self.paCurrentModel == PACurrentVideoModel) {
+        self.paCurrentModel = PACurrentPhotoModel;
+    }
 }
 
 #pragma mark - KVO
