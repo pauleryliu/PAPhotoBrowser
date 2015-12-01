@@ -6,7 +6,7 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoHandlerViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PAVideoHandlerViewController">
             <connections>
                 <outlet property="bottomView" destination="Ktr-e8-MoM" id="bGi-IH-OmA"/>
                 <outlet property="heightNeedToSet35" destination="2Tx-0G-OSr" id="TyU-D1-goG"/>
@@ -20,7 +20,6 @@
                 <outlet property="videoEncodeLoadingLabel" destination="opd-nw-lvK" id="cZy-BC-hhN"/>
                 <outlet property="videoEncodeMaskView" destination="qxi-yP-bqg" id="aAi-XB-ivi"/>
                 <outlet property="videoPlayBtn" destination="mqx-bw-Zpl" id="Thf-t8-H8a"/>
-                <outlet property="videoWaterMaskImageView" destination="Ujt-Pp-NAv" id="Ia3-rz-cXl"/>
                 <outlet property="view" destination="SPB-y6-VVn" id="3S2-Ia-oKS"/>
             </connections>
         </placeholder>
@@ -32,10 +31,6 @@
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S1n-ns-3jI" userLabel="preView">
                     <rect key="frame" x="0.0" y="50" width="320" height="320"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ujt-Pp-NAv" userLabel="VideoWaterMaskImageView">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
-                            <animations/>
-                        </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mqx-bw-Zpl" userLabel="VideoPlayBtn">
                             <rect key="frame" x="120" y="120" width="80" height="80"/>
                             <animations/>
@@ -84,11 +79,8 @@
                     <color key="backgroundColor" red="0.078431372549019607" green="0.078431372549019607" blue="0.090196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="mqx-bw-Zpl" firstAttribute="centerX" secondItem="S1n-ns-3jI" secondAttribute="centerX" id="0ui-ZN-htB"/>
-                        <constraint firstItem="Ujt-Pp-NAv" firstAttribute="leading" secondItem="S1n-ns-3jI" secondAttribute="leading" id="6WQ-rz-A7p"/>
                         <constraint firstAttribute="height" constant="320" id="BEY-vb-5Vn"/>
                         <constraint firstAttribute="width" secondItem="S1n-ns-3jI" secondAttribute="height" multiplier="1:1" id="FdZ-GA-aSe"/>
-                        <constraint firstAttribute="trailing" secondItem="Ujt-Pp-NAv" secondAttribute="trailing" id="GxC-XN-SVX"/>
-                        <constraint firstItem="Ujt-Pp-NAv" firstAttribute="top" secondItem="S1n-ns-3jI" secondAttribute="top" id="KKi-wo-LTI"/>
                         <constraint firstItem="opd-nw-lvK" firstAttribute="top" secondItem="SOR-8f-chL" secondAttribute="bottom" constant="10" id="OTW-9h-jCN"/>
                         <constraint firstAttribute="centerX" secondItem="mqx-bw-Zpl" secondAttribute="centerX" id="QQm-qF-E3l"/>
                         <constraint firstItem="mqx-bw-Zpl" firstAttribute="centerX" secondItem="S1n-ns-3jI" secondAttribute="centerX" id="RFM-cJ-AE8"/>
@@ -96,7 +88,6 @@
                         <constraint firstAttribute="centerY" secondItem="mqx-bw-Zpl" secondAttribute="centerY" id="Vq5-Jp-G7U"/>
                         <constraint firstItem="mqx-bw-Zpl" firstAttribute="centerY" secondItem="S1n-ns-3jI" secondAttribute="centerY" id="aql-FO-stJ"/>
                         <constraint firstAttribute="width" constant="320" id="dc7-5l-Ucc"/>
-                        <constraint firstAttribute="bottom" secondItem="Ujt-Pp-NAv" secondAttribute="bottom" id="h7c-dc-lL4"/>
                         <constraint firstItem="mqx-bw-Zpl" firstAttribute="centerY" secondItem="S1n-ns-3jI" secondAttribute="centerY" id="hrp-NT-No2"/>
                         <constraint firstAttribute="centerY" secondItem="SOR-8f-chL" secondAttribute="centerY" id="nlv-eQ-lmv"/>
                         <constraint firstAttribute="centerX" secondItem="SOR-8f-chL" secondAttribute="centerX" id="p35-PL-I7D"/>

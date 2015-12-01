@@ -136,8 +136,6 @@
 	CGContextSetLineWidth(context, thickness);
 	CGContextDrawPath(context, kCGPathStroke);
 	
-        
-	
 	radius = barRadius;
 	
 	rrect = CGRectInset(rrect, barInset, barInset);

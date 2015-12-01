@@ -8,12 +8,11 @@
 
 #import "PAVideoRecorderVC.h"
 #import "PAVideoRecorderHelper.h"
-//#import "AVPlayer+SnapShot.h"
 #import "QBImageLoadingProgressBar.h"
 #import "SDAVAssetExportSession.h"
-//#import "Settings.h"
 #import <POP.h>
-#import "PAVideoGroupViewController.h"
+#import "PAImagePickerController.h"
+#import "PAImagePickerGroupController.h"
 
 #define UIColorFromRGB(rgbValue) \
 [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
@@ -21,7 +20,7 @@ green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
 blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
 alpha:1.0]
 
-@interface PAVideoRecorderVC ()
+@interface PAVideoRecorderVC ()<PAImagePickerControllerDelegate>
 
 @property (assign,nonatomic) PACurrentModel paCurrentModel;
 
@@ -54,7 +53,6 @@ alpha:1.0]
 @property (weak, nonatomic) IBOutlet UIImageView *videoEncodeLoadingImageView;
 @property (weak, nonatomic) IBOutlet UIView *videoEncodeMaskView;
 @property (weak, nonatomic) IBOutlet UILabel *videoEncodeLoadingLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *videoWaterMaskImageView;
 @property (weak, nonatomic) IBOutlet UIView *bottonLayoutView;
 
 // gesture
@@ -260,10 +258,9 @@ alpha:1.0]
     self.videoRecorder.videoPreview.frame = self.preView.layer.bounds;
     [self.preView.layer addSublayer:self.videoRecorder.videoPreview];
     
-    // video RecorderBtn
+    // video Recorder Btn
     [self.videoRecorderBtn addTarget:self action:@selector(recorderButtonTouchBegin) forControlEvents:UIControlEventTouchDown];
     [self.videoRecorderBtn addTarget:self action:@selector(recorderButtonTouchEnd) forControlEvents:UIControlEventTouchUpInside];
-    [self.videoRecorderBtn addTarget:self action:@selector(recorderButtonTouchEnd) forControlEvents:UIControlEventTouchUpOutside];
 }
 
 - (void)subjectAreaChange
@@ -291,7 +288,7 @@ alpha:1.0]
         self.videoLessThan3SecondsTipBubbleTritangleImageView.transform = CGAffineTransformMakeRotation(M_PI_4);
     }
     
-    if (self.paMediaType == PAMediaTypePhotoAndVideo || self.paMediaType == PAMediaTypeVideo) {
+    if (self.paCurrentModel == PACurrentVideoModel) {
         // progress
         CGRect preViewRect = self.preView.frame;
         self.progressBar = [[QBImageLoadingProgressBar alloc] initWithFrame:CGRectMake(0,preViewRect.origin.y + CGRectGetHeight(preViewRect), CGRectGetWidth(preViewRect), 5) andBackgroundColor:[UIColor colorWithRed:32.0/255.0 green:32.0/255.0 blue:40.0/255.0 alpha:1]];
@@ -303,6 +300,8 @@ alpha:1.0]
         progressTagView.backgroundColor = [UIColor colorWithRed:255/255.0 green:160/255.0 blue:21/255.0 alpha:1];
         self.progressBar.layer.zPosition = -1;
         [self.progressBar addSubview:progressTagView];
+    } else {
+        [self.progressBar setHidden:YES];
     }
     
     // other Btns
@@ -388,8 +387,10 @@ alpha:1.0]
     [self.switchBtn setHidden:NO];
     
     // ui
-    [self.progressBar setProgress:0.0];
-    [self.progressBar setHidden:NO];
+    if (self.paCurrentModel == PACurrentVideoModel) {
+        [self.progressBar setProgress:0.0];
+        [self.progressBar setHidden:NO];
+    }
     
     // VideoRecorderBtn
     [self.videoRecorderBtn setHidden:NO];
@@ -417,10 +418,6 @@ alpha:1.0]
     
     // videoSelectBtn
     [self.videoSelectBtn setHidden:NO];
-
-    
-    // videoWaterMaskImageView
-    [self.videoWaterMaskImageView setHidden:YES];
     
     // videoEncodeMaskView
     [self.videoEncodeMaskView setHidden:YES];
@@ -784,13 +781,35 @@ alpha:1.0]
 
 - (IBAction)videoSelectBtn:(id)sender
 {
-    NSLog(@"%s", __func__);
-    PAVideoGroupViewController *videoGroupVC = [[PAVideoGroupViewController alloc] init];
-//    videoGroupVC.postDelegate = self.delegate;
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:videoGroupVC];
-    nav.navigationBar.tintColor = [UIColor redColor];
-    [self presentViewController:nav animated:YES completion:^(void){
+//    NSLog(@"%s", __func__);
+//    PAVideoGroupViewController *videoGroupVC = [[PAVideoGroupViewController alloc] init];
+////    videoGroupVC.postDelegate = self.delegate;
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:videoGroupVC];
+//    nav.navigationBar.tintColor = [UIColor redColor];
+//    [self presentViewController:nav animated:YES completion:^(void){
+//    }];
+    
+    // 本地选图
+    NSUInteger maxNumberOfPhotos = 6;
+    UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc]init];
+    [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    PAImagePickerController *pickerVC = [[PAImagePickerController alloc] initWithCollectionViewLayout:layout];
+    PAImagePickerGroupController *pickerGroupVC = [[PAImagePickerGroupController alloc] init];
+    pickerVC.isSupportEditWhenSelectSinglePhoto = NO;
+    pickerGroupVC.maxNumberOfPhotos = maxNumberOfPhotos;
+    pickerVC.maxNumberOfPhotos = maxNumberOfPhotos;
+    pickerVC.delegate = self;
+    pickerGroupVC.delegate = self;
+    pickerVC.doneBtnName = @"发送";
+    pickerVC.paMediaType = self.paMediaType;
+    pickerGroupVC.paMediaType = self.paMediaType;
+    UINavigationController *pickerNavController = [[UINavigationController alloc] initWithRootViewController:pickerGroupVC];
+    pickerNavController.viewControllers = @[pickerGroupVC,pickerVC];
+    
+    [self presentViewController:pickerNavController animated:YES completion:^{
+        
     }];
+    
 }
 
 - (IBAction)videoSwitchBtnPressed:(id)sender
@@ -889,7 +908,6 @@ alpha:1.0]
             [self.torchBtn setHidden:YES];
         }
         [self.switchBtn setHidden:YES];
-        [self.videoWaterMaskImageView setHidden:NO];
         
         // preView
         self.videoOutputFileURL = outputFileURL;

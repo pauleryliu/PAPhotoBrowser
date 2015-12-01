@@ -34,7 +34,6 @@
                 <outlet property="videoRecorderShineImageView" destination="xAS-7W-X5n" id="abb-Zy-APj"/>
                 <outlet property="videoSelectBtn" destination="elt-y2-Ssg" id="7X4-j0-KPn"/>
                 <outlet property="videoSwitchBtn" destination="HMo-wK-NiZ" id="N7D-ve-1HT"/>
-                <outlet property="videoWaterMaskImageView" destination="3l4-gj-aBv" id="9f5-In-g1w"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -91,10 +90,6 @@
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LbT-4C-apm" userLabel="preView">
                     <rect key="frame" x="0.0" y="50" width="320" height="320"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3l4-gj-aBv" userLabel="VideoWaterMaskImageView">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
-                            <animations/>
-                        </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Cu-e1-VdF" userLabel="VideoPlayBtn">
                             <rect key="frame" x="120" y="120" width="80" height="80"/>
                             <animations/>
@@ -152,7 +147,6 @@
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="3l4-gj-aBv" secondAttribute="trailing" id="Ai6-ka-Qaj"/>
                         <constraint firstAttribute="centerY" secondItem="p4L-NN-0Ry" secondAttribute="centerY" id="Dp1-Qy-9p0"/>
                         <constraint firstItem="aBY-c2-uDk" firstAttribute="top" secondItem="dxK-Jf-uxC" secondAttribute="bottom" constant="10" id="JJ4-0c-07o"/>
                         <constraint firstAttribute="centerX" secondItem="5Cu-e1-VdF" secondAttribute="centerX" id="JiX-4a-3LJ"/>
@@ -160,18 +154,15 @@
                         <constraint firstItem="5Cu-e1-VdF" firstAttribute="centerX" secondItem="LbT-4C-apm" secondAttribute="centerX" id="PPP-RJ-gWm"/>
                         <constraint firstItem="5Cu-e1-VdF" firstAttribute="centerY" secondItem="LbT-4C-apm" secondAttribute="centerY" id="Rnz-Zx-i8e"/>
                         <constraint firstAttribute="width" constant="320" id="WhP-f4-jjY"/>
-                        <constraint firstItem="3l4-gj-aBv" firstAttribute="leading" secondItem="LbT-4C-apm" secondAttribute="leading" id="YO5-ow-DdC"/>
                         <constraint firstItem="5Cu-e1-VdF" firstAttribute="centerX" secondItem="LbT-4C-apm" secondAttribute="centerX" id="dyZ-I6-Imd"/>
                         <constraint firstAttribute="centerY" secondItem="5Cu-e1-VdF" secondAttribute="centerY" id="e8K-U2-DPP"/>
                         <constraint firstItem="5Cu-e1-VdF" firstAttribute="centerY" secondItem="LbT-4C-apm" secondAttribute="centerY" id="eSU-ak-mLW"/>
                         <constraint firstAttribute="width" secondItem="LbT-4C-apm" secondAttribute="height" multiplier="1:1" id="edH-pf-sG2"/>
                         <constraint firstAttribute="height" constant="320" id="faH-od-Sre"/>
-                        <constraint firstAttribute="bottom" secondItem="3l4-gj-aBv" secondAttribute="bottom" id="g7A-ZF-N3E"/>
                         <constraint firstAttribute="width" secondItem="LbT-4C-apm" secondAttribute="height" multiplier="1:1" id="h7Y-eW-7X0"/>
                         <constraint firstAttribute="centerX" secondItem="aBY-c2-uDk" secondAttribute="centerX" constant="-6" id="hmW-6h-vk6"/>
                         <constraint firstAttribute="centerY" secondItem="dxK-Jf-uxC" secondAttribute="centerY" id="kCh-sR-RGM"/>
                         <constraint firstAttribute="centerX" secondItem="p4L-NN-0Ry" secondAttribute="centerX" id="pYz-5H-QEI"/>
-                        <constraint firstItem="3l4-gj-aBv" firstAttribute="top" secondItem="LbT-4C-apm" secondAttribute="top" id="qOG-ZK-RY1"/>
                         <constraint firstAttribute="centerX" secondItem="dxK-Jf-uxC" secondAttribute="centerX" id="vLT-oD-vMY"/>
                     </constraints>
                     <variation key="default">

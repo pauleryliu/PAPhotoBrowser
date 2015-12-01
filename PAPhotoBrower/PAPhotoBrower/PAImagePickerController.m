@@ -264,10 +264,19 @@ static NSString * const reuseIdentifier = @"Cell";
         // failure view controller
     };
     
-    // add group that contain videos
+    // add group
+    ALAssetsFilter *assetsfilter;
+    
+    if (self.paMediaType == PAMediaTypePhoto) {
+        assetsfilter = [ALAssetsFilter  allPhotos];
+    } else if (self.paMediaType == PAMediaTypeVideo) {
+        assetsfilter = [ALAssetsFilter allVideos];
+    } else {
+        assetsfilter = [ALAssetsFilter allAssets];
+    }
+    
     ALAssetsLibraryGroupsEnumerationResultsBlock groupBlock = ^(ALAssetsGroup *group,BOOL *stop){
-        ALAssetsFilter *onlyVideoFilter = [ALAssetsFilter  allPhotos];
-        [group setAssetsFilter:onlyVideoFilter];
+        [group setAssetsFilter:assetsfilter];
         if ([group numberOfAssets] > 0) {
             [self.groups addObject:group];
         }
@@ -278,7 +287,7 @@ static NSString * const reuseIdentifier = @"Cell";
         }
     };
     
-    // enumerate only videos
+    // enumerate
     NSInteger groupTypes = ALAssetsGroupSavedPhotos | ALAssetsGroupAlbum | ALAssetsGroupEvent | ALAssetsGroupFaces;
     [self.assetsLibrary enumerateGroupsWithTypes:groupTypes usingBlock:groupBlock failureBlock:failureBlock];
     
@@ -303,8 +312,17 @@ static NSString * const reuseIdentifier = @"Cell";
         }
     };
     
-    ALAssetsFilter *onlyPhotosFilter = [ALAssetsFilter allPhotos];
-    [self.assertGroup setAssetsFilter:onlyPhotosFilter];
+    ALAssetsFilter *assetsfilter;
+    
+    if (self.paMediaType == PAMediaTypePhoto) {
+        assetsfilter = [ALAssetsFilter  allPhotos];
+    } else if (self.paMediaType == PAMediaTypeVideo) {
+        assetsfilter = [ALAssetsFilter allVideos];
+    } else {
+        assetsfilter = [ALAssetsFilter allAssets];
+    }
+    
+    [self.assertGroup setAssetsFilter:assetsfilter];
     [self.assertGroup enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:assetsEnumerationBlock];
 }
 

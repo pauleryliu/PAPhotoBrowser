@@ -87,10 +87,19 @@ alpha:1.0]
         // failure view controller
     };
     
-    // add group that contain videos
+    // add group
+    ALAssetsFilter *assetsfilter;
+    
+    if (self.paMediaType == PAMediaTypePhoto) {
+        assetsfilter = [ALAssetsFilter  allPhotos];
+    } else if (self.paMediaType == PAMediaTypeVideo) {
+        assetsfilter = [ALAssetsFilter allVideos];
+    } else {
+        assetsfilter = [ALAssetsFilter allAssets];
+    }
+    
     ALAssetsLibraryGroupsEnumerationResultsBlock groupBlock = ^(ALAssetsGroup *group,BOOL *stop){
-        ALAssetsFilter *onlyPhotoFilter = [ALAssetsFilter  allPhotos];
-        [group setAssetsFilter:onlyPhotoFilter];
+        [group setAssetsFilter:assetsfilter];
         if ([group numberOfAssets] > 0) {
             [self.groups addObject:group];
         }
@@ -142,6 +151,7 @@ alpha:1.0]
     PAImagePickerController *vc = [[PAImagePickerController alloc] initWithCollectionViewLayout:layout];
     vc.maxNumberOfPhotos = self.maxNumberOfPhotos;
     vc.delegate = self.delegate;
+    vc.paMediaType = self.paMediaType;
     vc.title = [group  valueForProperty:ALAssetsGroupPropertyName];
     vc.assertGroup = [self.groups objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
