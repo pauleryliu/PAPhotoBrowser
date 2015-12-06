@@ -135,6 +135,41 @@
     NSLog(@"end init CaptureDevice");
 }
 
+- (void)switchToModel:(PACurrentModel)paCurrentModel
+{
+    self.paCurrentModel = paCurrentModel;
+    
+    if (self.paCurrentModel == PACurrentPhotoModel) {
+        _captureStillImageOutput = [[AVCaptureStillImageOutput alloc] init];
+        if ([_captureSession canAddOutput:_captureStillImageOutput]) {
+            [_captureSession addOutput:_captureStillImageOutput];
+        }
+    }
+    
+    if (self.paCurrentModel == PACurrentVideoModel) {
+        AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
+        if (audioDevice) {
+            NSError *error;
+            _audioDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
+            if (!error) {
+                if ([_captureSession canAddInput:_audioDeviceInput]) {
+                    [_captureSession addInput:_audioDeviceInput];
+                }
+            }
+        }
+        
+        _movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
+        if ([_captureSession canAddOutput:_movieFileOutput]){
+            [_captureSession addOutput:_movieFileOutput];
+            // 解决，拍摄视频后，视频播放的声音无法关闭的问题
+            if ([_captureSession respondsToSelector:@selector(setUsesApplicationAudioSession:)]) {
+                [_captureSession setUsesApplicationAudioSession:NO];
+            }
+            [self setMovieFileOutput:_movieFileOutput];
+        }
+    }
+}
+
 #pragma mark -- Photo Method
 
 - (void)takePhoto
