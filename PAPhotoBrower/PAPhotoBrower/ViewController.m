@@ -9,8 +9,9 @@
 #import "ViewController.h"
 #import "PAImagePickerController.h"
 #import "PAImagePickerGroupController.h"
+#import "PAVideoRecorderVC.h"
 
-@interface ViewController ()<PAImagePickerControllerDelegate,PAImagePickerControllerDelegate>
+@interface ViewController ()<PAImagePickerControllerDelegate,PAImagePickerControllerDelegate,UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *paPhotoBrowserButton;
 
@@ -34,23 +35,76 @@
 {
     NSLog(@"paPhotoBrowserButtonPressed");
     
-    NSUInteger maxNumberOfPhotos = 6;
-    UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc]init];
-    [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    PAImagePickerController *pickerVC = [[PAImagePickerController alloc] initWithCollectionViewLayout:layout];
-    PAImagePickerGroupController *pickerGroupVC = [[PAImagePickerGroupController alloc] init];
-    pickerVC.isSupportEditWhenSelectSinglePhoto = NO;
-    pickerGroupVC.maxNumberOfPhotos = maxNumberOfPhotos;
-    pickerVC.maxNumberOfPhotos = maxNumberOfPhotos;
-    pickerVC.delegate = self;
-    pickerGroupVC.delegate = self;
-    pickerVC.doneBtnName = @"发送";
-    UINavigationController *pickerNavController = [[UINavigationController alloc] initWithRootViewController:pickerGroupVC];
-    pickerNavController.viewControllers = @[pickerGroupVC,pickerVC];
-    
-    [self presentViewController:pickerNavController animated:YES completion:^{
-        
-    }];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照和录视频",@"拍照",@"录视频",@"本地相册", nil];
+    actionSheet.delegate = self;
+    [actionSheet showInView:self.view];
+}
+
+#pragma mark -- 
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+        {
+            NSLog(@"拍照和录视频");
+            PAVideoRecorderVC *videoRecorderVC = [[PAVideoRecorderVC alloc] initWithNibName:@"PAVideoRecorderVC" bundle:[NSBundle mainBundle]];
+            videoRecorderVC.paMediaType = PAMediaTypePhotoAndVideo;
+            //  PAVideoRecorderVC.delegate = (id)self;
+            [self presentViewController:videoRecorderVC animated:YES completion:^{
+                
+            }];
+            
+        }
+            break;
+        case 1:
+        {
+            NSLog(@"拍照");
+            PAVideoRecorderVC *videoRecorderVC = [[PAVideoRecorderVC alloc] initWithNibName:@"PAVideoRecorderVC" bundle:[NSBundle mainBundle]];
+            videoRecorderVC.paMediaType = PAMediaTypePhoto;
+            // PAVideoRecorderVC.delegate = (id)self;
+            [self presentViewController:videoRecorderVC animated:YES completion:^{
+                
+            }];
+            
+        }
+            break;
+        case 2:
+        {
+            NSLog(@"录视频");
+            PAVideoRecorderVC *videoRecorderVC = [[PAVideoRecorderVC alloc] initWithNibName:@"PAVideoRecorderVC" bundle:[NSBundle mainBundle]];
+            videoRecorderVC.paMediaType = PAMediaTypeVideo;
+            // PAVideoRecorderVC.delegate = (id)self;
+            [self presentViewController:videoRecorderVC animated:YES completion:^{
+                
+            }];
+        }
+            break;
+        case 3:
+        {
+            // 本地选图
+            NSUInteger maxNumberOfPhotos = 6;
+            UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc]init];
+            [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
+            PAImagePickerController *pickerVC = [[PAImagePickerController alloc] initWithCollectionViewLayout:layout];
+            PAImagePickerGroupController *pickerGroupVC = [[PAImagePickerGroupController alloc] init];
+            pickerVC.isSupportEditWhenSelectSinglePhoto = NO;
+            pickerGroupVC.maxNumberOfPhotos = maxNumberOfPhotos;
+            pickerVC.maxNumberOfPhotos = maxNumberOfPhotos;
+            pickerVC.delegate = self;
+            pickerGroupVC.delegate = self;
+            pickerVC.doneBtnName = @"发送";
+            UINavigationController *pickerNavController = [[UINavigationController alloc] initWithRootViewController:pickerGroupVC];
+            pickerNavController.viewControllers = @[pickerGroupVC,pickerVC];
+            
+            [self presentViewController:pickerNavController animated:YES completion:^{
+                
+            }];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 @end

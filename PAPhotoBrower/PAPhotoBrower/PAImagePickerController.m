@@ -13,6 +13,7 @@
 #import "PAImagePickerPreviewViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "PAPhotoBrowserHelper.h"
+#import <POP.h>
 
 #define UIColorFromRGB(rgbValue) \
 [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
@@ -99,6 +100,7 @@ static NSString * const reuseIdentifier = @"Cell";
 {
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0x8f8f95)}];
+    self.navigationController.navigationBar.barTintColor = UIColorFromRGB(0x1a1a1f);
     
     // back btn
     UIButton *leftBarBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -262,10 +264,19 @@ static NSString * const reuseIdentifier = @"Cell";
         // failure view controller
     };
     
-    // add group that contain videos
+    // add group
+    ALAssetsFilter *assetsfilter;
+    
+    if (self.paMediaType == PAMediaTypePhoto) {
+        assetsfilter = [ALAssetsFilter  allPhotos];
+    } else if (self.paMediaType == PAMediaTypeVideo) {
+        assetsfilter = [ALAssetsFilter allVideos];
+    } else {
+        assetsfilter = [ALAssetsFilter allAssets];
+    }
+    
     ALAssetsLibraryGroupsEnumerationResultsBlock groupBlock = ^(ALAssetsGroup *group,BOOL *stop){
-        ALAssetsFilter *onlyVideoFilter = [ALAssetsFilter  allPhotos];
-        [group setAssetsFilter:onlyVideoFilter];
+        [group setAssetsFilter:assetsfilter];
         if ([group numberOfAssets] > 0) {
             [self.groups addObject:group];
         }
@@ -276,7 +287,7 @@ static NSString * const reuseIdentifier = @"Cell";
         }
     };
     
-    // enumerate only videos
+    // enumerate
     NSInteger groupTypes = ALAssetsGroupSavedPhotos | ALAssetsGroupAlbum | ALAssetsGroupEvent | ALAssetsGroupFaces;
     [self.assetsLibrary enumerateGroupsWithTypes:groupTypes usingBlock:groupBlock failureBlock:failureBlock];
     
@@ -301,8 +312,17 @@ static NSString * const reuseIdentifier = @"Cell";
         }
     };
     
-    ALAssetsFilter *onlyPhotosFilter = [ALAssetsFilter allPhotos];
-    [self.assertGroup setAssetsFilter:onlyPhotosFilter];
+    ALAssetsFilter *assetsfilter;
+    
+    if (self.paMediaType == PAMediaTypePhoto) {
+        assetsfilter = [ALAssetsFilter  allPhotos];
+    } else if (self.paMediaType == PAMediaTypeVideo) {
+        assetsfilter = [ALAssetsFilter allVideos];
+    } else {
+        assetsfilter = [ALAssetsFilter allAssets];
+    }
+    
+    [self.assertGroup setAssetsFilter:assetsfilter];
     [self.assertGroup enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:assetsEnumerationBlock];
 }
 
@@ -382,7 +402,7 @@ static NSString * const reuseIdentifier = @"Cell";
         
         if (self.selectedAsserts.count == self.maxNumberOfPhotos) {
             // 超过范围
-            NSString *tip = [NSString stringWithFormat:@"最多只能选取%ld张图片哦",self.maxNumberOfPhotos];
+//            NSString *tip = [NSString stringWithFormat:@"最多只能选取%ld张图片哦",(long)self.maxNumberOfPhotos];
 //            PostMsg(tip);
             return;
         } else {
@@ -473,7 +493,7 @@ static NSString * const reuseIdentifier = @"Cell";
 {
     if (self.selectedAsserts.count == self.maxNumberOfPhotos && (!cell.selectedTagBtn.isSelected)) {
         // 超过范围
-        NSString *tip = [NSString stringWithFormat:@"最多只能选取%ld张图片哦",self.maxNumberOfPhotos];
+//        NSString *tip = [NSString stringWithFormat:@"最多只能选取%ld张图片哦",self.maxNumberOfPhotos];
 //        PostMsg(tip);
         return;
     }
@@ -500,12 +520,12 @@ static NSString * const reuseIdentifier = @"Cell";
         [self.selectedAsserts addObject:asset];
         [cell.selectedTagBtn setSelected:YES];
         
-//        POPSpringAnimation *sizeAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-//        sizeAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.6, 0.6)];
-//        sizeAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1,1)];
-//        sizeAnimation.springSpeed = 20.f;
-//        sizeAnimation.springBounciness = 20.0f;
-//        [cell.selectedTagBtn.layer pop_addAnimation:sizeAnimation forKey:@"paulery"];
+        POPSpringAnimation *sizeAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+        sizeAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.6, 0.6)];
+        sizeAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1,1)];
+        sizeAnimation.springSpeed = 20.f;
+        sizeAnimation.springBounciness = 20.0f;
+        [cell.selectedTagBtn.layer pop_addAnimation:sizeAnimation forKey:@"paulery"];
     }
 
     if (self.selectedAsserts.count > 0) {
@@ -522,12 +542,12 @@ static NSString * const reuseIdentifier = @"Cell";
     if (self.selectedAsserts.count > 0) {
         self.bottomBarSelectedLabel.text = [NSString stringWithFormat:@"%ld",(long)self.selectedAsserts.count];
         [self.bottomBarSelectedLabel setHidden:NO];
-//        POPSpringAnimation *sizeAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-//        sizeAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.6, 0.6)];
-//        sizeAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1,1)];
-//        sizeAnimation.springSpeed = 20.f;
-//        sizeAnimation.springBounciness = 20.0f;
-//        [self.bottomBarSelectedLabel.layer pop_addAnimation:sizeAnimation forKey:@"paulery"];
+        POPSpringAnimation *sizeAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+        sizeAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.6, 0.6)];
+        sizeAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1,1)];
+        sizeAnimation.springSpeed = 20.f;
+        sizeAnimation.springBounciness = 20.0f;
+        [self.bottomBarSelectedLabel.layer pop_addAnimation:sizeAnimation forKey:@"paulery"];
     } else {
         [self.bottomBarSelectedLabel setHidden:YES];
     }

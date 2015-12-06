@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "PAVideoRecorderVC.h"
 
 @protocol PAImagePickerControllerDelegate <NSObject>
 
@@ -19,6 +20,7 @@
 
 @interface PAImagePickerController : UICollectionViewController
 
+@property (nonatomic,assign) PAMediaType paMediaType;
 @property (weak,nonatomic) id<PAImagePickerControllerDelegate> delegate;
 @property (nonatomic,strong) ALAssetsGroup *assertGroup;
 @property (nonatomic) BOOL isSupportEditWhenSelectSinglePhoto;
