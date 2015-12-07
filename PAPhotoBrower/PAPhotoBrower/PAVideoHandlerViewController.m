@@ -320,6 +320,8 @@ alpha:1.0]
     // encode
     self.videoEncodedFileURL = [NSURL fileURLWithPath:[PAVideoRecorderHelper getFilePathByTime]];
     [self convertVideoToLowQuailtyWithInputURL:self.videoInputURL outputURL:self.videoEncodedFileURL];
+    
+    
 }
 
 #pragma mark - video convert
@@ -405,31 +407,6 @@ alpha:1.0]
 //    instruction.timeRange = range;
     videoComposition.instructions = [NSArray arrayWithObject:instruction];
     instruction.layerInstructions = [NSArray arrayWithObject:transformer];
-    
-    
-    /*
-     // water Mask
-     // logo ImageLayer
-     UIImage *logoImage = [UIImage imageNamed:@"logo"];
-     CALayer *logoLayer = [CALayer layer];
-     logoLayer.contents = (id)logoImage.CGImage;
-     logoLayer.frame = CGRectMake(5, 5, 111/2, 56/2);
-     logoLayer.opacity = 0.65;
-     
-     // add ImagerLayer & VideoLayer to ParentLayer
-     CGSize videoSize = [asset naturalSize];
-     CALayer *parentLayer = [CALayer layer];
-     CALayer *videoLayer = [CALayer layer];
-     parentLayer.frame = CGRectMake(0, 0, videoSize.width, videoSize.height);
-     videoLayer.frame = CGRectMake(0, 0,videoSize.width, videoSize.height);
-     [parentLayer addSublayer:videoLayer];
-     [parentLayer addSublayer:logoLayer];
-     
-     //incorporate by animate tool
-     AVVideoCompositionCoreAnimationTool *animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
-     videoComposition.animationTool = animationTool;
-     */
-    
     [self.encoder setVideoComposition:videoComposition];
     
     // call back

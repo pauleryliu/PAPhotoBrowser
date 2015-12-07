@@ -623,50 +623,25 @@ alpha:1.0]
         if (self.encoder.status == AVAssetExportSessionStatusCompleted) {
             NSLog(@"AVAssetExportSessionStatusCompleted");
             
-            if ([[NSFileManager defaultManager] fileExistsAtPath:outputURL.path]) {
+            if ([[NSFileManager defaultManager] fileExistsAtPath:_videoOutputFileURL.path]) {
                 NSLog(@"yyy");
             } else {
                 NSLog(@"nnn");
             }
             
-            if (self.isSupportVideoCrop) {
-                ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-                [library assetForURL:outputURL resultBlock:^(ALAsset *asset) {
-                    // If asset exists
-                    if (asset) {
-                        // Type your code here for successful
-                        if (self.isSupportVideoCrop) {
-                            PAVideoHandlerViewController *vc = [[PAVideoHandlerViewController alloc] initWithNibName:@"PAVideoHandlerViewController" bundle:[NSBundle mainBundle]];
-                            vc.title = @"剪辑视频";
-                            vc.videoDuration = [[asset valueForProperty:ALAssetPropertyDuration] doubleValue];
-                            vc.videoInputURL = asset.defaultRepresentation.url;
-                            [self.navigationController pushViewController:vc animated:YES];
-                        }
-                    } else {
-                        // Type your code here for not existing asset
-                    }
-                } failureBlock:^(NSError *error) {
-                    NSLog(@"error %@",error);
-                    // Type your code here for failure (when user doesn't allow location in your app)
-                }];
-            }
             
+            
+            if (self.isSupportVideoCrop) {
+                PAVideoHandlerViewController *vc = [[PAVideoHandlerViewController alloc] initWithNibName:@"PAVideoHandlerViewController" bundle:[NSBundle mainBundle]];
+                vc.title = @"剪辑视频";
+                vc.videoDuration = self.videoRecorder.getVideoDuration;
+                vc.videoInputURL = _videoOutputFileURL;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
             
             
 //            UIImage *videoPreViewImage = [self getVideoPreViewImageWithFileURL:outputURL];
             // TODO：转码后的视频URL：outputURL，处理后的视频URL；videoPreViewImage 视频预览图
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                if ([_delegate respondsToSelector:@selector(onImageEdited:)])
-//                {
-//                    [_delegate onVideoSelectedWithPath:outputURL firstImg:videoPreViewImage videoOriginHash:nil];
-//                }
-//                CGRect rect = CGRectZero;
-//                if ([_delegate respondsToSelector:@selector(animateEndRect)])
-//                {
-//                    rect = [_delegate animateEndRect];
-//                }
-//                [self disappearWithAnimationEndRect:rect image:videoPreViewImage];
-//            });
         }else if(self.encoder.status == AVAssetExportSessionStatusFailed){
             NSLog(@"AVAssetExportSessionStatusFailed");
         }else if(self.encoder.status == AVAssetExportSessionStatusExporting){

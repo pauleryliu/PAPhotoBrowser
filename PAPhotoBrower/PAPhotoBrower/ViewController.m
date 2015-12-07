@@ -80,7 +80,9 @@
             videoRecorderVC.paMediaType = PAMediaTypeVideo;
             videoRecorderVC.isSupportVideoCrop = YES;
             // PAVideoRecorderVC.delegate = (id)self;
-            [self presentViewController:videoRecorderVC animated:YES completion:^{
+            
+            UINavigationController *videoRecorderVCNav = [[UINavigationController alloc] initWithRootViewController:videoRecorderVC];
+            [self presentViewController:videoRecorderVCNav animated:YES completion:^{
                 
             }];
         }
@@ -89,10 +91,11 @@
         {
             NSLog(@"拍照和录视频(含剪辑)");
             PAVideoRecorderVC *videoRecorderVC = [[PAVideoRecorderVC alloc] initWithNibName:@"PAVideoRecorderVC" bundle:[NSBundle mainBundle]];
-            videoRecorderVC.paMediaType = PAMediaTypeVideo;
+            videoRecorderVC.paMediaType = PAMediaTypePhotoAndVideo;
             videoRecorderVC.isSupportVideoCrop = YES;
             // PAVideoRecorderVC.delegate = (id)self;
-            [self presentViewController:videoRecorderVC animated:YES completion:^{
+            UINavigationController *videoRecorderVCNav = [[UINavigationController alloc] initWithRootViewController:videoRecorderVC];
+            [self presentViewController:videoRecorderVCNav animated:YES completion:^{
                 
             }];
         }
