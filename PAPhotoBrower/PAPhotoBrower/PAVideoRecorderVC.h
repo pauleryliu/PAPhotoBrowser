@@ -38,7 +38,8 @@ typedef enum {
     PAMediaTypeVideo = 2,
 } PAMediaType;
 
-@property (nonatomic, copy) void (^recordVCDismssCallback)(void);
-@property (nonatomic, assign) PAMediaType paMediaType;
+@property (nonatomic,copy) void (^recordVCDismssCallback)(void);
+@property (nonatomic,assign) PAMediaType paMediaType;
+@property (nonatomic,assign) BOOL isSupportVideoCrop;
 
 @end

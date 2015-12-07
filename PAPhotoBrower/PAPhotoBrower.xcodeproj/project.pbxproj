@@ -353,7 +353,6 @@
 		9946963C1C07E58A00333CC7 /* PAPhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				994696541C07E9A400333CC7 /* Feature */,
 				9946963D1C07E59800333CC7 /* ViewController */,
 				9946963E1C07E5A000333CC7 /* Cell */,
 				9946963F1C07E5A800333CC7 /* Model */,
@@ -413,53 +412,6 @@
 				994696601C07EB1D00333CC7 /* icon_back@3x.png */,
 			);
 			name = Image;
-			sourceTree = "<group>";
-		};
-		994696541C07E9A400333CC7 /* Feature */ = {
-			isa = PBXGroup;
-			children = (
-				994696551C07E9AB00333CC7 /* TestA */,
-			);
-			name = Feature;
-			sourceTree = "<group>";
-		};
-		994696551C07E9AB00333CC7 /* TestA */ = {
-			isa = PBXGroup;
-			children = (
-				994696591C07E9C300333CC7 /* Model */,
-				994696581C07E9BE00333CC7 /* Model */,
-				994696571C07E9B900333CC7 /* Cell */,
-				994696561C07E9B200333CC7 /* ViewController */,
-			);
-			name = TestA;
-			sourceTree = "<group>";
-		};
-		994696561C07E9B200333CC7 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = ViewController;
-			sourceTree = "<group>";
-		};
-		994696571C07E9B900333CC7 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Cell;
-			sourceTree = "<group>";
-		};
-		994696581C07E9BE00333CC7 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		994696591C07E9C300333CC7 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Model;
 			sourceTree = "<group>";
 		};
 		994696621C07EBC200333CC7 /* Helper */ = {

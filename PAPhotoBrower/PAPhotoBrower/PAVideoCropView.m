@@ -77,16 +77,10 @@ alpha:1.0]
         self.videoCropCurrentTime = self.videoCropBeginTime;
         self.videoCropPreCurTime = self.videoCropEndTime;
         
-        // scrollView
+        // ui
         [self creatScrollView];
-        
-        // thunbNail
         [self creatThumbNail];
-        
-        // hanler
         [self creatHanler];
-        
-        // progressBar
         [self creatProgressBar];
         
         if (self.videoDuration < 10) {

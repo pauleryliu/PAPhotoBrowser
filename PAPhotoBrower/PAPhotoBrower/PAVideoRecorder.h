@@ -57,13 +57,16 @@ typedef enum
 - (BOOL)isTorchOn;
 - (BOOL)isTorchSupported;
 
+// Recorde
+- (void)startRecordingOutputFile;
+- (void)stopCurrentVideoRecording;
+- (void)switchToModel:(PACurrentModel)paCurrentModel;
+
 // Actions
 - (void)openTorch:(BOOL)open;
 - (void)switchCamera;
 - (void)takePhoto;
 - (CGFloat)getVideoDuration; // recorded time
-- (void)startRecordingOutputFile;
-- (void)stopCurrentVideoRecording;
 - (void)subjectAreaDidChange;
 - (void)focusAndExposeTap:(CGPoint)tapPoint;
 

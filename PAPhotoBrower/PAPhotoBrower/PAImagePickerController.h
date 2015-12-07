@@ -12,7 +12,7 @@
 
 @protocol PAImagePickerControllerDelegate <NSObject>
 
-@required
+@optional
 - (void)PAImagePickerControllerMultiPhotosDidFinishPickingMediaInfo:(NSMutableArray*)info;
 - (void)PAImagePickerControllerSinglePhotoDidFinishEdit:(UIImage*)image;
 
@@ -21,6 +21,7 @@
 @interface PAImagePickerController : UICollectionViewController
 
 @property (nonatomic,assign) PAMediaType paMediaType;
+@property (nonatomic,assign) BOOL isSupportRecorder;
 @property (weak,nonatomic) id<PAImagePickerControllerDelegate> delegate;
 @property (nonatomic,strong) ALAssetsGroup *assertGroup;
 @property (nonatomic) BOOL isSupportEditWhenSelectSinglePhoto;

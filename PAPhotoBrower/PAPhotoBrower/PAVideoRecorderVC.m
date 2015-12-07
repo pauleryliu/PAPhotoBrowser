@@ -13,6 +13,7 @@
 #import <POP.h>
 #import "PAImagePickerController.h"
 #import "PAImagePickerGroupController.h"
+#import "PAVideoHandlerViewController.h"
 
 #define UIColorFromRGB(rgbValue) \
 [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
@@ -87,12 +88,11 @@ alpha:1.0]
 - (IBAction)videoSelectBtn:(id)sender;
 - (IBAction)videoSwitchBtnPressed:(id)sender;
 
-
 @end
 
 @implementation PAVideoRecorderVC
 
-#pragma mark - Life Cycle
+#pragma mark - View Life Cycle
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -174,6 +174,13 @@ alpha:1.0]
 {
     [super viewDidDisappear:animated];
     [self.videoRecorder.captureSession stopRunning];
+}
+
+- (void)dissmissVC
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 - (void)setApplicationStatusBarHidden:(BOOL)hidden
@@ -268,6 +275,29 @@ alpha:1.0]
     [self.videoRecorder subjectAreaDidChange];
 }
 
+- (void)updateUI
+{
+    if (self.paCurrentModel == PACurrentVideoModel) {
+        // progressBar
+        if (!self.progressBar) {
+            CGRect preViewRect = self.preView.frame;
+            self.progressBar = [[QBImageLoadingProgressBar alloc] initWithFrame:CGRectMake(0,preViewRect.origin.y + CGRectGetHeight(preViewRect), CGRectGetWidth(preViewRect), 5) andBackgroundColor:[UIColor colorWithRed:32.0/255.0 green:32.0/255.0 blue:40.0/255.0 alpha:1]];
+            [self.progressBar setProgress:0.0];
+            [self.view addSubview:self.progressBar];
+            
+            // progressTagView
+            UIView *progressTagView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.progressBar.frame)*0.3, 0, 1, CGRectGetHeight(self.progressBar.frame))];
+            progressTagView.backgroundColor = [UIColor colorWithRed:255/255.0 green:160/255.0 blue:21/255.0 alpha:1];
+            self.progressBar.layer.zPosition = -1;
+            [self.progressBar addSubview:progressTagView];
+        } else {
+            [self.progressBar setHidden:NO];
+        }
+    } else {
+        [self.progressBar setHidden:YES];
+    }
+}
+
 - (void)createViews
 {
     if ([PAVideoRecorderHelper onlyShowForTheFirstTimeForKey:@"VideoRecorderVC_FirstTipBubbleView"]) {
@@ -286,22 +316,6 @@ alpha:1.0]
         self.videoLessThan3SecondsTipBubbleView.clipsToBounds = YES;
         self.videoLessThan3SecondsTipBubbleRectangleLabel.layer.cornerRadius = 5;
         self.videoLessThan3SecondsTipBubbleTritangleImageView.transform = CGAffineTransformMakeRotation(M_PI_4);
-    }
-    
-    if (self.paCurrentModel == PACurrentVideoModel) {
-        // progress
-        CGRect preViewRect = self.preView.frame;
-        self.progressBar = [[QBImageLoadingProgressBar alloc] initWithFrame:CGRectMake(0,preViewRect.origin.y + CGRectGetHeight(preViewRect), CGRectGetWidth(preViewRect), 5) andBackgroundColor:[UIColor colorWithRed:32.0/255.0 green:32.0/255.0 blue:40.0/255.0 alpha:1]];
-        [self.progressBar setProgress:0.0];
-        [self.view addSubview:self.progressBar];
-        
-        // progressTagView
-        UIView *progressTagView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.progressBar.frame)*0.3, 0, 1, CGRectGetHeight(self.progressBar.frame))];
-        progressTagView.backgroundColor = [UIColor colorWithRed:255/255.0 green:160/255.0 blue:21/255.0 alpha:1];
-        self.progressBar.layer.zPosition = -1;
-        [self.progressBar addSubview:progressTagView];
-    } else {
-        [self.progressBar setHidden:YES];
     }
     
     // other Btns
@@ -375,6 +389,14 @@ alpha:1.0]
     // video operate Btn disabled until start recorder
     [self.videoDeleteBtn setEnabled:NO];
     [self.videoRecorderFinishedBtn setEnabled:NO];
+    
+    [self updateUI];
+}
+
+- (void)dismiss
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
 }
 
 - (void)reset
@@ -600,6 +622,37 @@ alpha:1.0]
     [self.encoder exportAsynchronouslyWithCompletionHandler:^{
         if (self.encoder.status == AVAssetExportSessionStatusCompleted) {
             NSLog(@"AVAssetExportSessionStatusCompleted");
+            
+            if ([[NSFileManager defaultManager] fileExistsAtPath:outputURL.path]) {
+                NSLog(@"yyy");
+            } else {
+                NSLog(@"nnn");
+            }
+            
+            if (self.isSupportVideoCrop) {
+                ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+                [library assetForURL:outputURL resultBlock:^(ALAsset *asset) {
+                    // If asset exists
+                    if (asset) {
+                        // Type your code here for successful
+                        if (self.isSupportVideoCrop) {
+                            PAVideoHandlerViewController *vc = [[PAVideoHandlerViewController alloc] initWithNibName:@"PAVideoHandlerViewController" bundle:[NSBundle mainBundle]];
+                            vc.title = @"剪辑视频";
+                            vc.videoDuration = [[asset valueForProperty:ALAssetPropertyDuration] doubleValue];
+                            vc.videoInputURL = asset.defaultRepresentation.url;
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }
+                    } else {
+                        // Type your code here for not existing asset
+                    }
+                } failureBlock:^(NSError *error) {
+                    NSLog(@"error %@",error);
+                    // Type your code here for failure (when user doesn't allow location in your app)
+                }];
+            }
+            
+            
+            
 //            UIImage *videoPreViewImage = [self getVideoPreViewImageWithFileURL:outputURL];
             // TODO：转码后的视频URL：outputURL，处理后的视频URL；videoPreViewImage 视频预览图
 //            dispatch_async(dispatch_get_main_queue(), ^{
@@ -640,6 +693,7 @@ alpha:1.0]
         return;
     }
     NSLog(@"%s", __func__);
+    [self.videoSwitchBtn setHidden:YES];
     [self.videoSelectBtn setHidden:YES];
     if ([PAVideoRecorderHelper onlyShowForTheFirstTimeForKey:@"VideoRecorderVC_hideFirstTipBubbleView"]) {
         [self.videoFirstTipBubbleView setHidden:YES];
@@ -666,7 +720,6 @@ alpha:1.0]
 - (void)recorderButtonTouchEnd
 {
     if (self.paCurrentModel == PACurrentPhotoModel) {
-        // TODO:拍照
         [self.videoRecorder takePhoto];
         return;
     }
@@ -814,13 +867,17 @@ alpha:1.0]
 
 - (IBAction)videoSwitchBtnPressed:(id)sender
 {
-    NSLog(@"videoSwitchBtnPressed");
     if (self.paCurrentModel == PACurrentPhotoModel) {
         self.paCurrentModel = PACurrentVideoModel;
-    }
-    if (self.paCurrentModel == PACurrentVideoModel) {
+    } else {
         self.paCurrentModel = PACurrentPhotoModel;
     }
+    
+    NSLog(@"videoSwitchBtnPressed type %d",self.paCurrentModel);
+    
+    [self.videoRecorder switchToModel:self.paCurrentModel];
+    [self reset];
+    [self updateUI];
 }
 
 #pragma mark - KVO
@@ -1103,11 +1160,6 @@ alpha:1.0]
 {
     [self.videoRecorderShineImageView.layer removeAllAnimations];
     [self.videoRecorderShineImageView setHidden:YES];
-}
-
-- (void)dissmissVC
-{
-    [self dismissViewControllerAnimated:NO completion:^(void){}];
 }
 
 - (void)dealloc

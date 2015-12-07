@@ -44,11 +44,6 @@ alpha:1.0]
 
 static NSString * const reuseIdentifier = @"Cell";
 
-- (void)dealloc
-{
-    
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -333,29 +328,37 @@ static NSString * const reuseIdentifier = @"Cell";
     return 1;
 }
 
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.asserts.count + 1;
+    if (self.isSupportRecorder) {
+        return self.asserts.count + 1;
+    } else {
+        return self.asserts.count;
+    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
+    if (self.isSupportRecorder && indexPath.row == 0) {
         // take photo        
         PAImagePickerTakePhotoCell *cell = (PAImagePickerTakePhotoCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"identifierT" forIndexPath:indexPath];
         return cell;
+    }
+    
+    NSInteger assertIndex = 0;
+    if (self.isSupportRecorder) {
+        assertIndex = indexPath.row - 1;
     } else {
-        
+        assertIndex = indexPath.row;
     }
     
     PAImagePickerCell *cell = (PAImagePickerCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"identifier" forIndexPath:indexPath];
-    [cell bindData:self.asserts[indexPath.row - 1]];
+    [cell bindData:self.asserts[assertIndex]];
     cell.delegate = self;
 
     BOOL isAssetExist = NO;
     for (ALAsset *selectAsset in self.selectedAsserts) {
-        if ([[selectAsset valueForProperty:ALAssetPropertyAssetURL] isEqual:[self.asserts[indexPath.row - 1] valueForProperty:ALAssetPropertyAssetURL]]) {
+        if ([[selectAsset valueForProperty:ALAssetPropertyAssetURL] isEqual:[self.asserts[assertIndex] valueForProperty:ALAssetPropertyAssetURL]]) {
             isAssetExist = YES;
         }
     }
@@ -370,8 +373,6 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 #pragma mark <UICollectionViewDelegate>
-
-
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     return self.cellSpacing;
@@ -398,7 +399,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
+    if (self.isSupportRecorder && indexPath.row == 0) {
         
         if (self.selectedAsserts.count == self.maxNumberOfPhotos) {
             // 超过范围
@@ -458,35 +459,35 @@ static NSString * const reuseIdentifier = @"Cell";
 //            }
 //        }
 //    }
-    BOOL sourceCamera = UIImagePickerControllerSourceTypeCamera == type && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
-    
-    UIImagePickerController*pickerVC = [[UIImagePickerController alloc] init];
-    pickerVC.sourceType = sourceCamera ? UIImagePickerControllerSourceTypeCamera : UIImagePickerControllerSourceTypePhotoLibrary ;
-    pickerVC.delegate = (id)self;
-    [self presentViewController:pickerVC animated:NO completion:nil];
-    
-}
-
-#pragma mark - UIImagePickerController Delegate Methods
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-    // TODO: 图片压缩
-
-    [self dismissViewControllerAnimated:YES completion:^{
+    PAVideoRecorderVC *videoRecorderVC = [[PAVideoRecorderVC alloc] initWithNibName:@"PAVideoRecorderVC" bundle:[NSBundle mainBundle]];
+    videoRecorderVC.paMediaType = PAMediaTypePhotoAndVideo;
+    //  PAVideoRecorderVC.delegate = (id)self;
+    [self presentViewController:videoRecorderVC animated:YES completion:^{
         
     }];
     
-    if ([_delegate respondsToSelector:@selector(PAImagePickerControllerSinglePhotoDidFinishEdit:)]) {
-        [_delegate PAImagePickerControllerSinglePhotoDidFinishEdit:image];
-    }
 }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [picker dismissViewControllerAnimated:YES completion:nil];
-}
+//#pragma mark - UIImagePickerController Delegate Methods
+//
+//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+//{
+//    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+//    // TODO: 图片压缩
+//
+//    [self dismissViewControllerAnimated:YES completion:^{
+//        
+//    }];
+//    
+//    if ([_delegate respondsToSelector:@selector(PAImagePickerControllerSinglePhotoDidFinishEdit:)]) {
+//        [_delegate PAImagePickerControllerSinglePhotoDidFinishEdit:image];
+//    }
+//}
+//
+//- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+//{
+//    [picker dismissViewControllerAnimated:YES completion:nil];
+//}
 
 #pragma mark -- Cell Delegate
 - (void)selectedAsset:(ALAsset*)asset cell:(PAImagePickerCell*)cell;
@@ -554,7 +555,6 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 #pragma mark -- Notification
-
 - (void)userDidTakeScreenshot:(NSNotification *)notification
 {
     [self setupAssert];
