@@ -21,6 +21,7 @@
 @interface PAImagePickerController : UICollectionViewController
 
 @property (nonatomic,assign) PAMediaType paMediaType;
+@property (nonatomic,assign) BOOL isSupportRecorder;
 @property (weak,nonatomic) id<PAImagePickerControllerDelegate> delegate;
 @property (nonatomic,strong) ALAssetsGroup *assertGroup;
 @property (nonatomic) BOOL isSupportEditWhenSelectSinglePhoto;

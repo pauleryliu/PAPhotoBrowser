@@ -336,26 +336,35 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.asserts.count + 1;
+    if (self.isSupportRecorder) {
+        return self.asserts.count + 1;
+    } else {
+        return self.asserts.count;
+    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
+    if (self.isSupportRecorder && indexPath.row == 0) {
         // take photo        
         PAImagePickerTakePhotoCell *cell = (PAImagePickerTakePhotoCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"identifierT" forIndexPath:indexPath];
         return cell;
+    }
+    
+    NSInteger assertIndex = 0;
+    if (self.isSupportRecorder) {
+        assertIndex = indexPath.row - 1;
     } else {
-        
+        assertIndex = indexPath.row;
     }
     
     PAImagePickerCell *cell = (PAImagePickerCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"identifier" forIndexPath:indexPath];
-    [cell bindData:self.asserts[indexPath.row - 1]];
+    [cell bindData:self.asserts[assertIndex]];
     cell.delegate = self;
 
     BOOL isAssetExist = NO;
     for (ALAsset *selectAsset in self.selectedAsserts) {
-        if ([[selectAsset valueForProperty:ALAssetPropertyAssetURL] isEqual:[self.asserts[indexPath.row - 1] valueForProperty:ALAssetPropertyAssetURL]]) {
+        if ([[selectAsset valueForProperty:ALAssetPropertyAssetURL] isEqual:[self.asserts[assertIndex] valueForProperty:ALAssetPropertyAssetURL]]) {
             isAssetExist = YES;
         }
     }
@@ -398,7 +407,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
+    if (self.isSupportRecorder && indexPath.row == 0) {
         
         if (self.selectedAsserts.count == self.maxNumberOfPhotos) {
             // 超过范围

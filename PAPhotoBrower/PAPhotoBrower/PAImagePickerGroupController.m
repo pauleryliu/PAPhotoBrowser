@@ -152,6 +152,7 @@ alpha:1.0]
     vc.maxNumberOfPhotos = self.maxNumberOfPhotos;
     vc.delegate = self.delegate;
     vc.paMediaType = self.paMediaType;
+    vc.isSupportRecorder = self.isSupportRecorder;
     vc.title = [group  valueForProperty:ALAssetsGroupPropertyName];
     vc.assertGroup = [self.groups objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];

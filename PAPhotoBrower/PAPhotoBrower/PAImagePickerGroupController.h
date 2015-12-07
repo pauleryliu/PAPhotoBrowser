@@ -12,6 +12,7 @@
 @interface PAImagePickerGroupController : UIViewController
 
 @property (nonatomic,assign) PAMediaType paMediaType;
+@property (nonatomic,assign) BOOL isSupportRecorder;
 @property (nonatomic) NSInteger maxNumberOfPhotos;
 @property (weak,nonatomic) id<PAImagePickerControllerDelegate> delegate;
 
