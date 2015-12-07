@@ -65,7 +65,7 @@ alpha:1.0]
 
 - (void)rightBarBtnPressed
 {
-    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+    [self dismissViewControllerAnimated:YES completion:^{
         
     }];
 }
