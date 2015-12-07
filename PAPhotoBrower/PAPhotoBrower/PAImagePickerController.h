@@ -12,7 +12,7 @@
 
 @protocol PAImagePickerControllerDelegate <NSObject>
 
-@required
+@optional
 - (void)PAImagePickerControllerMultiPhotosDidFinishPickingMediaInfo:(NSMutableArray*)info;
 - (void)PAImagePickerControllerSinglePhotoDidFinishEdit:(UIImage*)image;
 

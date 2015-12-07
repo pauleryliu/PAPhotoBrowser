@@ -206,8 +206,6 @@ static NSString * const reuseIdentifier = @"Cell";
         ALAsset *assert = [self.selectedAsserts firstObject];
         CGImageRef  ref = [[assert defaultRepresentation] fullScreenImage];
         UIImage *img = [[UIImage alloc]initWithCGImage:ref];
-        
-
         return;
     } else {
         // 单张图片(不支持单张编辑)或多张图片直接添加

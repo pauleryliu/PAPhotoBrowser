@@ -25,8 +25,6 @@ alpha:1.0]
 - (void)layoutSubviews
 {
     self.backgroundColor = UIColorFromRGB(0x444444);
-
-    // takePhotoImageView
     if (!self.takePhotoImageView) {
         NSInteger width = 23;
         NSInteger height = 23;

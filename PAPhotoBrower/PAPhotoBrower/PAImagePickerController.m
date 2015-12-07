@@ -44,11 +44,6 @@ alpha:1.0]
 
 static NSString * const reuseIdentifier = @"Cell";
 
-- (void)dealloc
-{
-    
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -333,7 +328,6 @@ static NSString * const reuseIdentifier = @"Cell";
     return 1;
 }
 
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if (self.isSupportRecorder) {
@@ -379,8 +373,6 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 #pragma mark <UICollectionViewDelegate>
-
-
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     return self.cellSpacing;
@@ -563,7 +555,6 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 #pragma mark -- Notification
-
 - (void)userDidTakeScreenshot:(NSNotification *)notification
 {
     [self setupAssert];

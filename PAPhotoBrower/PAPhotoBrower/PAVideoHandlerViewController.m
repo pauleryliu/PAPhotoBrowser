@@ -25,7 +25,6 @@ alpha:1.0]
 @property (weak, nonatomic) IBOutlet UIImageView *imgviewNeedToHidden;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightNeedToSet35;
 
-
 @property (weak, nonatomic) AVPlayer *player;  // video preview
 @property (strong,nonatomic) AVPlayerItem *playerItem;
 @property (strong, nonatomic) AVPlayerLayer *playerLayer;
@@ -69,6 +68,26 @@ alpha:1.0]
 @end
 
 @implementation PAVideoHandlerViewController
+
+- (void)dealloc
+{
+    [self removeObserver:self forKeyPath:@"player.rate"];
+    if (self.playerBoundaryTimeObserver) {
+        [self.player removeTimeObserver:self.playerBoundaryTimeObserver];
+    }
+    
+    if (self.playerPeriodicTimeObserver) {
+        [self.player removeTimeObserver:self.playerPeriodicTimeObserver];
+    }
+    [self.playerLayer removeFromSuperlayer];
+    self.playerItem = nil;
+    self.playerLayer = nil;
+    [self.player pause];
+    self.player = nil;
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:nil];
+    self.player = nil;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -308,13 +327,13 @@ alpha:1.0]
     AVURLAsset *asset = [AVURLAsset assetWithURL:inputURL];
     
     // video track
-    NSError *error = nil;
+//    NSError *error = nil;
     AVAssetTrack *clipVideoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
     
     // insert timeRange
-    CMTimeRange range = CMTimeRangeMake(CMTimeMake(self.cropView.videoCropBeginTime*self.avAsset.duration.timescale, self.avAsset.duration.timescale),CMTimeMake(self.cropView.videoCropDurationTime*self.avAsset.duration.timescale, self.avAsset.duration.timescale));
+//    CMTimeRange range = CMTimeRangeMake(CMTimeMake(self.cropView.videoCropBeginTime*self.avAsset.duration.timescale, self.avAsset.duration.timescale),CMTimeMake(self.cropView.videoCropDurationTime*self.avAsset.duration.timescale, self.avAsset.duration.timescale));
     AVMutableComposition *composition = [AVMutableComposition composition];
-    BOOL insertTrackSuccessed = [composition insertTimeRange:range ofAsset:asset atTime:kCMTimeZero error:&error];
+//    BOOL insertTrackSuccessed = [composition insertTimeRange:range ofAsset:asset atTime:kCMTimeZero error:&error];
     
     // encoder
     self.encoder = [[SDAVAssetExportSession alloc] initWithAsset:composition];
@@ -420,7 +439,7 @@ alpha:1.0]
             
             NSLog(@"AVAssetExportSessionStatusCompleted");
 
-            UIImage *videoPreViewImage = [weakSelf getVideoPreViewImageWithFileURL:outputURL];
+//            UIImage *videoPreViewImage = [weakSelf getVideoPreViewImageWithFileURL:outputURL];
             // TODO：转码后的视频URL：outputURL，处理后的视频URL；videoPreViewImage 视频预览图
 //            dispatch_async(dispatch_get_main_queue(), ^{
 //                if ([_delegate respondsToSelector:@selector(onImageEdited:)])
@@ -485,27 +504,10 @@ alpha:1.0]
                         }];
 }
 
-#pragma mark - outlet
+#pragma mark - Outlet
 - (IBAction)videoBtnPressed:(id)sender
 {
     [self.player play];
-}
-
-#pragma mark - Rotation
-// ios 6 supports
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return (1 << UIInterfaceOrientationPortrait);
-}
-
-- (BOOL)shouldAutorotate
-{
-    return NO;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return NO;
 }
 
 #pragma mark - Notification
@@ -579,26 +581,6 @@ alpha:1.0]
     CGFloat currentTime = CMTimeGetSeconds([self.player currentTime]);
     CGFloat currentProgress = (currentTime - self.cropView.videoCropBeginTime)/self.cropView.videoCropDurationTime;
     [self.cropView setProgressBar:currentProgress];
-}
-
-- (void)dealloc
-{
-    [self removeObserver:self forKeyPath:@"player.rate"];
-    if (self.playerBoundaryTimeObserver) {
-        [self.player removeTimeObserver:self.playerBoundaryTimeObserver];
-    }
-    
-    if (self.playerPeriodicTimeObserver) {
-        [self.player removeTimeObserver:self.playerPeriodicTimeObserver];
-    }
-    [self.playerLayer removeFromSuperlayer];
-    self.playerItem = nil;
-    self.playerLayer = nil;
-    [self.player pause];
-    self.player = nil;
-    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:nil];
-    self.player = nil;
 }
 
 @end

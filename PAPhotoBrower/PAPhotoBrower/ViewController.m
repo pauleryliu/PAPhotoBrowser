@@ -26,21 +26,16 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (IBAction)paPhotoBrowserButtonPressed:(id)sender
 {
     NSLog(@"paPhotoBrowserButtonPressed");
     
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"录视频",@"拍照和录视频",@"本地选图",@"本地选视频",@"本地选图和视频",@"本地选图（含拍摄）",@"本地选视频（含拍摄）",@"本地选图和视频（含拍摄）",nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"录视频(默认无剪辑)",@"拍照和录视频(默认无剪辑)",@"录视频(含剪辑)",@"拍照和录视频(含剪辑)",@"本地选图（默认无拍摄）",@"本地选视频（默认无拍摄）",@"本地选图和视频（默认无拍摄）",@"本地选图（含拍摄）",@"本地选视频（含拍摄）",@"本地选图和视频（含拍摄）",nil];
     actionSheet.delegate = self;
     [actionSheet showInView:self.view];
 }
 
-#pragma mark -- 
+#pragma mark -- ActionSheet
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -58,7 +53,7 @@
             break;
         case 1:
         {
-            NSLog(@"录视频");
+            NSLog(@"录视频(默认无剪辑)");
             PAVideoRecorderVC *videoRecorderVC = [[PAVideoRecorderVC alloc] initWithNibName:@"PAVideoRecorderVC" bundle:[NSBundle mainBundle]];
             videoRecorderVC.paMediaType = PAMediaTypeVideo;
             // PAVideoRecorderVC.delegate = (id)self;
@@ -69,7 +64,7 @@
             break;
         case 2:
         {
-            NSLog(@"拍照和录视频");
+            NSLog(@"拍照和录视频(默认无剪辑)");
             PAVideoRecorderVC *videoRecorderVC = [[PAVideoRecorderVC alloc] initWithNibName:@"PAVideoRecorderVC" bundle:[NSBundle mainBundle]];
             videoRecorderVC.paMediaType = PAMediaTypePhotoAndVideo;
             //  PAVideoRecorderVC.delegate = (id)self;
@@ -80,7 +75,31 @@
             break;
         case 3:
         {
-            // 本地选图
+            NSLog(@"录视频(含剪辑)");
+            PAVideoRecorderVC *videoRecorderVC = [[PAVideoRecorderVC alloc] initWithNibName:@"PAVideoRecorderVC" bundle:[NSBundle mainBundle]];
+            videoRecorderVC.paMediaType = PAMediaTypeVideo;
+            videoRecorderVC.isSupportVideoCrop = YES;
+            // PAVideoRecorderVC.delegate = (id)self;
+            [self presentViewController:videoRecorderVC animated:YES completion:^{
+                
+            }];
+        }
+            break;
+        case 4:
+        {
+            NSLog(@"拍照和录视频(含剪辑)");
+            PAVideoRecorderVC *videoRecorderVC = [[PAVideoRecorderVC alloc] initWithNibName:@"PAVideoRecorderVC" bundle:[NSBundle mainBundle]];
+            videoRecorderVC.paMediaType = PAMediaTypeVideo;
+            videoRecorderVC.isSupportVideoCrop = YES;
+            // PAVideoRecorderVC.delegate = (id)self;
+            [self presentViewController:videoRecorderVC animated:YES completion:^{
+                
+            }];
+        }
+            break;
+        case 5:
+        {
+            // 本地选图（默认无拍摄）
             NSUInteger maxNumberOfPhotos = 6;
             UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc]init];
             [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
@@ -102,9 +121,9 @@
             }];
         }
             break;
-        case 4:
+        case 6:
         {
-            // 本地选视频
+            // 本地选视频（默认无拍摄）
             NSUInteger maxNumberOfPhotos = 6;
             UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc]init];
             [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
@@ -126,9 +145,9 @@
             }];
         }
             break;
-        case 5:
+        case 7:
         {
-            // 本地选图和视频
+            // 本地选图和视频（默认无拍摄）
             NSUInteger maxNumberOfPhotos = 6;
             UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc]init];
             [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
@@ -148,7 +167,7 @@
             }];
         }
             break;
-        case 6:
+        case 8:
         {
             // 本地选图(含拍摄)
             NSUInteger maxNumberOfPhotos = 6;
@@ -174,7 +193,7 @@
             }];
         }
             break;
-        case 7:
+        case 9:
         {
             // 本地选视频(含拍摄)
             NSUInteger maxNumberOfPhotos = 6;
@@ -200,7 +219,7 @@
             }];
         }
             break;
-        case 8:
+        case 10:
         {
             // 本地选图和视频(含拍摄)
             NSUInteger maxNumberOfPhotos = 6;
