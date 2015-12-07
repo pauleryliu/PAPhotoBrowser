@@ -82,7 +82,7 @@
             // PAVideoRecorderVC.delegate = (id)self;
             
             UINavigationController *videoRecorderVCNav = [[UINavigationController alloc] initWithRootViewController:videoRecorderVC];
-            [self presentViewController:videoRecorderVCNav animated:YES completion:^{
+            [self presentViewController:videoRecorderVC animated:YES completion:^{
                 
             }];
         }

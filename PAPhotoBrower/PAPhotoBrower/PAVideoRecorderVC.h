@@ -24,9 +24,6 @@
 #define SCALE_OF_INTERVAL_2 1
 // videoEncodeLoadingImageView animation config
 #define ENCODELOADINGIMAGEVIEW_ANIMATION_DURATION 1
-// Video TipBubble
-#define VIDEOFIRSTTIPBUBBLE_JUMP_DURATION 0.5
-#define VIDEOTIPBUBBLE_JUMP_DURATION 0.5
 // videoRecorderShine
 #define VIDEORECORDERSHINE_DURATION 1
 

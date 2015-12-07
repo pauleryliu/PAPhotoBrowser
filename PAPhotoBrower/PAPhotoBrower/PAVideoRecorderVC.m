@@ -60,16 +60,6 @@ alpha:1.0]
 @property (strong,nonatomic) UITapGestureRecognizer *tapToFocusGesture;
 @property (strong,nonatomic) UITapGestureRecognizer *preViewBtnGesture;
 
-// tip Bubble
-@property (weak, nonatomic) IBOutlet UIView *videoFirstTipBubbleView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *videoFirstTipBubbleViewConstrainTop;
-@property (weak, nonatomic) IBOutlet UILabel *videoFirstTipBubbleRectangleLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *videoFirstTipBubbleTritangleImageView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *videoLessThan3SecondsTipBubbleViewLeft;
-@property (weak, nonatomic) IBOutlet UIView *videoLessThan3SecondsTipBubbleView;
-@property (weak, nonatomic) IBOutlet UILabel *videoLessThan3SecondsTipBubbleRectangleLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *videoLessThan3SecondsTipBubbleTritangleImageView;
-
 // others
 @property (nonatomic) BOOL initalized;
 @property (nonatomic) BOOL isMoreThanMaxSeconds;
@@ -153,11 +143,6 @@ alpha:1.0]
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    if ([PAVideoRecorderHelper onlyShowForTheFirstTimeForKey:@"VideoRecorderVC_FirstTipBubbleViewJump"]) {
-        [self videoFirstTipBubbleJump];
-    }
-    
     [self setApplicationStatusBarHidden:YES];
 }
 
@@ -300,24 +285,6 @@ alpha:1.0]
 
 - (void)createViews
 {
-    if ([PAVideoRecorderHelper onlyShowForTheFirstTimeForKey:@"VideoRecorderVC_FirstTipBubbleView"]) {
-        self.videoFirstTipBubbleRectangleLabel.layer.masksToBounds = YES;
-        self.videoFirstTipBubbleRectangleLabel.clipsToBounds = YES;
-        self.videoFirstTipBubbleRectangleLabel.layer.cornerRadius = 5;
-        self.videoFirstTipBubbleTritangleImageView.transform = CGAffineTransformMakeRotation(M_PI_4);
-        self.videoFirstTipBubbleViewConstrainTop.constant = CGRectGetHeight(self.videoFirstTipBubbleView.frame) + 8;
-        [self.videoFirstTipBubbleView  setNeedsLayout];
-        [self.videoFirstTipBubbleView  layoutIfNeeded];
-        [self.videoFirstTipBubbleView setHidden:NO];
-    }
-    if ([PAVideoRecorderHelper onlyShowForTheFirstTimeForKey:@"VideoRecorderVC_LessThan3SecondsBubbleView"]){
-        self.videoLessThan3SecondsTipBubbleViewLeft.constant = CGRectGetWidth(self.view.frame) * 0.3 - CGRectGetWidth(self.videoLessThan3SecondsTipBubbleView.frame) / 2;
-        self.videoLessThan3SecondsTipBubbleRectangleLabel.layer.masksToBounds = YES;
-        self.videoLessThan3SecondsTipBubbleView.clipsToBounds = YES;
-        self.videoLessThan3SecondsTipBubbleRectangleLabel.layer.cornerRadius = 5;
-        self.videoLessThan3SecondsTipBubbleTritangleImageView.transform = CGAffineTransformMakeRotation(M_PI_4);
-    }
-    
     // other Btns
     [self.backBtn setImage:[UIImage imageNamed:@"video_close"] forState:UIControlStateNormal];
     [self.torchBtn setImage:[UIImage imageNamed:@"video_flash"] forState:UIControlStateNormal];
@@ -670,10 +637,6 @@ alpha:1.0]
     NSLog(@"%s", __func__);
     [self.videoSwitchBtn setHidden:YES];
     [self.videoSelectBtn setHidden:YES];
-    if ([PAVideoRecorderHelper onlyShowForTheFirstTimeForKey:@"VideoRecorderVC_hideFirstTipBubbleView"]) {
-        [self.videoFirstTipBubbleView setHidden:YES];
-    }
-    
     [self videoRecorderShineAnimationStart];
 //    NSLog(@"%s state = %lu", __func__, self.videoRecorder.state);
     
@@ -926,11 +889,6 @@ alpha:1.0]
     [self.switchBtn setHidden:NO];
     
     if (videoDuration < MIN_VIDEO_DUR) {
-        // re-recorder
-        if ([PAVideoRecorderHelper onlyShowForTheFirstTimeForKey:@"VideoRecorderVC_showLessThan3SecondsBubbleView"]){
-            [self.videoLessThan3SecondsTipBubbleView setHidden:NO];
-            [self videoLessThan3SecondsTipBubbleJumpAndFade];
-        }
         [self reset];
     }else{
         [self videoRecorderBtnAnimation];
@@ -963,51 +921,6 @@ alpha:1.0]
     videoRecorderBtnsPOPBasicAnimation.beginTime = beginTime;
     videoRecorderBtnsPOPBasicAnimation.duration = duration;
     return videoRecorderBtnsPOPBasicAnimation;
-}
-
-- (void)videoFirstTipBubbleJump{
-    CABasicAnimation *videoFirstTipBubbleAni = [CABasicAnimation animationWithKeyPath:@"position.y"];
-    videoFirstTipBubbleAni.autoreverses = YES;
-    videoFirstTipBubbleAni.duration = VIDEOFIRSTTIPBUBBLE_JUMP_DURATION;
-    videoFirstTipBubbleAni.fromValue = [NSNumber numberWithFloat:self.videoFirstTipBubbleView.layer.position.y];
-    videoFirstTipBubbleAni.toValue = [NSNumber numberWithFloat:self.videoFirstTipBubbleView.layer.position.y - 6];
-    videoFirstTipBubbleAni.repeatCount = HUGE;
-    videoFirstTipBubbleAni.removedOnCompletion = NO;
-    videoFirstTipBubbleAni.beginTime = 0;
-    videoFirstTipBubbleAni.fillMode = kCAFillModeForwards;
-    [self.videoFirstTipBubbleView.layer addAnimation:videoFirstTipBubbleAni forKey:@"paulery"];
-}
-
-- (void)videoLessThan3SecondsTipBubbleJumpAndFade{
-    CABasicAnimation *videoTipBubbleAniJump = [CABasicAnimation animationWithKeyPath:@"position.y"];
-    videoTipBubbleAniJump.autoreverses = YES;
-    videoTipBubbleAniJump.duration = VIDEOTIPBUBBLE_JUMP_DURATION;
-    videoTipBubbleAniJump.fromValue = [NSNumber numberWithFloat:self.videoLessThan3SecondsTipBubbleView.layer.position.y];
-    videoTipBubbleAniJump.toValue = [NSNumber numberWithFloat:self.videoLessThan3SecondsTipBubbleView.layer.position.y - 6];
-    videoTipBubbleAniJump.repeatCount = 4;
-    videoTipBubbleAniJump.removedOnCompletion = NO;
-    videoTipBubbleAniJump.beginTime = 0;
-    videoTipBubbleAniJump.fillMode = kCAFillModeForwards;
-    
-    CABasicAnimation *videoTipBubbleAniFade = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    videoTipBubbleAniFade.autoreverses = YES;
-    videoTipBubbleAniFade.duration = VIDEOTIPBUBBLE_JUMP_DURATION;
-    videoTipBubbleAniFade.fromValue = [NSNumber numberWithFloat:1.0];
-    videoTipBubbleAniFade.toValue = [NSNumber numberWithFloat:0.0];
-    videoTipBubbleAniFade.repeatCount = 1;
-    videoTipBubbleAniFade.removedOnCompletion = NO;
-    videoTipBubbleAniFade.beginTime = VIDEOTIPBUBBLE_JUMP_DURATION*4;
-    videoTipBubbleAniFade.fillMode = kCAFillModeForwards;
-    
-    CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
-    animationGroup.beginTime = 0;
-    animationGroup.duration = VIDEOTIPBUBBLE_JUMP_DURATION*5;
-    animationGroup.removedOnCompletion = NO;
-    animationGroup.fillMode = kCAFillModeForwards;
-    animationGroup.repeatCount = 1;
-    animationGroup.animations = [NSArray arrayWithObjects:videoTipBubbleAniJump,videoTipBubbleAniFade,nil];
-    
-    [self.videoLessThan3SecondsTipBubbleView.layer addAnimation:animationGroup forKey:@"paulery"];
 }
 
 - (void)videoRecorderBtnAnimation
