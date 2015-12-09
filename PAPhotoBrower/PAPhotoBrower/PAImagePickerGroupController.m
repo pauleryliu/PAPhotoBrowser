@@ -29,7 +29,7 @@ alpha:1.0]
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"本地照片";
+    self.title = @"Local Photos";
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0x8f8f95)}];
 
@@ -55,7 +55,7 @@ alpha:1.0]
     // cancel btn
     UIButton *rightBarBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     rightBarBtn.titleLabel.font = [UIFont systemFontOfSize:17.0f];
-    [rightBarBtn setTitle:@"取消" forState:UIControlStateNormal];
+    [rightBarBtn setTitle:@"Cancel" forState:UIControlStateNormal];
     [rightBarBtn setTitleColor:UIColorFromRGB(0xffa015) forState:UIControlStateNormal];
     [rightBarBtn sizeToFit];
     [rightBarBtn addTarget:self action:@selector(rightBarBtnPressed) forControlEvents:UIControlEventTouchUpInside];

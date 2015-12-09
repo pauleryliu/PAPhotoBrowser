@@ -51,8 +51,6 @@
 	return self;
 }
 
-
-
 - (void) _updateProgress{
 	
 	if(_displayProgress >= _progress){
@@ -69,11 +67,11 @@
 	
 }
 
-
 - (void) setProgress:(float)p{
 	[self setProgress:p animated:NO];
 }
-- (void) setProgress:(float)p animated:(BOOL)animated{
+
+-(void) setProgress:(float)p animated:(BOOL)animated{
 	_progress = p;
 	
 	
@@ -94,8 +92,6 @@
 	
 	
 }
-
-
 
 - (void) drawRect:(CGRect)rect borderRadius:(CGFloat)rad borderWidth:(CGFloat)thickness barRadius:(CGFloat)barRadius barInset:(CGFloat)barInset{
 	
@@ -150,10 +146,8 @@
 	CGContextClosePath(context);
 	CGContextSetRGBFillColor(context,1, 1, 1, 0.8);
 	CGContextDrawPath(context, kCGPathFill);
-	
-	
-	
 }
+
 - (void) drawRect:(CGRect)rect {
 
 	if(_style == TKProgressBarViewStyleLong) 
@@ -161,10 +155,6 @@
         [self drawRect:rect borderRadius:6. borderWidth:2. barRadius:3. barInset:3];
 	else
 		[self drawRect:rect borderRadius:17. borderWidth:4. barRadius:11. barInset:6.];
-	
 }
-
-
-
 
 @end

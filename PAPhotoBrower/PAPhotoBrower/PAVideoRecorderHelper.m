@@ -70,19 +70,6 @@
     return isSaveToAppDocumentSuccess;
 }
 
-//+ (UIImage*)getVideoPreViewImageWithFileURL:(NSURL*)fileURL
-//{
-//    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:fileURL options:nil];
-//    AVAssetImageGenerator *gen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
-//    gen.appliesPreferredTrackTransform = YES;
-//    CMTime time = CMTimeMakeWithSeconds(0.0, 30);
-//    NSError *error = nil;
-//    CMTime actualTime;
-//    CGImageRef image = [gen copyCGImageAtTime:time actualTime:&actualTime error:&error];
-//    UIImage *img = [[UIImage alloc] initWithCGImage:image];
-//    return img;
-//}
-
 + (BOOL)onlyShowForTheFirstTimeForKey:(NSString*)key
 {
     if (![[NSUserDefaults standardUserDefaults] boolForKey:key]) {
@@ -107,6 +94,5 @@
     NSString *showtimeNew = [formatter stringFromDate:d];
     return showtimeNew;
 }
-
 
 @end

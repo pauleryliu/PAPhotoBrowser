@@ -47,10 +47,6 @@ alpha:1.0]
     return self;
 }
 
-- (void)dealloc
-{
-}
-
 - (void)drawRect:(CGRect)rect
 {
     CGFloat p = _displayProgress;

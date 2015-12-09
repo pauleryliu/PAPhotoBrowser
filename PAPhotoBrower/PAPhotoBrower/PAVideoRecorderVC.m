@@ -773,12 +773,11 @@ alpha:1.0]
     [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
     PAImagePickerController *pickerVC = [[PAImagePickerController alloc] initWithCollectionViewLayout:layout];
     PAImagePickerGroupController *pickerGroupVC = [[PAImagePickerGroupController alloc] init];
-    pickerVC.isSupportEditWhenSelectSinglePhoto = NO;
     pickerGroupVC.maxNumberOfPhotos = maxNumberOfPhotos;
     pickerVC.maxNumberOfPhotos = maxNumberOfPhotos;
     pickerVC.delegate = self;
     pickerGroupVC.delegate = self;
-    pickerVC.doneBtnName = @"发送";
+    pickerVC.doneButtonTitle = @"Send";
     pickerVC.paMediaType = self.paMediaType;
     pickerGroupVC.paMediaType = self.paMediaType;
     UINavigationController *pickerNavController = [[UINavigationController alloc] initWithRootViewController:pickerGroupVC];

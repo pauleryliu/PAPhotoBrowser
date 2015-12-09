@@ -76,17 +76,12 @@
         case 3:
         {
             // 本地选图（默认无拍摄）
-            NSUInteger maxNumberOfPhotos = 6;
             UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc]init];
             [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
             PAImagePickerController *pickerVC = [[PAImagePickerController alloc] initWithCollectionViewLayout:layout];
             PAImagePickerGroupController *pickerGroupVC = [[PAImagePickerGroupController alloc] init];
-            pickerVC.isSupportEditWhenSelectSinglePhoto = NO;
-            pickerGroupVC.maxNumberOfPhotos = maxNumberOfPhotos;
-            pickerVC.maxNumberOfPhotos = maxNumberOfPhotos;
             pickerVC.delegate = self;
             pickerGroupVC.delegate = self;
-            pickerVC.doneBtnName = @"发送";
             pickerVC.paMediaType = PAMediaTypePhoto; // Default
             pickerVC.paMediaType = PAMediaTypePhoto;
             UINavigationController *pickerNavController = [[UINavigationController alloc] initWithRootViewController:pickerGroupVC];
@@ -100,17 +95,12 @@
         case 4:
         {
             // 本地选视频（默认无拍摄）
-            NSUInteger maxNumberOfPhotos = 6;
             UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc]init];
             [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
             PAImagePickerController *pickerVC = [[PAImagePickerController alloc] initWithCollectionViewLayout:layout];
             PAImagePickerGroupController *pickerGroupVC = [[PAImagePickerGroupController alloc] init];
-            pickerVC.isSupportEditWhenSelectSinglePhoto = NO;
-            pickerGroupVC.maxNumberOfPhotos = maxNumberOfPhotos;
-            pickerVC.maxNumberOfPhotos = maxNumberOfPhotos;
             pickerVC.delegate = self;
             pickerGroupVC.delegate = self;
-            pickerVC.doneBtnName = @"发送";
             pickerVC.paMediaType = PAMediaTypeVideo; // Default
             pickerVC.paMediaType = PAMediaTypeVideo;
             UINavigationController *pickerNavController = [[UINavigationController alloc] initWithRootViewController:pickerGroupVC];
@@ -124,17 +114,12 @@
         case 5:
         {
             // 本地选图和视频（默认无拍摄）
-            NSUInteger maxNumberOfPhotos = 6;
             UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc]init];
             [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
             PAImagePickerController *pickerVC = [[PAImagePickerController alloc] initWithCollectionViewLayout:layout];
             PAImagePickerGroupController *pickerGroupVC = [[PAImagePickerGroupController alloc] init];
-            pickerVC.isSupportEditWhenSelectSinglePhoto = NO;
-            pickerGroupVC.maxNumberOfPhotos = maxNumberOfPhotos;
-            pickerVC.maxNumberOfPhotos = maxNumberOfPhotos;
             pickerVC.delegate = self;
             pickerGroupVC.delegate = self;
-            pickerVC.doneBtnName = @"发送";
             UINavigationController *pickerNavController = [[UINavigationController alloc] initWithRootViewController:pickerGroupVC];
             pickerNavController.viewControllers = @[pickerGroupVC,pickerVC];
             
@@ -146,24 +131,18 @@
         case 6:
         {
             // 本地选图(含拍摄)
-            NSUInteger maxNumberOfPhotos = 6;
             UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc]init];
             [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
             PAImagePickerController *pickerVC = [[PAImagePickerController alloc] initWithCollectionViewLayout:layout];
             PAImagePickerGroupController *pickerGroupVC = [[PAImagePickerGroupController alloc] init];
-            pickerVC.isSupportEditWhenSelectSinglePhoto = NO;
-            pickerGroupVC.maxNumberOfPhotos = maxNumberOfPhotos;
-            pickerVC.maxNumberOfPhotos = maxNumberOfPhotos;
             pickerVC.delegate = self;
             pickerGroupVC.delegate = self;
-            pickerVC.doneBtnName = @"发送";
             pickerVC.isSupportRecorder = YES;
             pickerGroupVC.isSupportRecorder = YES;
             pickerVC.paMediaType = PAMediaTypePhoto; // Default
             pickerVC.paMediaType = PAMediaTypePhoto;
             UINavigationController *pickerNavController = [[UINavigationController alloc] initWithRootViewController:pickerGroupVC];
             pickerNavController.viewControllers = @[pickerGroupVC,pickerVC];
-            
             [self presentViewController:pickerNavController animated:YES completion:^{
                 
             }];
@@ -172,17 +151,12 @@
         case 7:
         {
             // 本地选视频(含拍摄)
-            NSUInteger maxNumberOfPhotos = 6;
             UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc]init];
             [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
             PAImagePickerController *pickerVC = [[PAImagePickerController alloc] initWithCollectionViewLayout:layout];
             PAImagePickerGroupController *pickerGroupVC = [[PAImagePickerGroupController alloc] init];
-            pickerVC.isSupportEditWhenSelectSinglePhoto = NO;
-            pickerGroupVC.maxNumberOfPhotos = maxNumberOfPhotos;
-            pickerVC.maxNumberOfPhotos = maxNumberOfPhotos;
             pickerVC.delegate = self;
             pickerGroupVC.delegate = self;
-            pickerVC.doneBtnName = @"发送";
             pickerVC.isSupportRecorder = YES;
             pickerGroupVC.isSupportRecorder = YES;
             pickerVC.paMediaType = PAMediaTypeVideo; // Default
@@ -198,22 +172,16 @@
         case 8:
         {
             // 本地选图和视频(含拍摄)
-            NSUInteger maxNumberOfPhotos = 6;
             UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc]init];
             [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
             PAImagePickerController *pickerVC = [[PAImagePickerController alloc] initWithCollectionViewLayout:layout];
             PAImagePickerGroupController *pickerGroupVC = [[PAImagePickerGroupController alloc] init];
-            pickerVC.isSupportEditWhenSelectSinglePhoto = NO;
-            pickerGroupVC.maxNumberOfPhotos = maxNumberOfPhotos;    // Default 1
-            pickerVC.maxNumberOfPhotos = maxNumberOfPhotos;
             pickerVC.delegate = self;
             pickerGroupVC.delegate = self;
-            pickerVC.doneBtnName = @"发送";
             pickerVC.isSupportRecorder = YES;   // Default NO
             pickerGroupVC.isSupportRecorder = YES;
             UINavigationController *pickerNavController = [[UINavigationController alloc] initWithRootViewController:pickerGroupVC];
             pickerNavController.viewControllers = @[pickerGroupVC,pickerVC];
-            
             [self presentViewController:pickerNavController animated:YES completion:^{
                 
             }];
