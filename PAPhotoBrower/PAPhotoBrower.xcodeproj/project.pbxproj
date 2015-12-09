@@ -56,6 +56,9 @@
 		994696701C082DE800333CC7 /* PAPhotoBrowserHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9946966F1C082DE800333CC7 /* PAPhotoBrowserHelper.m */; };
 		9960B8261C0C889000BCE1B0 /* video_switch@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9960B8251C0C889000BCE1B0 /* video_switch@3x.png */; };
 		BCD5D085FBB2A28D8FC1A0F2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FBF5999C5E93E9DD5CFEEDB /* libPods.a */; };
+		FC4EB6DC1C18278700A81B01 /* PATapImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4EB6DB1C18278700A81B01 /* PATapImageView.m */; };
+		FC4EB6DF1C18283200A81B01 /* PATapView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4EB6DE1C18283200A81B01 /* PATapView.m */; };
+		FC4EB6E21C1828A600A81B01 /* PAZoomingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4EB6E11C1828A600A81B01 /* PAZoomingScrollView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,6 +151,12 @@
 		9946966F1C082DE800333CC7 /* PAPhotoBrowserHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAPhotoBrowserHelper.m; sourceTree = "<group>"; };
 		9960B8251C0C889000BCE1B0 /* video_switch@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_switch@3x.png"; sourceTree = "<group>"; };
 		AFC74990D486F9047C6234E4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		FC4EB6DA1C18278700A81B01 /* PATapImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATapImageView.h; sourceTree = "<group>"; };
+		FC4EB6DB1C18278700A81B01 /* PATapImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATapImageView.m; sourceTree = "<group>"; };
+		FC4EB6DD1C18283200A81B01 /* PATapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATapView.h; sourceTree = "<group>"; };
+		FC4EB6DE1C18283200A81B01 /* PATapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATapView.m; sourceTree = "<group>"; };
+		FC4EB6E01C1828A600A81B01 /* PAZoomingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAZoomingScrollView.h; sourceTree = "<group>"; };
+		FC4EB6E11C1828A600A81B01 /* PAZoomingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAZoomingScrollView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -342,6 +351,12 @@
 				9946964F1C07E5F300333CC7 /* PAImagePickerTakePhotoCell.m */,
 				994696491C07E5E700333CC7 /* PAImagePickerPreviewCell.h */,
 				9946964A1C07E5E700333CC7 /* PAImagePickerPreviewCell.m */,
+				FC4EB6DA1C18278700A81B01 /* PATapImageView.h */,
+				FC4EB6DB1C18278700A81B01 /* PATapImageView.m */,
+				FC4EB6DD1C18283200A81B01 /* PATapView.h */,
+				FC4EB6DE1C18283200A81B01 /* PATapView.m */,
+				FC4EB6E01C1828A600A81B01 /* PAZoomingScrollView.h */,
+				FC4EB6E11C1828A600A81B01 /* PAZoomingScrollView.m */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -609,7 +624,10 @@
 			files = (
 				994696481C07E5CF00333CC7 /* PAImagePickerPreviewViewController.m in Sources */,
 				994696451C07E5C700333CC7 /* PAImagePickerGroupController.m in Sources */,
+				FC4EB6DC1C18278700A81B01 /* PATapImageView.m in Sources */,
 				994696701C082DE800333CC7 /* PAPhotoBrowserHelper.m in Sources */,
+				FC4EB6DF1C18283200A81B01 /* PATapView.m in Sources */,
+				FC4EB6E21C1828A600A81B01 /* PAZoomingScrollView.m in Sources */,
 				994696501C07E5F300333CC7 /* PAImagePickerCell.m in Sources */,
 				993EFD801C0A9D7200F0CA84 /* SDAVAssetExportSession.m in Sources */,
 				993EFDBB1C0AA61400F0CA84 /* TKProgressBarView.m in Sources */,
