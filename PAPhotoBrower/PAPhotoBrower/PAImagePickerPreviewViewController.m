@@ -42,7 +42,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [self setBottomToolBar];
     
     if (!self.doneBtnName) {
-        self.doneBtnName = @"完成";
+        self.doneBtnName = @"Done";
     }
     
     if (!self.selectedAsserts) {
@@ -82,7 +82,7 @@ static NSString * const reuseIdentifier = @"Cell";
     UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightBarBtn];
     self.navigationItem.rightBarButtonItem = rightBarItem;
 
-    UIButton *btn = [self setLeftBarItem:@"icon_back" accessibilityHint:@"点两下返回" accesssibilityLabel:@"返回"];
+    UIButton *btn = [self setLeftBarItem:@"icon_back" accessibilityHint:@"Tap Double Back" accesssibilityLabel:@"Back"];
     [btn addTarget:self action:@selector(popVCwithAnimation) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -154,8 +154,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)rightBarBtnPressed
 {
     if (self.selectedAsserts.count >= self.maxNumberOfPhotos && ![self.rightBarBtn isSelected]) {
-        // 超过范围
-//        NSString *tip = [NSString stringWithFormat:@"最多只能选取%ld张图片哦",self.maxNumberOfPhotos];
+//        NSString *tip = [NSString stringWithFormat:@"you can choose just %ld number of photos",self.maxNumberOfPhotos];
 //        PostMsg(tip);
         return;
     }
@@ -197,18 +196,15 @@ static NSString * const reuseIdentifier = @"Cell";
 {
     // Done Btn Pressed
     if (!self.selectedAsserts || self.selectedAsserts.count == 0) {
-        // 没有选择图片自动添加当前预览图片
         [self.selectedAsserts addObject:self.currentAsset];
     }
     
-    if (self.selectedAsserts.count == 1 && self.isSupportEditWhenSelectSinglePhoto) {
-        // 单张图片
+    if (self.selectedAsserts.count == 1) {
         ALAsset *assert = [self.selectedAsserts firstObject];
         CGImageRef  ref = [[assert defaultRepresentation] fullScreenImage];
         UIImage *img = [[UIImage alloc]initWithCGImage:ref];
         return;
     } else {
-        // 单张图片(不支持单张编辑)或多张图片直接添加
         if ([_delegate respondsToSelector:@selector(PAImagePickerControllerMultiPhotosDidFinishPickingMediaInfo:)]) {
             [_delegate PAImagePickerControllerMultiPhotosDidFinishPickingMediaInfo:self.selectedAsserts];
         }

@@ -29,6 +29,7 @@ alpha:1.0]
 @property (nonatomic, strong) ALAssetsLibrary *assetsLibrary;
 @property (nonatomic, strong) NSMutableArray *groups;
 @property (nonatomic,strong) NSMutableArray *asserts;
+
 @property (nonatomic) CGSize cellSize;
 @property (nonatomic) CGFloat cellSpacing;
 @property (nonatomic) CGFloat selectionSpacing;
@@ -48,21 +49,32 @@ static NSString * const reuseIdentifier = @"Cell";
 {
     [super viewWillAppear:animated];
     
+    // init
     if (!self.title) {
-        self.title = @"选择照片";
+        self.title = @"Photo Stream";
+    }
+    if (!_doneButtonTitle) {
+        _doneButtonTitle = @"Send";
     }
     
-    if (!self.doneBtnName) {
-        self.doneBtnName = @"完成";
+    // TODO:fix me
+    if (_maxNumberOfPhotos == 0) {
+        _maxNumberOfPhotos = 1;
+    }
+    if (_isSupportRecorder == NO) {
+        _isSupportRecorder = YES;
+    }
+    if (_paMediaType == 0) {
+        _paMediaType = PAMediaTypePhotoAndVideo;
     }
     
     [self setNavigationBar];
     [self setBottomToolBar];
     
     if (self.assertGroup) {
-        [self setupAsserts];    // 从相册选择进来的
+        [self setupAsserts];    // from album
     } else {
-        [self setupAssert];     // 从外部进来的
+        [self setupAssert];     // from outside
     }
     
     if (!self.selectedAsserts) {
@@ -90,6 +102,31 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.collectionView registerClass:[PAImagePickerTakePhotoCell class] forCellWithReuseIdentifier:@"identifierT"];
 }
 
+#pragma mark -- Properties
+// set max number asset you can select(Default is one)
+- (void)setpa_MaxNumberSelected:(NSInteger)number
+{
+    _maxNumberOfPhotos = number;
+}
+
+// set done button title (Default is "send")
+- (void)setpa_DoneButtonTitle:(NSString*)title
+{
+    _doneButtonTitle = title;
+}
+
+// set whether support take photo and video recorder(Default is YES)
+- (void)setpa_isSupportRecorer:(BOOL)isSupport
+{
+    _isSupportRecorder = isSupport;
+}
+
+// set media type(Detail is PAMediaTypePhotoAndVideo)
+- (void)setpa_MediaType:(PAMediaType)paMediaType
+{
+    _paMediaType = paMediaType;
+}
+
 #pragma mark -- Private Method
 - (void)setNavigationBar
 {
@@ -97,20 +134,20 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0x8f8f95)}];
     self.navigationController.navigationBar.barTintColor = UIColorFromRGB(0x1a1a1f);
     
-    // back btn
+    // Back btn
     UIButton *leftBarBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     leftBarBtn.titleLabel.font = [UIFont systemFontOfSize:17.0f];
-    [leftBarBtn setTitle:@"相册" forState:UIControlStateNormal];
+    [leftBarBtn setTitle:@"Album" forState:UIControlStateNormal];
     [leftBarBtn setTitleColor:UIColorFromRGB(0xffa015) forState:UIControlStateNormal];
     [leftBarBtn sizeToFit];
     [leftBarBtn addTarget:self action:@selector(leftBarBtnPressed) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithCustomView:leftBarBtn];
     self.navigationItem.leftBarButtonItem = leftBarItem;
     
-    // cancel btn
+    // Cancel btn
     UIButton *rightBarBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     rightBarBtn.titleLabel.font = [UIFont systemFontOfSize:17.0f];
-    [rightBarBtn setTitle:@"取消" forState:UIControlStateNormal];
+    [rightBarBtn setTitle:@"Cancel" forState:UIControlStateNormal];
     [rightBarBtn setTitleColor:UIColorFromRGB(0xffa015) forState:UIControlStateNormal];
     [rightBarBtn sizeToFit];
     [rightBarBtn addTarget:self action:@selector(rightBarBtnPressed) forControlEvents:UIControlEventTouchUpInside];
@@ -120,13 +157,12 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)leftBarBtnPressed
 {
-    // 返回相册列表
+    // Back to Ablum
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)rightBarBtnPressed
 {
-    // 取消
     [self dismissViewControllerAnimated:YES completion:^(void){}];
 }
 
@@ -146,7 +182,7 @@ static NSString * const reuseIdentifier = @"Cell";
         self.bottomBarLeftBtn.titleLabel.font = [UIFont systemFontOfSize:15.0f];
         self.bottomBarLeftBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
         [self.bottomBarLeftBtn addTarget:self action:@selector(bottomBarLeftBtnPressed) forControlEvents:UIControlEventTouchUpInside];
-        [self.bottomBarLeftBtn setTitle:@"预览" forState:UIControlStateNormal];
+        [self.bottomBarLeftBtn setTitle:@"PreView" forState:UIControlStateNormal];
         [self.bottomToolBarView addSubview:self.bottomBarLeftBtn];
         
         UIView *rightBtnMaskView = [[UIView alloc] initWithFrame:self.bottomBarLeftBtn.bounds];
@@ -162,7 +198,7 @@ static NSString * const reuseIdentifier = @"Cell";
         self.bottomBarRightBtn.titleLabel.font = [UIFont systemFontOfSize:15.0f];
         self.bottomBarRightBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
         [self.bottomBarRightBtn addTarget:self action:@selector(bottomBarRightBtnPressed) forControlEvents:UIControlEventTouchUpInside];
-        [self.bottomBarRightBtn setTitle:self.doneBtnName forState:UIControlStateNormal];
+        [self.bottomBarRightBtn setTitle:self.doneButtonTitle forState:UIControlStateNormal];
         [self.bottomToolBarView addSubview:self.bottomBarRightBtn];
     }
     
@@ -194,34 +230,32 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)bottomBarLeftBtnPressed
 {
-    // 预览
+    // PreView
     UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc]init];
     [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     PAImagePickerPreviewViewController *preViewController = [[PAImagePickerPreviewViewController alloc] initWithCollectionViewLayout:layout];
     preViewController.hidesBottomBarWhenPushed = YES;
-    preViewController.title = @"预览";
+    preViewController.title = @"PreView";
     preViewController.maxNumberOfPhotos = self.maxNumberOfPhotos;
     preViewController.selectedAsserts = self.selectedAsserts;
     preViewController.asserts = [self.selectedAsserts mutableCopy];
     preViewController.delegate = self.delegate;
     preViewController.pickerVC = self;
-    preViewController.doneBtnName = self.doneBtnName;
-    preViewController.isSupportEditWhenSelectSinglePhoto = self.isSupportEditWhenSelectSinglePhoto;
+    preViewController.doneBtnName = self.doneButtonTitle;
     [self.navigationController pushViewController:preViewController animated:YES];
 }
 
 - (void)bottomBarRightBtnPressed
 {
-    // Done Btn Pressed
-    // 没有选图片不添加
+    // Done Button Pressed
     if (!self.selectedAsserts || self.selectedAsserts.count == 0) {
         [self dismissViewControllerAnimated:YES completion:^{
         }];
         return;
     }
     
-    if (self.selectedAsserts.count == 1 && self.isSupportEditWhenSelectSinglePhoto) {
-        // 单张图片
+    if (self.selectedAsserts.count == 1) {
+        // just one photo
         ALAsset *assert = [self.selectedAsserts firstObject];
         CGImageRef  ref = [[assert defaultRepresentation] fullScreenImage];
         UIImage *img = [[UIImage alloc]initWithCGImage:ref];
@@ -232,7 +266,7 @@ static NSString * const reuseIdentifier = @"Cell";
         
         return;
     } else {
-        // 单张图片(不支持单张编辑) 或 多张图片直接添加
+        // beyond one photo
         if ([_delegate respondsToSelector:@selector(PAImagePickerControllerMultiPhotosDidFinishPickingMediaInfo:)]) {
             [_delegate PAImagePickerControllerMultiPhotosDidFinishPickingMediaInfo:self.selectedAsserts];
         }
@@ -244,7 +278,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)setupAssert
 {
-    // init
+    // Init
     if (self.assetsLibrary == nil) {
         self.assetsLibrary = [[ALAssetsLibrary alloc] init];
     }
@@ -254,12 +288,12 @@ static NSString * const reuseIdentifier = @"Cell";
         [self.groups removeAllObjects];
     }
     
-    // in case enumerateGroupsWithTypes fails
+    // In case enumerateGroupsWithTypes fails
     ALAssetsLibraryAccessFailureBlock failureBlock = ^(NSError *error){
         // failure view controller
     };
     
-    // add group
+    // Add group
     ALAssetsFilter *assetsfilter;
     
     if (self.paMediaType == PAMediaTypePhoto) {
@@ -282,7 +316,7 @@ static NSString * const reuseIdentifier = @"Cell";
         }
     };
     
-    // enumerate
+    // Enumerate
     NSInteger groupTypes = ALAssetsGroupSavedPhotos | ALAssetsGroupAlbum | ALAssetsGroupEvent | ALAssetsGroupFaces;
     [self.assetsLibrary enumerateGroupsWithTypes:groupTypes usingBlock:groupBlock failureBlock:failureBlock];
     
@@ -322,7 +356,6 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 #pragma mark <UICollectionViewDataSource>
-
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
@@ -372,7 +405,7 @@ static NSString * const reuseIdentifier = @"Cell";
     return cell;
 }
 
-#pragma mark <UICollectionViewDelegate>
+#pragma mark -- UICollectionViewDelegate
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     return self.cellSpacing;
@@ -384,7 +417,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(9,self.selectionSpacing,BottomBarHeight,self.selectionSpacing);//分别为上、左、下(+底部bar高度)、右
+    return UIEdgeInsetsMake(9,self.selectionSpacing,BottomBarHeight,self.selectionSpacing);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -402,8 +435,7 @@ static NSString * const reuseIdentifier = @"Cell";
     if (self.isSupportRecorder && indexPath.row == 0) {
         
         if (self.selectedAsserts.count == self.maxNumberOfPhotos) {
-            // 超过范围
-//            NSString *tip = [NSString stringWithFormat:@"最多只能选取%ld张图片哦",(long)self.maxNumberOfPhotos];
+//            NSString *tip = [NSString stringWithFormat:@"you can choose just %ld number of photos",(long)self.maxNumberOfPhotos];
 //            PostMsg(tip);
             return;
         } else {
@@ -417,28 +449,21 @@ static NSString * const reuseIdentifier = @"Cell";
         [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
         PAImagePickerPreviewViewController *preViewController = [[PAImagePickerPreviewViewController alloc] initWithCollectionViewLayout:layout];
         preViewController.hidesBottomBarWhenPushed = YES;
-        preViewController.title = @"预览";
+        preViewController.title = @"PreView";
         preViewController.maxNumberOfPhotos = self.maxNumberOfPhotos;
         preViewController.selectedAsserts = self.selectedAsserts;
         preViewController.asserts = self.asserts;
         preViewController.jumpIndexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:0];
         preViewController.delegate = self.delegate;
         preViewController.pickerVC = self;
-        preViewController.doneBtnName = self.doneBtnName;
-        preViewController.isSupportEditWhenSelectSinglePhoto = self.isSupportEditWhenSelectSinglePhoto;
+        preViewController.doneBtnName = self.doneButtonTitle;
         [self.navigationController pushViewController:preViewController animated:YES];
     }
 }
 
 - (void)onTakePictureFromSource:(UIImagePickerControllerSourceType)type
 {
-    if (self.isSupportEditWhenSelectSinglePhoto) {
-
-        
-    } else {
-        // 拍摄
-        [self onTakePhotos:type];
-    }
+    [self onTakePhotos:type];
 }
 
 - (void)onTakePhotos:(UIImagePickerControllerSourceType)type
@@ -493,8 +518,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)selectedAsset:(ALAsset*)asset cell:(PAImagePickerCell*)cell;
 {
     if (self.selectedAsserts.count == self.maxNumberOfPhotos && (!cell.selectedTagBtn.isSelected)) {
-        // 超过范围
-//        NSString *tip = [NSString stringWithFormat:@"最多只能选取%ld张图片哦",self.maxNumberOfPhotos];
+//        NSString *tip = [NSString stringWithFormat:@"you can choose just %ld number of photos",self.maxNumberOfPhotos];
 //        PostMsg(tip);
         return;
     }
