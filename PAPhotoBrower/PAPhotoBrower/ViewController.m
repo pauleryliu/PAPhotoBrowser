@@ -30,7 +30,7 @@
 {
     NSLog(@"paPhotoBrowserButtonPressed");
     
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"录视频(默认无剪辑)",@"拍照和录视频(默认无剪辑)",@"录视频(含剪辑)",@"拍照和录视频(含剪辑)",@"本地选图（默认无拍摄）",@"本地选视频（默认无拍摄）",@"本地选图和视频（默认无拍摄）",@"本地选图（含拍摄）",@"本地选视频（含拍摄）",@"本地选图和视频（含拍摄）",nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"录视频",@"拍照和录视频",@"本地选图（默认无拍摄）",@"本地选视频（默认无拍摄）",@"本地选图和视频（默认无拍摄）",@"本地选图（含拍摄）",@"本地选视频（含拍摄）",@"本地选图和视频（含拍摄）",nil];
     actionSheet.delegate = self;
     [actionSheet showInView:self.view];
 }
@@ -53,7 +53,7 @@
             break;
         case 1:
         {
-            NSLog(@"录视频(默认无剪辑)");
+            NSLog(@"录视频");
             PAVideoRecorderVC *videoRecorderVC = [[PAVideoRecorderVC alloc] initWithNibName:@"PAVideoRecorderVC" bundle:[NSBundle mainBundle]];
             videoRecorderVC.paMediaType = PAMediaTypeVideo;
             // PAVideoRecorderVC.delegate = (id)self;
@@ -64,7 +64,7 @@
             break;
         case 2:
         {
-            NSLog(@"拍照和录视频(默认无剪辑)");
+            NSLog(@"拍照和录视频");
             PAVideoRecorderVC *videoRecorderVC = [[PAVideoRecorderVC alloc] initWithNibName:@"PAVideoRecorderVC" bundle:[NSBundle mainBundle]];
             videoRecorderVC.paMediaType = PAMediaTypePhotoAndVideo;
             //  PAVideoRecorderVC.delegate = (id)self;
@@ -74,33 +74,6 @@
         }
             break;
         case 3:
-        {
-            NSLog(@"录视频(含剪辑)");
-            PAVideoRecorderVC *videoRecorderVC = [[PAVideoRecorderVC alloc] initWithNibName:@"PAVideoRecorderVC" bundle:[NSBundle mainBundle]];
-            videoRecorderVC.paMediaType = PAMediaTypeVideo;
-            videoRecorderVC.isSupportVideoCrop = YES;
-            // PAVideoRecorderVC.delegate = (id)self;
-            
-            UINavigationController *videoRecorderVCNav = [[UINavigationController alloc] initWithRootViewController:videoRecorderVC];
-            [self presentViewController:videoRecorderVC animated:YES completion:^{
-                
-            }];
-        }
-            break;
-        case 4:
-        {
-            NSLog(@"拍照和录视频(含剪辑)");
-            PAVideoRecorderVC *videoRecorderVC = [[PAVideoRecorderVC alloc] initWithNibName:@"PAVideoRecorderVC" bundle:[NSBundle mainBundle]];
-            videoRecorderVC.paMediaType = PAMediaTypePhotoAndVideo;
-            videoRecorderVC.isSupportVideoCrop = YES;
-            // PAVideoRecorderVC.delegate = (id)self;
-            UINavigationController *videoRecorderVCNav = [[UINavigationController alloc] initWithRootViewController:videoRecorderVC];
-            [self presentViewController:videoRecorderVCNav animated:YES completion:^{
-                
-            }];
-        }
-            break;
-        case 5:
         {
             // 本地选图（默认无拍摄）
             NSUInteger maxNumberOfPhotos = 6;
@@ -124,7 +97,7 @@
             }];
         }
             break;
-        case 6:
+        case 4:
         {
             // 本地选视频（默认无拍摄）
             NSUInteger maxNumberOfPhotos = 6;
@@ -148,7 +121,7 @@
             }];
         }
             break;
-        case 7:
+        case 5:
         {
             // 本地选图和视频（默认无拍摄）
             NSUInteger maxNumberOfPhotos = 6;
@@ -170,7 +143,7 @@
             }];
         }
             break;
-        case 8:
+        case 6:
         {
             // 本地选图(含拍摄)
             NSUInteger maxNumberOfPhotos = 6;
@@ -196,7 +169,7 @@
             }];
         }
             break;
-        case 9:
+        case 7:
         {
             // 本地选视频(含拍摄)
             NSUInteger maxNumberOfPhotos = 6;
@@ -222,7 +195,7 @@
             }];
         }
             break;
-        case 10:
+        case 8:
         {
             // 本地选图和视频(含拍摄)
             NSUInteger maxNumberOfPhotos = 6;

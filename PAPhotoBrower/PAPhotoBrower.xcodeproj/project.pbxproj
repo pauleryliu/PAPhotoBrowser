@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		993EFD701C0A9D2100F0CA84 /* PAVideoHandlerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 993EFD6E1C0A9D2100F0CA84 /* PAVideoHandlerViewController.m */; };
-		993EFD711C0A9D2100F0CA84 /* PAVideoHandlerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 993EFD6F1C0A9D2100F0CA84 /* PAVideoHandlerViewController.xib */; };
-		993EFD761C0A9D2D00F0CA84 /* PAVideoCropHanderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 993EFD731C0A9D2D00F0CA84 /* PAVideoCropHanderView.m */; };
-		993EFD771C0A9D2D00F0CA84 /* PAVideoCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 993EFD751C0A9D2D00F0CA84 /* PAVideoCropView.m */; };
 		993EFD801C0A9D7200F0CA84 /* SDAVAssetExportSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 993EFD7B1C0A9D7200F0CA84 /* SDAVAssetExportSession.m */; };
 		993EFD811C0A9D7200F0CA84 /* PAVideoRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 993EFD7D1C0A9D7200F0CA84 /* PAVideoRecorder.m */; };
 		993EFD821C0A9D7200F0CA84 /* PAVideoRecorderHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 993EFD7F1C0A9D7200F0CA84 /* PAVideoRecorderHelper.m */; };
@@ -85,13 +81,6 @@
 /* Begin PBXFileReference section */
 		08C4DFE3A7E5CFBFC496D9E5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		0FBF5999C5E93E9DD5CFEEDB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		993EFD6D1C0A9D2100F0CA84 /* PAVideoHandlerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAVideoHandlerViewController.h; sourceTree = "<group>"; };
-		993EFD6E1C0A9D2100F0CA84 /* PAVideoHandlerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAVideoHandlerViewController.m; sourceTree = "<group>"; };
-		993EFD6F1C0A9D2100F0CA84 /* PAVideoHandlerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PAVideoHandlerViewController.xib; sourceTree = "<group>"; };
-		993EFD721C0A9D2D00F0CA84 /* PAVideoCropHanderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAVideoCropHanderView.h; sourceTree = "<group>"; };
-		993EFD731C0A9D2D00F0CA84 /* PAVideoCropHanderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAVideoCropHanderView.m; sourceTree = "<group>"; };
-		993EFD741C0A9D2D00F0CA84 /* PAVideoCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAVideoCropView.h; sourceTree = "<group>"; };
-		993EFD751C0A9D2D00F0CA84 /* PAVideoCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAVideoCropView.m; sourceTree = "<group>"; };
 		993EFD7A1C0A9D7200F0CA84 /* SDAVAssetExportSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAVAssetExportSession.h; sourceTree = "<group>"; };
 		993EFD7B1C0A9D7200F0CA84 /* SDAVAssetExportSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDAVAssetExportSession.m; sourceTree = "<group>"; };
 		993EFD7C1C0A9D7200F0CA84 /* PAVideoRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAVideoRecorder.h; sourceTree = "<group>"; };
@@ -212,39 +201,8 @@
 		993EFD681C0A9CD400F0CA84 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
-				993EFD691C0A9CE300F0CA84 /* PAVideoEditHandler */,
 			);
 			name = Feature;
-			sourceTree = "<group>";
-		};
-		993EFD691C0A9CE300F0CA84 /* PAVideoEditHandler */ = {
-			isa = PBXGroup;
-			children = (
-				993EFD6A1C0A9CF900F0CA84 /* ViewController */,
-				993EFD6B1C0A9D0400F0CA84 /* View */,
-			);
-			name = PAVideoEditHandler;
-			sourceTree = "<group>";
-		};
-		993EFD6A1C0A9CF900F0CA84 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				993EFD6D1C0A9D2100F0CA84 /* PAVideoHandlerViewController.h */,
-				993EFD6E1C0A9D2100F0CA84 /* PAVideoHandlerViewController.m */,
-				993EFD6F1C0A9D2100F0CA84 /* PAVideoHandlerViewController.xib */,
-			);
-			name = ViewController;
-			sourceTree = "<group>";
-		};
-		993EFD6B1C0A9D0400F0CA84 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				993EFD721C0A9D2D00F0CA84 /* PAVideoCropHanderView.h */,
-				993EFD731C0A9D2D00F0CA84 /* PAVideoCropHanderView.m */,
-				993EFD741C0A9D2D00F0CA84 /* PAVideoCropView.h */,
-				993EFD751C0A9D2D00F0CA84 /* PAVideoCropView.m */,
-			);
-			name = View;
 			sourceTree = "<group>";
 		};
 		993EFD781C0A9D5000F0CA84 /* ViewController */ = {
@@ -593,7 +551,6 @@
 				993EFDAE1C0AA06100F0CA84 /* videoEncodeLoading@2x.png in Resources */,
 				994696181C07631A00333CC7 /* LaunchScreen.storyboard in Resources */,
 				993EFDAA1C0AA06100F0CA84 /* video_finish@2x.png in Resources */,
-				993EFD711C0A9D2100F0CA84 /* PAVideoHandlerViewController.xib in Resources */,
 				994696151C07631A00333CC7 /* Assets.xcassets in Resources */,
 				993EFDA91C0AA06100F0CA84 /* video_finish_disable@2x.png in Resources */,
 				9946965F1C07EAF300333CC7 /* photo_localUnselected_tag@3x.png in Resources */,
@@ -665,7 +622,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				993EFD761C0A9D2D00F0CA84 /* PAVideoCropHanderView.m in Sources */,
 				994696481C07E5CF00333CC7 /* PAImagePickerPreviewViewController.m in Sources */,
 				994696451C07E5C700333CC7 /* PAImagePickerGroupController.m in Sources */,
 				FC4EB6DC1C18278700A81B01 /* PATapImageView.m in Sources */,
@@ -679,10 +635,8 @@
 				993EFDB81C0AA5CB00F0CA84 /* QBImageLoadingProgressBar.m in Sources */,
 				994696101C07631A00333CC7 /* ViewController.m in Sources */,
 				9946964B1C07E5E700333CC7 /* PAImagePickerPreviewCell.m in Sources */,
-				993EFD771C0A9D2D00F0CA84 /* PAVideoCropView.m in Sources */,
 				993EFD8C1C0A9D9A00F0CA84 /* PAVideoRecorderVC.m in Sources */,
 				993EFD811C0A9D7200F0CA84 /* PAVideoRecorder.m in Sources */,
-				993EFD701C0A9D2100F0CA84 /* PAVideoHandlerViewController.m in Sources */,
 				9946960D1C07631A00333CC7 /* AppDelegate.m in Sources */,
 				993EFD821C0A9D7200F0CA84 /* PAVideoRecorderHelper.m in Sources */,
 				994696511C07E5F300333CC7 /* PAImagePickerTakePhotoCell.m in Sources */,

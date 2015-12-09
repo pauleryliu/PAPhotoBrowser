@@ -13,7 +13,6 @@
 #import <POP.h>
 #import "PAImagePickerController.h"
 #import "PAImagePickerGroupController.h"
-#import "PAVideoHandlerViewController.h"
 
 #define UIColorFromRGB(rgbValue) \
 [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
@@ -96,7 +95,7 @@ alpha:1.0]
     }
     
     // add player Oberver
-    [self addObserver:self forKeyPath:@"player.rate" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+//    [self addObserver:self forKeyPath:@"player.rate" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     
     // add Notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dissmissVC) name:@"dismissVideoRecorderVCWhenCropVideoFinished" object:nil];
@@ -595,18 +594,6 @@ alpha:1.0]
             } else {
                 NSLog(@"nnn");
             }
-            
-            
-            
-            if (self.isSupportVideoCrop) {
-                PAVideoHandlerViewController *vc = [[PAVideoHandlerViewController alloc] initWithNibName:@"PAVideoHandlerViewController" bundle:[NSBundle mainBundle]];
-                vc.title = @"剪辑视频";
-                vc.videoDuration = self.videoRecorder.getVideoDuration;
-                vc.videoInputURL = _videoOutputFileURL;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-            
-            
 //            UIImage *videoPreViewImage = [self getVideoPreViewImageWithFileURL:outputURL];
             // TODO：转码后的视频URL：outputURL，处理后的视频URL；videoPreViewImage 视频预览图
         }else if(self.encoder.status == AVAssetExportSessionStatusFailed){
@@ -1052,7 +1039,7 @@ alpha:1.0]
 
 - (void)dealloc
 {
-    [self removeObserver:self forKeyPath:@"player.rate"];
+//    [self removeObserver:self forKeyPath:@"player.rate"];
     self.player = nil;
     self.videoRecorder = nil;
 }
