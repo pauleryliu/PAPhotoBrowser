@@ -300,6 +300,7 @@
                 <constraint firstItem="shI-ma-EC2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="5" id="yKu-wy-L7O"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
