@@ -31,7 +31,6 @@ alpha:1.0]
         _progress = 0;
         self.backgroundColor = [UIColor clearColor];
     }
-    
     return self;
 }
 
@@ -43,7 +42,6 @@ alpha:1.0]
         _progress = 0;
         self.backgroundColor = backgroundColor;
     }
-    
     return self;
 }
 

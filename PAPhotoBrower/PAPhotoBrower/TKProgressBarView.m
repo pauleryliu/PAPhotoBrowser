@@ -39,20 +39,17 @@
 @synthesize progress=_progress;
 
 - (id) initWithStyle:(TKProgressBarViewStyle)s{
-//	CGRect r = s==TKProgressBarViewStyleLong ? CGRectMake(0, 0, 210, 20) : CGRectMake(0, 0, 180, 42);
 	CGRect r = CGRectMake(0, 0, 100, 16);
 	if(!(self=[super initWithFrame:r])) return nil;
 	self.backgroundColor = [UIColor clearColor];
-//    self.layer.borderWidth = 2;
-//    self.layer.borderColor = [UIColor colorWithWhite:1 alpha:0.9].CGColor;
 	_style = s;	
 	_progress = _displayProgress = 0;
     
 	return self;
 }
 
-- (void) _updateProgress{
-	
+- (void) _updateProgress
+{
 	if(_displayProgress >= _progress){
 		_displayProgress = _progress;
 		return;
@@ -67,13 +64,14 @@
 	
 }
 
-- (void) setProgress:(float)p{
+- (void)setProgress:(float)p
+{
 	[self setProgress:p animated:NO];
 }
 
--(void) setProgress:(float)p animated:(BOOL)animated{
+-(void)setProgress:(float)p animated:(BOOL)animated
+{
 	_progress = p;
-	
 	
 	p = MIN(MAX(0.0,p),1.0);
 	
@@ -82,15 +80,12 @@
 		_progress = p;
 		[self _updateProgress];
 		
-	}else{
+	} else {
 		
 		_progress = p;
 		_displayProgress = _progress;
 		[self setNeedsDisplay];
-		
 	}
-	
-	
 }
 
 - (void) drawRect:(CGRect)rect borderRadius:(CGFloat)rad borderWidth:(CGFloat)thickness barRadius:(CGFloat)barRadius barInset:(CGFloat)barInset{
@@ -111,7 +106,6 @@
 	CGFloat minx = CGRectGetMinX(rrect), midx = CGRectGetMidX(rrect), maxx = CGRectGetMaxX(rrect);
 	CGFloat miny = CGRectGetMinY(rrect), midy = CGRectGetMidY(rrect), maxy = CGRectGetMaxY(rrect);
 	
-    //added by xhan
     CGContextMoveToPoint(context, minx, midy);
 	CGContextAddArcToPoint(context, minx, miny, midx, miny, radius);
 	CGContextAddArcToPoint(context, maxx, miny, maxx, midy, radius);
@@ -151,7 +145,6 @@
 - (void) drawRect:(CGRect)rect {
 
 	if(_style == TKProgressBarViewStyleLong) 
-//		[self drawRect:rect borderRadius:8. borderWidth:2. barRadius:5. barInset:3];
         [self drawRect:rect borderRadius:6. borderWidth:2. barRadius:3. barInset:3];
 	else
 		[self drawRect:rect borderRadius:17. borderWidth:4. barRadius:11. barInset:6.];

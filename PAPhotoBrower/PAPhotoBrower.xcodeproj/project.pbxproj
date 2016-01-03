@@ -784,6 +784,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PAPhotoBrower",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = PAPhotoBrower/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -801,6 +802,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PAPhotoBrower",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = PAPhotoBrower/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;

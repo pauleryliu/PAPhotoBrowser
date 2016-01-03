@@ -24,7 +24,6 @@
 - (void)imageView:(UIImageView *)imageView doubleTapDetected:(UITouch *)touch;
 - (void)imageView:(UIImageView *)imageView tripleTapDetected:(UITouch *)touch;
 
-
 //! @name Gesture For imageView
 - (void)imageView:(UIImageView *)imageView doubleTap:(CGPoint)gestureLocation;
 - (void)imageView:(UIImageView *)imageView singleTap:(CGPoint)gestureLocation;

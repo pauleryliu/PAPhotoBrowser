@@ -8,6 +8,7 @@
 
 #import "PAImagePickerPreviewViewController.h"
 #import "PAImagePickerPreviewCell.h"
+#import <POP.h>
 
 #define UIColorFromRGB(rgbValue) \
 [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
@@ -65,10 +66,7 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark -- Private Method
 - (void)setNavigationBar
 {
-    //    if (MyDevice().isIOS7AndAbove)
-    //    {
     self.navigationController.navigationBar.barTintColor = UIColorFromRGB(0x1a1a1f);
-    //    }
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0x8f8f95)}];
     
@@ -89,10 +87,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (UIButton *)setLeftBarItem:(NSString *)imageName accessibilityHint:(NSString *)hint accesssibilityLabel:(NSString *)label
 {
     UIImage *image = [UIImage imageNamed:imageName];
-//    UIImage *imageHighlight = [UIHelper image:image withAlpha:PA_BARBUTTON_HIGHLIGHT_ALPHA];
-    
     UIImage *imageHighlight;
-    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setImage:image forState:UIControlStateNormal];
     [button setImage:imageHighlight forState:UIControlStateHighlighted];
@@ -101,9 +96,6 @@ static NSString * const reuseIdentifier = @"Cell";
     [button setAdjustsImageWhenHighlighted:NO];
     button.frame= CGRectMake(0.0, 0.0, 48, image.size.height);
     button.imageEdgeInsets = UIEdgeInsetsMake(0, -42, 0, 0);
-//    if (!MyDevice().isIOS7AndAbove) {
-//        button.imageEdgeInsets = UIEdgeInsetsMake(0, -18, 0, 0);
-//    }
     UIBarButtonItem *forward = [[UIBarButtonItem alloc] initWithCustomView:button];
     forward.accessibilityHint = hint;
     forward.accessibilityLabel = label;
@@ -154,8 +146,9 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)rightBarBtnPressed
 {
     if (self.selectedAsserts.count >= self.maxNumberOfPhotos && ![self.rightBarBtn isSelected]) {
-//        NSString *tip = [NSString stringWithFormat:@"you can choose just %ld number of photos",self.maxNumberOfPhotos];
-//        PostMsg(tip);
+        NSString *tip = [NSString stringWithFormat:@"you can choose just %ld number of photos",self.maxNumberOfPhotos];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:tip delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+        [alertView show];
         return;
     }
     
@@ -181,12 +174,12 @@ static NSString * const reuseIdentifier = @"Cell";
         self.bottomBarSelectedLabel.text = [NSString stringWithFormat:@"%ld",(long)self.selectedAsserts.count];
         [self.bottomBarSelectedLabel setHidden:NO];
         
-//        POPSpringAnimation *sizeAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-//        sizeAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.6, 0.6)];
-//        sizeAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1,1)];
-//        sizeAnimation.springSpeed = 20.f;
-//        sizeAnimation.springBounciness = 20.0f;
-//        [self.bottomBarSelectedLabel.layer pop_addAnimation:sizeAnimation forKey:@"paulery"];
+        POPSpringAnimation *sizeAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+        sizeAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.6, 0.6)];
+        sizeAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1,1)];
+        sizeAnimation.springSpeed = 20.f;
+        sizeAnimation.springBounciness = 20.0f;
+        [self.bottomBarSelectedLabel.layer pop_addAnimation:sizeAnimation forKey:@"paulery"];
     } else {
         [self.bottomBarSelectedLabel setHidden:YES];
     }

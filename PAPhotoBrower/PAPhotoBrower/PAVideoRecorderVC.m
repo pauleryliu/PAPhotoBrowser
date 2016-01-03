@@ -94,9 +94,6 @@ alpha:1.0]
         return;
     }
     
-    // add player Oberver
-//    [self addObserver:self forKeyPath:@"player.rate" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
-    
     // add Notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dissmissVC) name:@"dismissVideoRecorderVCWhenCropVideoFinished" object:nil];
     
@@ -182,7 +179,6 @@ alpha:1.0]
     [[UIApplication sharedApplication] setStatusBarHidden:hidden];
 }
 
-// confirm 之后的调用
 - (void)disappearWithAnimationEndRect:(CGRect)rect image:(UIImage *)image
 {
     self.disRect = rect;
@@ -230,7 +226,6 @@ alpha:1.0]
 
 - (void)initRecorder
 {
-    NSLog(@"%s", __func__);
     // video Recorder
     if (!self.videoRecorder) {
         self.videoRecorder = [[PAVideoRecorder alloc] init];
@@ -240,7 +235,6 @@ alpha:1.0]
     dispatch_queue_t sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL);
     [self setSessionQueue:sessionQueue];
     
-    // 原来的是异步执行，很大几率造成init方法耗费很长时间（大概10s），造成拍摄时界面变黑，卡死等情况
     dispatch_sync(sessionQueue, ^{
         [self.videoRecorder initCaptureDevice];
     });
@@ -542,14 +536,14 @@ alpha:1.0]
     videoComposition.frameDuration = CMTimeMake(1, 30);
     //here we are setting its render size to its height x height (Square)
     videoComposition.renderSize = CGSizeMake(clipVideoTrack.naturalSize.height, clipVideoTrack.naturalSize.height);
-    //TODO: 这个缩放比例是猜的，在4，5，6，6+上都表现的比较接近正确的结果，但是实际上拍摄截取区域并不是这么做的，将来需要修改
+
     CGFloat scale = 1.5f;
+    
     //create a video instruction
     AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
     instruction.timeRange = CMTimeRangeMake(kCMTimeZero, CMTimeMakeWithSeconds(60, 30));
     AVMutableVideoCompositionLayerInstruction* transformer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:clipVideoTrack];
     
-    // 使用视频自生的transform来做变换的基础
     CGAffineTransform originalTransform = clipVideoTrack.preferredTransform;
     CGAffineTransform finalTransform = CGAffineTransformTranslate(originalTransform, - self.preView.frame.origin.y * scale, 0);
     [transformer setTransform:finalTransform atTime:kCMTimeZero];
@@ -557,30 +551,6 @@ alpha:1.0]
     //add the transformer layer instructions, then add to video composition
     instruction.layerInstructions = [NSArray arrayWithObject:transformer];
     videoComposition.instructions = [NSArray arrayWithObject: instruction];
-    
-    
-    /*
-     // water Mask
-     // logo ImageLayer
-     UIImage *logoImage = [UIImage imageNamed:@"logo"];
-     CALayer *logoLayer = [CALayer layer];
-     logoLayer.contents = (id)logoImage.CGImage;
-     logoLayer.frame = CGRectMake(5, 5, 111/2, 56/2);
-     logoLayer.opacity = 0.65;
-     
-     // add ImagerLayer & VideoLayer to ParentLayer
-     CGSize videoSize = [asset naturalSize];
-     CALayer *parentLayer = [CALayer layer];
-     CALayer *videoLayer = [CALayer layer];
-     parentLayer.frame = CGRectMake(0, 0, videoSize.width, videoSize.height);
-     videoLayer.frame = CGRectMake(0, 0,videoSize.width, videoSize.height);
-     [parentLayer addSublayer:videoLayer];
-     [parentLayer addSublayer:logoLayer];
-     
-     //incorporate by animate tool
-     AVVideoCompositionCoreAnimationTool *animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
-     videoComposition.animationTool = animationTool;
-     */
     
     [self.encoder setVideoComposition:videoComposition];
     
@@ -590,12 +560,10 @@ alpha:1.0]
             NSLog(@"AVAssetExportSessionStatusCompleted");
             
             if ([[NSFileManager defaultManager] fileExistsAtPath:_videoOutputFileURL.path]) {
-                NSLog(@"yyy");
+                NSLog(@"AVAssetExportSessionStatusCompleted YES");
             } else {
-                NSLog(@"nnn");
+                NSLog(@"AVAssetExportSessionStatusCompleted NO");
             }
-//            UIImage *videoPreViewImage = [self getVideoPreViewImageWithFileURL:outputURL];
-            // TODO：转码后的视频URL：outputURL，处理后的视频URL；videoPreViewImage 视频预览图
         }else if(self.encoder.status == AVAssetExportSessionStatusFailed){
             NSLog(@"AVAssetExportSessionStatusFailed");
         }else if(self.encoder.status == AVAssetExportSessionStatusExporting){
@@ -615,7 +583,6 @@ alpha:1.0]
         return;
     }
     
-    // 拍摄按钮按下
     if (self.videoRecorder.state == VideoRecoderStateInit)
     {
         NSLog(@"%s videoRecorder.state == VideoRecoderStateInit", __func__);
@@ -625,19 +592,15 @@ alpha:1.0]
     [self.videoSwitchBtn setHidden:YES];
     [self.videoSelectBtn setHidden:YES];
     [self videoRecorderShineAnimationStart];
-//    NSLog(@"%s state = %lu", __func__, self.videoRecorder.state);
     
     __weak typeof(self) weakSelf = self;
     dispatch_async(_sessionQueue, ^{
-//        NSLog(@"%s dispatch_async state = %lu", __func__, self.videoRecorder.state);
-//        NSLog(@"%s dispatch_async startRecordingOutputFile", __func__);
         [weakSelf.videoRecorder startRecordingOutputFile];
     });
 }
 
 - (void)recorderButtonTouchLessThanOneSecond
 {
-    NSLog(@"%s", __func__);
     self.videoRecorderBtn.hidden = NO;
     self.videoRecorderBtn.userInteractionEnabled = YES;
 }
@@ -654,31 +617,25 @@ alpha:1.0]
         NSLog(@"%s videoRecorder.state != VideoRecoderStateRecording", __func__);
         return;
     }
-    NSLog(@"%s", __func__);
+
     self.videoRecorderBtn.userInteractionEnabled = NO;
     [self performSelector:@selector(recorderButtonTouchLessThanOneSecond) withObject:nil afterDelay:1.0f];
     
     if (!self.isMoreThanMaxSeconds) {
-        NSLog(@"%s !isMoreThanMaxSeconds", __func__);
         [self.videoRecorderBtn setEnabled:NO];
-        
         [self videoRecorderShineAnimationStop];
-//        NSLog(@"%s state = %lu", __func__, self.videoRecorder.state);
     __weak typeof(self) weakSelf = self;
         dispatch_async(_sessionQueue, ^{
-//            NSLog(@"%s dispatch_async state = %lu", __func__, self.videoRecorder.state);
-//            NSLog(@"%s dispatch_async", __func__);
             [weakSelf.videoRecorder stopCurrentVideoRecording];
             [weakSelf videoRecorderBtnsAnimation];
         });
     }
 }
 
-- (IBAction)backBtnPressed:(id)sender {
-    NSLog(@"%s", __func__);
+- (IBAction)backBtnPressed:(id)sender
+{
     [self.player pause];
     [self.videoRecorder stopCurrentVideoRecording];
-    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (_recordVCDismssCallback)
         {
@@ -691,7 +648,8 @@ alpha:1.0]
     });
 }
 
-- (IBAction)torchBtnPressed:(id)sender {
+- (IBAction)torchBtnPressed:(id)sender
+{
     NSLog(@"%s", __func__);
     if ([self.videoRecorder isTorchOn]) {
         NSLog(@"%s isTorchOn", __func__);
@@ -704,10 +662,9 @@ alpha:1.0]
     }
 }
 
-- (IBAction)switchBtnPressed:(id)sender {
+- (IBAction)switchBtnPressed:(id)sender
+{
     [self.videoRecorder switchCamera];
-    
-    NSLog(@"%s", __func__);
     // close Torch when open front carmera
     if ([self.videoRecorder isTorchSupported]) {
         NSLog(@"%s isTorchSupported", __func__);
@@ -720,19 +677,19 @@ alpha:1.0]
     }
 }
 
-- (IBAction)videoPlayBtnPressed:(id)sender {
-    NSLog(@"%s", __func__);
+- (IBAction)videoPlayBtnPressed:(id)sender
+{
     [self preViewPressed];
 }
 
-- (IBAction)videoDeleteBtnPressed:(id)sender {
-    NSLog(@"%s", __func__);
+- (IBAction)videoDeleteBtnPressed:(id)sender
+{
     [self.player pause];
     [self reset];
 }
 
-- (IBAction)videoRecorderFinishedBtnPressed:(id)sender {
-    NSLog(@"%s", __func__);
+- (IBAction)videoRecorderFinishedBtnPressed:(id)sender
+{
     // ui
     [self.player pause];
     [self.videoPlayBtn setHidden:YES];
@@ -759,15 +716,7 @@ alpha:1.0]
 
 - (IBAction)videoSelectBtn:(id)sender
 {
-//    NSLog(@"%s", __func__);
-//    PAVideoGroupViewController *videoGroupVC = [[PAVideoGroupViewController alloc] init];
-////    videoGroupVC.postDelegate = self.delegate;
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:videoGroupVC];
-//    nav.navigationBar.tintColor = [UIColor redColor];
-//    [self presentViewController:nav animated:YES completion:^(void){
-//    }];
-    
-    // 本地选图
+    // select photos locally
     NSUInteger maxNumberOfPhotos = 6;
     UICollectionViewFlowLayout *layout= [[UICollectionViewFlowLayout alloc]init];
     [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
@@ -796,8 +745,6 @@ alpha:1.0]
     } else {
         self.paCurrentModel = PACurrentPhotoModel;
     }
-    
-    NSLog(@"videoSwitchBtnPressed type %d",self.paCurrentModel);
     
     [self.videoRecorder switchToModel:self.paCurrentModel];
     [self reset];
@@ -829,14 +776,15 @@ alpha:1.0]
 {
     self.videoCurrentDuration = 0.0f;
     self.isMoreThanMaxSeconds = NO;
-    
     [self.videoDeleteBtn setHidden:NO];
     [self.videoDeleteBtn setEnabled:NO];
     [self.videoRecorderFinishedBtn setHidden:NO];
     [self.videoRecorderFinishedBtn setEnabled:NO];
+    
     if ([self.videoRecorder isTorchSupported]) {
-    [self.torchBtn setHidden:YES];
+        [self.torchBtn setHidden:YES];
     }
+    
     [self.switchBtn setHidden:YES];
 }
 
@@ -868,21 +816,22 @@ alpha:1.0]
 
 - (void)videoRecorder:(PAVideoRecorder *)videoRecorder didFinishRecordingToOutPutFileAtURL:(NSURL *)outputFileURL duration:(CGFloat)videoDuration error:(NSError*)error
 {
-    NSLog(@"outputFileURL:%@,videoDuration:%f,filesize:%f",outputFileURL,videoDuration,[PAVideoRecorderHelper getFileSize:outputFileURL]);
     if ([self.videoRecorder isTorchSupported]) {
         [self.torchBtn setHidden:NO];
     }
+    
     [self.switchBtn setHidden:NO];
     
     if (videoDuration < MIN_VIDEO_DUR) {
         [self reset];
-    }else{
+    } else {
         [self videoRecorderBtnAnimation];
- 
         [self.progressBar setHidden:YES];
+        
         if ([self.videoRecorder isTorchSupported]) {
             [self.torchBtn setHidden:YES];
         }
+        
         [self.switchBtn setHidden:YES];
         
         // preView
@@ -930,7 +879,6 @@ alpha:1.0]
         self.videoRecorderFinishedBtn.layer.borderColor = [UIColor colorWithRed:57/255.0 green:205/255.0 blue:120/255.0 alpha:1].CGColor;
         self.videoRecorderFinishedBtn.layer.cornerRadius = self.videoDeleteBtn.frame.size.width/2;
         
-        
         // videoDeleteBtnAnimation
         POPBasicAnimation *videoDeleteBtnAni1 = [self getVideoRecorderBtnsPOPBasicAnimationWithKeyPath:kPOPViewCenter toValue:[NSValue valueWithCGPoint:CGPointMake(self.videoDeleteBtn.center.x + 60, self.videoDeleteBtn.center.y)] beginTime:0 duration:DURATION];
         [self.videoDeleteBtn pop_addAnimation:videoDeleteBtnAni1 forKey:@"videoDeleteBtnAni1"];
@@ -943,7 +891,6 @@ alpha:1.0]
         
         POPBasicAnimation *videoDeleteBtnAni4 = [self getVideoRecorderBtnsPOPBasicAnimationWithKeyPath:kPOPViewScaleXY toValue:[NSValue valueWithCGSize:CGSizeMake(SCALE_OF_INTERVAL_2,SCALE_OF_INTERVAL_2)] beginTime:CACurrentMediaTime() + DURATION duration:DURATION];
         [self.videoDeleteBtn pop_addAnimation:videoDeleteBtnAni4 forKey:@"videoDeleteBtnAni4"];
-        
         
         // videoRecorderFinishBtnAnimation
         POPBasicAnimation *videoRecorderFinishBtnAni1 = [self getVideoRecorderBtnsPOPBasicAnimationWithKeyPath:kPOPViewCenter toValue:[NSValue valueWithCGPoint:CGPointMake(self.videoRecorderFinishedBtn.center.x - OFFSETX_OF_INTERVAL_1, self.videoRecorderFinishedBtn.center.y)] beginTime:0 duration:DURATION];
@@ -1038,7 +985,6 @@ alpha:1.0]
 
 - (void)dealloc
 {
-//    [self removeObserver:self forKeyPath:@"player.rate"];
     self.player = nil;
     self.videoRecorder = nil;
 }

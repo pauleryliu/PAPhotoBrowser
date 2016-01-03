@@ -10,10 +10,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import <QuartzCore/QuartzCore.h>
 
-/**
- *  用途：视频功能工具类
- */
-
 @interface PAVideoRecorderHelper : NSObject
 
 // videoRecorder
@@ -22,7 +18,6 @@
 + (NSString*)getMovFilePathByTime;
 + (NSTimeInterval)getVideoDuration:(NSURL*)fileURL;
 + (BOOL)saveToAppDocumentWithFileURL:(NSURL*)fileURL;
-+ (UIImage*)getVideoPreViewImageWithFileURL:(NSURL*)fileURL;
 + (BOOL)onlyShowForTheFirstTimeForKey:(NSString*)key;
 
 // videoHandle
