@@ -56,7 +56,7 @@
 }
 
 - (void)initCaptureDevice{
-    NSLog(@"start init CaptureDevice");
+
     // position of Camera
     AVCaptureDevice *frontCamera = nil;
     AVCaptureDevice *backCamera = nil;
@@ -120,7 +120,6 @@
         _movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
         if ([_captureSession canAddOutput:_movieFileOutput]){
             [_captureSession addOutput:_movieFileOutput];
-            // 解决，拍摄视频后，视频播放的声音无法关闭的问题
             if ([_captureSession respondsToSelector:@selector(setUsesApplicationAudioSession:)]) {
                 [_captureSession setUsesApplicationAudioSession:NO];
             }
@@ -132,7 +131,6 @@
     _captureSession.sessionPreset = AVCaptureSessionPreset640x480;
     [_captureSession startRunning];
     _state = VideoRecoderStateReadyToRecord;
-    NSLog(@"end init CaptureDevice");
 }
 
 - (void)switchToModel:(PACurrentModel)paCurrentModel
@@ -161,7 +159,6 @@
         _movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
         if ([_captureSession canAddOutput:_movieFileOutput]){
             [_captureSession addOutput:_movieFileOutput];
-            // 解决，拍摄视频后，视频播放的声音无法关闭的问题
             if ([_captureSession respondsToSelector:@selector(setUsesApplicationAudioSession:)]) {
                 [_captureSession setUsesApplicationAudioSession:NO];
             }
@@ -363,7 +360,7 @@
     self.videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
     if ([_captureSession canAddInput:_videoDeviceInput]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subjectAreaDidChange:) name:AVCaptureDeviceSubjectAreaDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subjectAreaDidChange) name:AVCaptureDeviceSubjectAreaDidChangeNotification object:nil];
         [_captureSession addInput:_videoDeviceInput];
     }
     [_captureSession commitConfiguration];

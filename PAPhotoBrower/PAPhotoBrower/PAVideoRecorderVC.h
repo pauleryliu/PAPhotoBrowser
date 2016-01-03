@@ -9,10 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "PAVideoRecorder.h"
 
-/**
- *  用途：视频拍摄界面
- */
-
 // recorder
 #define MIN_VIDEO_DUR 3
 #define MAX_VIDEO_DUR 9.9

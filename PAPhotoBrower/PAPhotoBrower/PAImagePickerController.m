@@ -35,7 +35,6 @@ alpha:1.0]
 @property (nonatomic) CGFloat selectionSpacing;
 @property (strong,nonatomic) UIButton *bottomBarLeftBtn;
 @property (strong,nonatomic) UIButton *bottomBarRightBtn;
-@property (strong,nonatomic) UILabel *bottomBarSelectedLabel;
 @property (strong,nonatomic) NSMutableArray *selectedAsserts;
 @property (strong,nonatomic) UIView *bottomToolBarView;
 
@@ -45,9 +44,9 @@ alpha:1.0]
 
 static NSString * const reuseIdentifier = @"Cell";
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidLoad
 {
-    [super viewWillAppear:animated];
+    [super viewDidLoad];
     
     // init
     if (!self.title) {
@@ -57,7 +56,6 @@ static NSString * const reuseIdentifier = @"Cell";
         _doneButtonTitle = @"Send";
     }
     
-    // TODO:fix me
     if (_maxNumberOfPhotos == 0) {
         _maxNumberOfPhotos = 1;
     }
@@ -168,63 +166,31 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)setBottomToolBar
 {
-    if (!self.bottomToolBarView) {
-        self.bottomToolBarView = [[UIView alloc] initWithFrame:CGRectMake(0, self.collectionView.frame.size.height - BottomBarHeight, [UIScreen mainScreen].bounds.size.width, BottomBarHeight)];
-        self.bottomToolBarView.backgroundColor = [UIColor blackColor];
-        self.bottomToolBarView.alpha = 0.8;
-        [self.view addSubview:self.bottomToolBarView];
-    }
+    self.bottomToolBarView = [[UIView alloc] initWithFrame:CGRectMake(0, self.collectionView.frame.size.height - BottomBarHeight, [UIScreen mainScreen].bounds.size.width, BottomBarHeight)];
+    self.bottomToolBarView.backgroundColor = [UIColor blackColor];
+    self.bottomToolBarView.alpha = 0.8;
+    [self.view addSubview:self.bottomToolBarView];
+
+    self.bottomBarLeftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0,0, 100, self.bottomToolBarView.frame.size.height)];
+    [self.bottomBarLeftBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.bottomBarLeftBtn.titleLabel.font = [UIFont systemFontOfSize:15.0f];
+    self.bottomBarLeftBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [self.bottomBarLeftBtn addTarget:self action:@selector(bottomBarLeftBtnPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self.bottomBarLeftBtn setTitle:@"preview" forState:UIControlStateNormal];
+    [self.bottomToolBarView addSubview:self.bottomBarLeftBtn];
+
+    self.bottomBarRightBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.bottomToolBarView.frame.size.width - 80,0, 60, self.bottomToolBarView.frame.size.height)];
+    [self.bottomBarRightBtn setTitleColor:UIColorFromRGB(0xffa015) forState:UIControlStateNormal];
+    self.bottomBarRightBtn.titleLabel.font = [UIFont systemFontOfSize:15.0f];
+    self.bottomBarRightBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [self.bottomBarRightBtn addTarget:self action:@selector(bottomBarRightBtnPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self.bottomBarRightBtn setTitle:self.doneButtonTitle forState:UIControlStateNormal];
+    [self.bottomToolBarView addSubview:self.bottomBarRightBtn];
     
-    if (!self.bottomBarLeftBtn) {
-        self.bottomBarLeftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0,0, 100, self.bottomToolBarView.frame.size.height)];
-        
-        [self.bottomBarLeftBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.bottomBarLeftBtn.titleLabel.font = [UIFont systemFontOfSize:15.0f];
-        self.bottomBarLeftBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [self.bottomBarLeftBtn addTarget:self action:@selector(bottomBarLeftBtnPressed) forControlEvents:UIControlEventTouchUpInside];
-        [self.bottomBarLeftBtn setTitle:@"PreView" forState:UIControlStateNormal];
-        [self.bottomToolBarView addSubview:self.bottomBarLeftBtn];
-        
-        UIView *rightBtnMaskView = [[UIView alloc] initWithFrame:self.bottomBarLeftBtn.bounds];
-        [rightBtnMaskView setBackgroundColor:[UIColor blackColor]];
-        rightBtnMaskView.alpha = 0.3;
-        [self.bottomBarLeftBtn setMaskView:rightBtnMaskView];
-        [self.bottomBarLeftBtn setEnabled:NO];
-    }
-    
-    if (!self.bottomBarRightBtn) {
-        self.bottomBarRightBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.bottomToolBarView.frame.size.width - 50,0, 30, self.bottomToolBarView.frame.size.height)];
-        [self.bottomBarRightBtn setTitleColor:UIColorFromRGB(0xffa015) forState:UIControlStateNormal];
-        self.bottomBarRightBtn.titleLabel.font = [UIFont systemFontOfSize:15.0f];
-        self.bottomBarRightBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [self.bottomBarRightBtn addTarget:self action:@selector(bottomBarRightBtnPressed) forControlEvents:UIControlEventTouchUpInside];
-        [self.bottomBarRightBtn setTitle:self.doneButtonTitle forState:UIControlStateNormal];
-        [self.bottomToolBarView addSubview:self.bottomBarRightBtn];
-    }
-    
-    if (!self.bottomBarSelectedLabel) {
-        self.bottomBarSelectedLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.bottomToolBarView.frame.size.width - 78,self.bottomToolBarView.frame.size.height / 2 - 20 / 2, 20, 20)];
-        self.bottomBarSelectedLabel.textColor = [UIColor whiteColor];
-        self.bottomBarSelectedLabel.backgroundColor = UIColorFromRGB(0xffa015);
-        self.bottomBarSelectedLabel.font = [UIFont systemFontOfSize:13.0f];
-        self.bottomBarSelectedLabel.clipsToBounds = YES;
-        self.bottomBarSelectedLabel.layer.cornerRadius = self.bottomBarSelectedLabel.frame.size.width / 2;
-        self.bottomBarSelectedLabel.textAlignment = NSTextAlignmentCenter;
-        [self.bottomToolBarView addSubview:self.bottomBarSelectedLabel];
-    }
-    
-    self.bottomBarSelectedLabel.text = [NSString stringWithFormat:@"%ld",(long)self.selectedAsserts.count];
     if (self.selectedAsserts.count > 0) {
-        [self.bottomBarSelectedLabel setHidden:NO];
-        [self.bottomBarLeftBtn setMaskView:nil];
-        [self.bottomBarLeftBtn setEnabled:YES];
+        [self.bottomBarLeftBtn setHidden:NO];
     } else {
-        [self.bottomBarSelectedLabel setHidden:YES];
-        UIView *rightBtnMaskView = [[UIView alloc] initWithFrame:self.bottomBarRightBtn.bounds];
-        [rightBtnMaskView setBackgroundColor:[UIColor blackColor]];
-        rightBtnMaskView.alpha = 0.3;
-        [self.bottomBarLeftBtn setMaskView:rightBtnMaskView];
-        [self.bottomBarLeftBtn setEnabled:NO];
+        [self.bottomBarLeftBtn setHidden:YES];
     }
 }
 
@@ -259,14 +225,13 @@ static NSString * const reuseIdentifier = @"Cell";
         ALAsset *assert = [self.selectedAsserts firstObject];
         CGImageRef  ref = [[assert defaultRepresentation] fullScreenImage];
         UIImage *img = [[UIImage alloc]initWithCGImage:ref];
-        // TODO: 压缩处理
         if ([_delegate respondsToSelector:@selector(PAImagePickerControllerSinglePhotoDidFinishEdit:)]) {
             [_delegate PAImagePickerControllerSinglePhotoDidFinishEdit:img];
         }
         
         return;
     } else {
-        // beyond one photo
+        // over one photo
         if ([_delegate respondsToSelector:@selector(PAImagePickerControllerMultiPhotosDidFinishPickingMediaInfo:)]) {
             [_delegate PAImagePickerControllerMultiPhotosDidFinishPickingMediaInfo:self.selectedAsserts];
         }
@@ -295,7 +260,6 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // Add group
     ALAssetsFilter *assetsfilter;
-    
     if (self.paMediaType == PAMediaTypePhoto) {
         assetsfilter = [ALAssetsFilter  allPhotos];
     } else if (self.paMediaType == PAMediaTypeVideo) {
@@ -303,7 +267,6 @@ static NSString * const reuseIdentifier = @"Cell";
     } else {
         assetsfilter = [ALAssetsFilter allAssets];
     }
-    
     ALAssetsLibraryGroupsEnumerationResultsBlock groupBlock = ^(ALAssetsGroup *group,BOOL *stop){
         [group setAssetsFilter:assetsfilter];
         if ([group numberOfAssets] > 0) {
@@ -435,8 +398,9 @@ static NSString * const reuseIdentifier = @"Cell";
     if (self.isSupportRecorder && indexPath.row == 0) {
         
         if (self.selectedAsserts.count == self.maxNumberOfPhotos) {
-//            NSString *tip = [NSString stringWithFormat:@"you can choose just %ld number of photos",(long)self.maxNumberOfPhotos];
-//            PostMsg(tip);
+            NSString *tip = [NSString stringWithFormat:@"you can choose just %ld number of photos",(long)self.maxNumberOfPhotos];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:tip delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+            [alertView show];
             return;
         } else {
             // take photo
@@ -468,58 +432,19 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)onTakePhotos:(UIImagePickerControllerSourceType)type
 {
-    // 相机权限判断
-//    if (MyDevice().isIOS7AndAbove)
-//    {
-//        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-//        if (authStatus == AVAuthorizationStatusDenied || AVAuthorizationStatusRestricted == authStatus){// have no permission
-//            if([MyDevice() isIOS8AndAbove]){// iOS 8和以上 跳转到应用的设置页面
-//                PLAlert(@"您现在无法使用相机功能，解除办法是：点击“去设置”，打开“相机”设置项。", nil, @"取消", @"去设置", ^(int index, BOOL isCancel) {
-//                    if (!isCancel)
-//                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-//                });
-//            }else{
-//                // iOS 7 跳转到设置首页
-                  // 您现在无法使用相机功能,解除的办法是：打开设置，点击“隐私”，点击“相机”
-//            }
-//        }
-//    }
     PAVideoRecorderVC *videoRecorderVC = [[PAVideoRecorderVC alloc] initWithNibName:@"PAVideoRecorderVC" bundle:[NSBundle mainBundle]];
     videoRecorderVC.paMediaType = PAMediaTypePhotoAndVideo;
-    //  PAVideoRecorderVC.delegate = (id)self;
     [self presentViewController:videoRecorderVC animated:YES completion:^{
-        
     }];
-    
 }
-
-//#pragma mark - UIImagePickerController Delegate Methods
-//
-//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-//{
-//    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-//    // TODO: 图片压缩
-//
-//    [self dismissViewControllerAnimated:YES completion:^{
-//        
-//    }];
-//    
-//    if ([_delegate respondsToSelector:@selector(PAImagePickerControllerSinglePhotoDidFinishEdit:)]) {
-//        [_delegate PAImagePickerControllerSinglePhotoDidFinishEdit:image];
-//    }
-//}
-//
-//- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-//{
-//    [picker dismissViewControllerAnimated:YES completion:nil];
-//}
 
 #pragma mark -- Cell Delegate
 - (void)selectedAsset:(ALAsset*)asset cell:(PAImagePickerCell*)cell;
 {
     if (self.selectedAsserts.count == self.maxNumberOfPhotos && (!cell.selectedTagBtn.isSelected)) {
-//        NSString *tip = [NSString stringWithFormat:@"you can choose just %ld number of photos",self.maxNumberOfPhotos];
-//        PostMsg(tip);
+        NSString *tip = [NSString stringWithFormat:@"you can choose just %ld number of photos",(long)(long)self.maxNumberOfPhotos];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:tip delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+        [alertView show];
         return;
     }
 
@@ -533,10 +458,10 @@ static NSString * const reuseIdentifier = @"Cell";
             break;
         }
     }
+    
     if (assetNeedRemove) {
         [self.selectedAsserts removeObject:assetNeedRemove];
     }
-    
     
     if (isAssetExist) {
         
@@ -554,27 +479,9 @@ static NSString * const reuseIdentifier = @"Cell";
     }
 
     if (self.selectedAsserts.count > 0) {
-        [self.bottomBarLeftBtn setMaskView:nil];
-        [self.bottomBarLeftBtn setEnabled:YES];
+        [self.bottomBarLeftBtn setHidden:NO];
     } else {
-        UIView *rightBtnMaskView = [[UIView alloc] initWithFrame:self.bottomBarRightBtn.bounds];
-        [rightBtnMaskView setBackgroundColor:[UIColor blackColor]];
-        rightBtnMaskView.alpha = 0.3;
-        [self.bottomBarLeftBtn setMaskView:rightBtnMaskView];
-        [self.bottomBarLeftBtn setEnabled:NO];
-    }
-
-    if (self.selectedAsserts.count > 0) {
-        self.bottomBarSelectedLabel.text = [NSString stringWithFormat:@"%ld",(long)self.selectedAsserts.count];
-        [self.bottomBarSelectedLabel setHidden:NO];
-        POPSpringAnimation *sizeAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-        sizeAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.6, 0.6)];
-        sizeAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1,1)];
-        sizeAnimation.springSpeed = 20.f;
-        sizeAnimation.springBounciness = 20.0f;
-        [self.bottomBarSelectedLabel.layer pop_addAnimation:sizeAnimation forKey:@"paulery"];
-    } else {
-        [self.bottomBarSelectedLabel setHidden:YES];
+        [self.bottomBarLeftBtn setHidden:YES];
     }
 }
 
