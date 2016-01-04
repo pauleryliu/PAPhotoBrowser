@@ -56,10 +56,13 @@ static NSString * const reuseIdentifier = @"Cell";
     
     self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.showsVerticalScrollIndicator = NO;
-    [self.collectionView scrollToItemAtIndexPath:self.jumpIndexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+    
+    if (self.jumpIndexPath.row >= 0) {
+        
+        [self.collectionView scrollToItemAtIndexPath:self.jumpIndexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+    }
     self.collectionView.pagingEnabled = YES;
     [self.collectionView registerClass:[PAImagePickerPreviewCell class] forCellWithReuseIdentifier:@"identifier"];
-    
 }
 
 #pragma mark -- Private Method
@@ -81,7 +84,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.rightBarBtn addTarget:self action:@selector(rightBarBtnPressed) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightBarBtn];
     self.navigationItem.rightBarButtonItem = rightBarItem;
-
+    
     UIButton *btn = [self setLeftBarItem:@"icon_back" accessibilityHint:@"点两下返回" accesssibilityLabel:@"返回"];
     [btn addTarget:self action:@selector(popVCwithAnimation) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -89,7 +92,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (UIButton *)setLeftBarItem:(NSString *)imageName accessibilityHint:(NSString *)hint accesssibilityLabel:(NSString *)label
 {
     UIImage *image = [UIImage imageNamed:imageName];
-//    UIImage *imageHighlight = [UIHelper image:image withAlpha:PA_BARBUTTON_HIGHLIGHT_ALPHA];
+    //    UIImage *imageHighlight = [UIHelper image:image withAlpha:PA_BARBUTTON_HIGHLIGHT_ALPHA];
     
     UIImage *imageHighlight;
     
@@ -101,9 +104,9 @@ static NSString * const reuseIdentifier = @"Cell";
     [button setAdjustsImageWhenHighlighted:NO];
     button.frame= CGRectMake(0.0, 0.0, 48, image.size.height);
     button.imageEdgeInsets = UIEdgeInsetsMake(0, -42, 0, 0);
-//    if (!MyDevice().isIOS7AndAbove) {
-//        button.imageEdgeInsets = UIEdgeInsetsMake(0, -18, 0, 0);
-//    }
+    //    if (!MyDevice().isIOS7AndAbove) {
+    //        button.imageEdgeInsets = UIEdgeInsetsMake(0, -18, 0, 0);
+    //    }
     UIBarButtonItem *forward = [[UIBarButtonItem alloc] initWithCustomView:button];
     forward.accessibilityHint = hint;
     forward.accessibilityLabel = label;
@@ -155,8 +158,8 @@ static NSString * const reuseIdentifier = @"Cell";
 {
     if (self.selectedAsserts.count >= self.maxNumberOfPhotos && ![self.rightBarBtn isSelected]) {
         // 超过范围
-//        NSString *tip = [NSString stringWithFormat:@"最多只能选取%ld张图片哦",self.maxNumberOfPhotos];
-//        PostMsg(tip);
+        //        NSString *tip = [NSString stringWithFormat:@"最多只能选取%ld张图片哦",self.maxNumberOfPhotos];
+        //        PostMsg(tip);
         return;
     }
     
@@ -182,12 +185,12 @@ static NSString * const reuseIdentifier = @"Cell";
         self.bottomBarSelectedLabel.text = [NSString stringWithFormat:@"%ld",(long)self.selectedAsserts.count];
         [self.bottomBarSelectedLabel setHidden:NO];
         
-//        POPSpringAnimation *sizeAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-//        sizeAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.6, 0.6)];
-//        sizeAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1,1)];
-//        sizeAnimation.springSpeed = 20.f;
-//        sizeAnimation.springBounciness = 20.0f;
-//        [self.bottomBarSelectedLabel.layer pop_addAnimation:sizeAnimation forKey:@"paulery"];
+        //        POPSpringAnimation *sizeAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+        //        sizeAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.6, 0.6)];
+        //        sizeAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1,1)];
+        //        sizeAnimation.springSpeed = 20.f;
+        //        sizeAnimation.springBounciness = 20.0f;
+        //        [self.bottomBarSelectedLabel.layer pop_addAnimation:sizeAnimation forKey:@"paulery"];
     } else {
         [self.bottomBarSelectedLabel setHidden:YES];
     }
@@ -286,7 +289,7 @@ static NSString * const reuseIdentifier = @"Cell";
         [self.bottomToolBarView setHidden:NO];
         self.navigationController.navigationBar.alpha = 1.0;
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-         self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
         
     } else {
         [self.bottomToolBarView setHidden:YES];
