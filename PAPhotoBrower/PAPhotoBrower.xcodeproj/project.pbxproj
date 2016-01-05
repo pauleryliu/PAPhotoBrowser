@@ -56,6 +56,9 @@
 		994696701C082DE800333CC7 /* PAPhotoBrowserHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9946966F1C082DE800333CC7 /* PAPhotoBrowserHelper.m */; };
 		9960B8261C0C889000BCE1B0 /* video_switch@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9960B8251C0C889000BCE1B0 /* video_switch@3x.png */; };
 		BCD5D085FBB2A28D8FC1A0F2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FBF5999C5E93E9DD5CFEEDB /* libPods.a */; };
+		DA4D619F1C3A552800AD97EC /* PAActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4D619A1C3A552700AD97EC /* PAActionSheet.m */; settings = {ASSET_TAGS = (); }; };
+		DA4D61A01C3A552800AD97EC /* PAFetchImges.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4D619C1C3A552800AD97EC /* PAFetchImges.m */; settings = {ASSET_TAGS = (); }; };
+		DA4D61A11C3A552800AD97EC /* PAPreviewImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4D619E1C3A552800AD97EC /* PAPreviewImageCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		FC4EB6DC1C18278700A81B01 /* PATapImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4EB6DB1C18278700A81B01 /* PATapImageView.m */; };
 		FC4EB6DF1C18283200A81B01 /* PATapView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4EB6DE1C18283200A81B01 /* PATapView.m */; };
 		FC4EB6E21C1828A600A81B01 /* PAZoomingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4EB6E11C1828A600A81B01 /* PAZoomingScrollView.m */; };
@@ -151,6 +154,12 @@
 		9946966F1C082DE800333CC7 /* PAPhotoBrowserHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAPhotoBrowserHelper.m; sourceTree = "<group>"; };
 		9960B8251C0C889000BCE1B0 /* video_switch@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_switch@3x.png"; sourceTree = "<group>"; };
 		AFC74990D486F9047C6234E4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		DA4D61991C3A552700AD97EC /* PAActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAActionSheet.h; sourceTree = "<group>"; };
+		DA4D619A1C3A552700AD97EC /* PAActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAActionSheet.m; sourceTree = "<group>"; };
+		DA4D619B1C3A552800AD97EC /* PAFetchImges.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFetchImges.h; sourceTree = "<group>"; };
+		DA4D619C1C3A552800AD97EC /* PAFetchImges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAFetchImges.m; sourceTree = "<group>"; };
+		DA4D619D1C3A552800AD97EC /* PAPreviewImageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAPreviewImageCollectionViewCell.h; sourceTree = "<group>"; };
+		DA4D619E1C3A552800AD97EC /* PAPreviewImageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAPreviewImageCollectionViewCell.m; sourceTree = "<group>"; };
 		FC4EB6DA1C18278700A81B01 /* PATapImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATapImageView.h; sourceTree = "<group>"; };
 		FC4EB6DB1C18278700A81B01 /* PATapImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATapImageView.m; sourceTree = "<group>"; };
 		FC4EB6DD1C18283200A81B01 /* PATapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATapView.h; sourceTree = "<group>"; };
@@ -338,6 +347,12 @@
 				994696431C07E5C700333CC7 /* PAImagePickerGroupController.m */,
 				994696461C07E5CF00333CC7 /* PAImagePickerPreviewViewController.h */,
 				994696471C07E5CF00333CC7 /* PAImagePickerPreviewViewController.m */,
+				DA4D61991C3A552700AD97EC /* PAActionSheet.h */,
+				DA4D619A1C3A552700AD97EC /* PAActionSheet.m */,
+				DA4D619B1C3A552800AD97EC /* PAFetchImges.h */,
+				DA4D619C1C3A552800AD97EC /* PAFetchImges.m */,
+				DA4D619D1C3A552800AD97EC /* PAPreviewImageCollectionViewCell.h */,
+				DA4D619E1C3A552800AD97EC /* PAPreviewImageCollectionViewCell.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -622,6 +637,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA4D619F1C3A552800AD97EC /* PAActionSheet.m in Sources */,
+				993EFD761C0A9D2D00F0CA84 /* PAVideoCropHanderView.m in Sources */,
 				994696481C07E5CF00333CC7 /* PAImagePickerPreviewViewController.m in Sources */,
 				994696451C07E5C700333CC7 /* PAImagePickerGroupController.m in Sources */,
 				FC4EB6DC1C18278700A81B01 /* PATapImageView.m in Sources */,
@@ -635,7 +652,10 @@
 				993EFDB81C0AA5CB00F0CA84 /* QBImageLoadingProgressBar.m in Sources */,
 				994696101C07631A00333CC7 /* ViewController.m in Sources */,
 				9946964B1C07E5E700333CC7 /* PAImagePickerPreviewCell.m in Sources */,
+				993EFD771C0A9D2D00F0CA84 /* PAVideoCropView.m in Sources */,
+				DA4D61A11C3A552800AD97EC /* PAPreviewImageCollectionViewCell.m in Sources */,
 				993EFD8C1C0A9D9A00F0CA84 /* PAVideoRecorderVC.m in Sources */,
+				DA4D61A01C3A552800AD97EC /* PAFetchImges.m in Sources */,
 				993EFD811C0A9D7200F0CA84 /* PAVideoRecorder.m in Sources */,
 				9946960D1C07631A00333CC7 /* AppDelegate.m in Sources */,
 				993EFD821C0A9D7200F0CA84 /* PAVideoRecorderHelper.m in Sources */,

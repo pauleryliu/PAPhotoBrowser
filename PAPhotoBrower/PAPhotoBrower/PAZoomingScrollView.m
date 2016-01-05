@@ -51,7 +51,7 @@
         UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panView:)];
         [panGesture setMinimumNumberOfTouches:1];
         [panGesture setMaximumNumberOfTouches:1];
-        [_photoImageView addGestureRecognizer:panGesture];
+//        [_photoImageView addGestureRecognizer:panGesture];
     }
     return self;
 }
