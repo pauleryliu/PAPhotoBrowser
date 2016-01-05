@@ -33,6 +33,15 @@
 		993EFDB41C0AA06100F0CA84 /* video_recorder_focus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 993EFDA41C0AA06100F0CA84 /* video_recorder_focus@2x.png */; };
 		993EFDB81C0AA5CB00F0CA84 /* QBImageLoadingProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 993EFDB71C0AA5CB00F0CA84 /* QBImageLoadingProgressBar.m */; };
 		993EFDBB1C0AA61400F0CA84 /* TKProgressBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 993EFDBA1C0AA61400F0CA84 /* TKProgressBarView.m */; };
+		65EB44EB1C3BBD7700207D05 /* PAVideoPickerPreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EB44EA1C3BBD7700207D05 /* PAVideoPickerPreviewCell.m */; };
+		65EB44F41C3BBF5E00207D05 /* video-player-close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65EB44EC1C3BBF5E00207D05 /* video-player-close@2x.png */; };
+		65EB44F51C3BBF5E00207D05 /* video-player-close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65EB44ED1C3BBF5E00207D05 /* video-player-close@3x.png */; };
+		65EB44F61C3BBF5E00207D05 /* video-player-fullscreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65EB44EE1C3BBF5E00207D05 /* video-player-fullscreen@2x.png */; };
+		65EB44F71C3BBF5E00207D05 /* video-player-fullscreen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65EB44EF1C3BBF5E00207D05 /* video-player-fullscreen@3x.png */; };
+		65EB44F81C3BBF5E00207D05 /* video-player-pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65EB44F01C3BBF5E00207D05 /* video-player-pause@2x.png */; };
+		65EB44F91C3BBF5E00207D05 /* video-player-pause@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65EB44F11C3BBF5E00207D05 /* video-player-pause@3x.png */; };
+		65EB44FA1C3BBF5E00207D05 /* video-player-play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65EB44F21C3BBF5E00207D05 /* video-player-play@2x.png */; };
+		65EB44FB1C3BBF5E00207D05 /* video-player-play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65EB44F31C3BBF5E00207D05 /* video-player-play@3x.png */; };
 		9946960A1C07631A00333CC7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 994696091C07631A00333CC7 /* main.m */; };
 		9946960D1C07631A00333CC7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9946960C1C07631A00333CC7 /* AppDelegate.m */; };
 		994696101C07631A00333CC7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9946960F1C07631A00333CC7 /* ViewController.m */; };
@@ -116,6 +125,16 @@
 		993EFDB71C0AA5CB00F0CA84 /* QBImageLoadingProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBImageLoadingProgressBar.m; sourceTree = "<group>"; };
 		993EFDB91C0AA61400F0CA84 /* TKProgressBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKProgressBarView.h; sourceTree = "<group>"; };
 		993EFDBA1C0AA61400F0CA84 /* TKProgressBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKProgressBarView.m; sourceTree = "<group>"; };
+		65EB44E91C3BBD7700207D05 /* PAVideoPickerPreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAVideoPickerPreviewCell.h; sourceTree = "<group>"; };
+		65EB44EA1C3BBD7700207D05 /* PAVideoPickerPreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAVideoPickerPreviewCell.m; sourceTree = "<group>"; };
+		65EB44EC1C3BBF5E00207D05 /* video-player-close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video-player-close@2x.png"; sourceTree = "<group>"; };
+		65EB44ED1C3BBF5E00207D05 /* video-player-close@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video-player-close@3x.png"; sourceTree = "<group>"; };
+		65EB44EE1C3BBF5E00207D05 /* video-player-fullscreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video-player-fullscreen@2x.png"; sourceTree = "<group>"; };
+		65EB44EF1C3BBF5E00207D05 /* video-player-fullscreen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video-player-fullscreen@3x.png"; sourceTree = "<group>"; };
+		65EB44F01C3BBF5E00207D05 /* video-player-pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video-player-pause@2x.png"; sourceTree = "<group>"; };
+		65EB44F11C3BBF5E00207D05 /* video-player-pause@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video-player-pause@3x.png"; sourceTree = "<group>"; };
+		65EB44F21C3BBF5E00207D05 /* video-player-play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video-player-play@2x.png"; sourceTree = "<group>"; };
+		65EB44F31C3BBF5E00207D05 /* video-player-play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video-player-play@3x.png"; sourceTree = "<group>"; };
 		994696051C07631A00333CC7 /* PAPhotoBrower.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PAPhotoBrower.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		994696091C07631A00333CC7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9946960B1C07631A00333CC7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -372,6 +391,8 @@
 				FC4EB6DE1C18283200A81B01 /* PATapView.m */,
 				FC4EB6E01C1828A600A81B01 /* PAZoomingScrollView.h */,
 				FC4EB6E11C1828A600A81B01 /* PAZoomingScrollView.m */,
+				65EB44E91C3BBD7700207D05 /* PAVideoPickerPreviewCell.h */,
+				65EB44EA1C3BBD7700207D05 /* PAVideoPickerPreviewCell.m */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -398,6 +419,14 @@
 				9946965B1C07EAE100333CC7 /* photo_localSelected_camera@3x.png */,
 				9946965E1C07EAF300333CC7 /* photo_localUnselected_tag@3x.png */,
 				994696601C07EB1D00333CC7 /* icon_back@3x.png */,
+				65EB44EC1C3BBF5E00207D05 /* video-player-close@2x.png */,
+				65EB44ED1C3BBF5E00207D05 /* video-player-close@3x.png */,
+				65EB44EE1C3BBF5E00207D05 /* video-player-fullscreen@2x.png */,
+				65EB44EF1C3BBF5E00207D05 /* video-player-fullscreen@3x.png */,
+				65EB44F01C3BBF5E00207D05 /* video-player-pause@2x.png */,
+				65EB44F11C3BBF5E00207D05 /* video-player-pause@3x.png */,
+				65EB44F21C3BBF5E00207D05 /* video-player-play@2x.png */,
+				65EB44F31C3BBF5E00207D05 /* video-player-play@3x.png */,
 			);
 			name = Image;
 			sourceTree = "<group>";
@@ -553,6 +582,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				993EFD921C0AA05A00F0CA84 /* video_crop_handle_left@3x.png in Resources */,
+				65EB44F71C3BBF5E00207D05 /* video-player-fullscreen@3x.png in Resources */,
+				65EB44F61C3BBF5E00207D05 /* video-player-fullscreen@2x.png in Resources */,
+				65EB44F51C3BBF5E00207D05 /* video-player-close@3x.png in Resources */,
 				9946965D1C07EAE100333CC7 /* photo_localSelected_camera@3x.png in Resources */,
 				993EFDA81C0AA06100F0CA84 /* video_localSelected@3x.png in Resources */,
 				993EFDB41C0AA06100F0CA84 /* video_recorder_focus@2x.png in Resources */,
@@ -564,6 +596,10 @@
 				993EFDB11C0AA06100F0CA84 /* video_pointToTopArrow@3x.png in Resources */,
 				9946965C1C07EAE100333CC7 /* photo_localSelected_tag@3x.png in Resources */,
 				993EFDAE1C0AA06100F0CA84 /* videoEncodeLoading@2x.png in Resources */,
+				65EB44F91C3BBF5E00207D05 /* video-player-pause@3x.png in Resources */,
+				65EB44F41C3BBF5E00207D05 /* video-player-close@2x.png in Resources */,
+				65EB44FA1C3BBF5E00207D05 /* video-player-play@2x.png in Resources */,
+				65EB44F81C3BBF5E00207D05 /* video-player-pause@2x.png in Resources */,
 				994696181C07631A00333CC7 /* LaunchScreen.storyboard in Resources */,
 				993EFDAA1C0AA06100F0CA84 /* video_finish@2x.png in Resources */,
 				994696151C07631A00333CC7 /* Assets.xcassets in Resources */,
@@ -576,6 +612,7 @@
 				994696611C07EB1D00333CC7 /* icon_back@3x.png in Resources */,
 				993EFDAF1C0AA06100F0CA84 /* video_pointToBottomArrow@3x.png in Resources */,
 				993EFD931C0AA05A00F0CA84 /* video_crop_handle_right@3x.png in Resources */,
+				65EB44FB1C3BBF5E00207D05 /* video-player-play@3x.png in Resources */,
 				994696131C07631A00333CC7 /* Main.storyboard in Resources */,
 				993EFDA61C0AA06100F0CA84 /* video_flash@2x.png in Resources */,
 				9960B8261C0C889000BCE1B0 /* video_switch@3x.png in Resources */,
@@ -642,6 +679,7 @@
 				994696481C07E5CF00333CC7 /* PAImagePickerPreviewViewController.m in Sources */,
 				994696451C07E5C700333CC7 /* PAImagePickerGroupController.m in Sources */,
 				FC4EB6DC1C18278700A81B01 /* PATapImageView.m in Sources */,
+				65EB44EB1C3BBD7700207D05 /* PAVideoPickerPreviewCell.m in Sources */,
 				994696701C082DE800333CC7 /* PAPhotoBrowserHelper.m in Sources */,
 				FC4EB6DF1C18283200A81B01 /* PATapView.m in Sources */,
 				FC4EB6E21C1828A600A81B01 /* PAZoomingScrollView.m in Sources */,
