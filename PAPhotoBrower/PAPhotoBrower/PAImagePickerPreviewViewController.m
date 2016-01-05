@@ -185,7 +185,6 @@ static NSString * const reuseIdentifier = @"Cell";
         [self.originSendBtn setSelected:NO];
         
         // 缩略图
-        
         CGImageRef ref = [self.currentAsset thumbnail];
         UIImage *img = [[UIImage alloc]initWithCGImage:ref];
         
@@ -194,7 +193,6 @@ static NSString * const reuseIdentifier = @"Cell";
         [self.originSendBtn setSelected:YES];
         
         // 原图
-        
         CGImageRef ref = [[self.currentAsset  defaultRepresentation]fullResolutionImage];
         
         UIImage *img = [[UIImage alloc]initWithCGImage:ref];
