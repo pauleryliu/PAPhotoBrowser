@@ -9,6 +9,7 @@
 #import "PAImagePickerPreviewViewController.h"
 #import "PAImagePickerPreviewCell.h"
 #import <POP.h>
+#import "PAVideoPickerPreviewCell.h"
 
 #define UIColorFromRGB(rgbValue) \
 [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
@@ -69,7 +70,6 @@ static NSString * const reuseIdentifier = @"Cell";
     }
     self.collectionView.pagingEnabled = YES;
     [self.collectionView registerClass:[PAImagePickerPreviewCell class] forCellWithReuseIdentifier:@"identifier"];
-    
     self.currentAsset = self.asserts[0];
     
     if (self.currentAsset) {
@@ -78,8 +78,9 @@ static NSString * const reuseIdentifier = @"Cell";
         UIImage *img = [[UIImage alloc]initWithCGImage:ref];
         NSData * data = UIImageJPEGRepresentation(img, 1.0);
         
-        [self.originSendBtn setTitle:[NSString stringWithFormat:@"原图: %.2fM", data.length / (1000 * 1.0 * 1000 * 1.0)] forState:UIControlStateNormal];
+        [self.originSendBtn setTitle:[NSString stringWithFormat:@"Origin: %.2fM", data.length / (1000 * 1.0 * 1000 * 1.0)] forState:UIControlStateNormal];
     }
+    [self.collectionView registerClass:[PAVideoPickerPreviewCell class] forCellWithReuseIdentifier:@"video"];
 }
 
 #pragma mark -- Private Method
@@ -138,9 +139,8 @@ static NSString * const reuseIdentifier = @"Cell";
     self.bottomToolBarView.alpha = 0.8;
     [self.view addSubview:self.bottomToolBarView];
     
-    self.bottomBarRightBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.bottomToolBarView.frame.size.width - 50,0, 30, self.bottomToolBarView.frame.size.height)];
+    self.bottomBarRightBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.bottomToolBarView.frame.size.width - 70,0, 50, self.bottomToolBarView.frame.size.height)];
     [self.bottomBarRightBtn setTitleColor:UIColorFromRGB(0xffa015) forState:UIControlStateNormal];
-    
     self.bottomBarRightBtn.titleLabel.font = [UIFont systemFontOfSize:15.0f];
     self.bottomBarRightBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
     [self.bottomBarRightBtn addTarget:self action:@selector(bottomBarRightBtnPressed) forControlEvents:UIControlEventTouchUpInside];
@@ -159,13 +159,12 @@ static NSString * const reuseIdentifier = @"Cell";
     
     
     //! @author Dylan - 2015-1-4
-    
     self.originSendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.originSendBtn.frame = CGRectMake(10, self.bottomToolBarView.frame.size.height / 2 - 20 / 2, 90, 20);
+    self.originSendBtn.frame = CGRectMake(10, self.bottomToolBarView.frame.size.height / 2 - 40 / 2, 120, 40);
     [self.originSendBtn setImage:[UIImage imageNamed:@"photo_localUnselected_tag"] forState:UIControlStateNormal];
     [self.originSendBtn setImage:[UIImage imageNamed:@"photo_localSelected_tag"] forState:UIControlStateSelected];
     [self.originSendBtn setTitleColor:UIColorFromRGB(0xffa015) forState:UIControlStateNormal];
-    [self.originSendBtn setTitle:@"原图 0.0M" forState:UIControlStateNormal];
+    [self.originSendBtn setTitle:@"Origin" forState:UIControlStateNormal];
     self.originSendBtn.titleLabel.font = [UIFont systemFontOfSize:12.];
     self.originSendBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
     [self.originSendBtn addTarget:self action:@selector(originSendButtonAction) forControlEvents:UIControlEventTouchUpInside];
@@ -211,7 +210,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)rightBarBtnPressed
 {
     if (self.selectedAsserts.count >= self.maxNumberOfPhotos && ![self.rightBarBtn isSelected]) {
-        NSString *tip = [NSString stringWithFormat:@"you can choose just %ld number of photos",self.maxNumberOfPhotos];
+        NSString *tip = [NSString stringWithFormat:@"you can choose just %ld number of photos",(long)self.maxNumberOfPhotos];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:tip delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
         [alertView show];
         return;
@@ -288,8 +287,18 @@ static NSString * const reuseIdentifier = @"Cell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     self.currentAsset = self.asserts[indexPath.row];
-    PAImagePickerPreviewCell *cell = (PAImagePickerPreviewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"identifier" forIndexPath:indexPath];
-    [cell bindData:self.asserts[indexPath.row]];
+    
+    UICollectionViewCell *cell = nil;
+    
+    NSString *extenName = [[[[[self.currentAsset defaultRepresentation] filename] componentsSeparatedByString:@"."] lastObject] lowercaseString];
+    if ([extenName isEqualToString:@"mp4"] || [extenName isEqualToString:@"mov"]) {
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"video" forIndexPath:indexPath];
+        [(PAVideoPickerPreviewCell*)cell bindData:self.asserts[indexPath.row]];
+        
+    }else{
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"identifier" forIndexPath:indexPath];
+        [(PAImagePickerPreviewCell*)cell bindData:self.asserts[indexPath.row]];
+    }
     
     BOOL isAssetExist = NO;
     for (ALAsset *asset in self.selectedAsserts) {
@@ -370,7 +379,7 @@ static NSString * const reuseIdentifier = @"Cell";
         UIImage *img = [[UIImage alloc]initWithCGImage:ref];
         NSData * data = UIImageJPEGRepresentation(img, 1.0);
         
-        [self.originSendBtn setTitle:[NSString stringWithFormat:@"原图: %.2fM", data.length / (1000 * 1.0 * 1000 * 1.0)] forState:UIControlStateNormal];
+        [self.originSendBtn setTitle:[NSString stringWithFormat:@"Origin: %.2fM", data.length / (1000 * 1.0 * 1000 * 1.0)] forState:UIControlStateNormal];
     }
 }
 

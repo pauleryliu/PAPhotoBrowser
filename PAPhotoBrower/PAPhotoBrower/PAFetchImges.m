@@ -35,7 +35,6 @@
     
 //
     __block NSMutableArray *assetsArray = [NSMutableArray array];
-    __weak typeof(self) weakSelf = self;
     //设置全选模式
     NSNumber *type = @(ALAssetsGroupLibrary);
     [self.assetsLibrary enumerateGroupsWithTypes:[type unsignedIntegerValue]
