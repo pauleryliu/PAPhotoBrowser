@@ -32,7 +32,11 @@
 
 - (void)bindData:(ALAsset*)asset
 {
-    [self addSubview:self.scrollView];
+    
+    if (!_scrollView) {
+        
+        [self addSubview:self.scrollView];
+    }
     
     CGImageRef ref = [[asset defaultRepresentation] fullScreenImage];
     UIImage *img = [[UIImage alloc]initWithCGImage:ref];

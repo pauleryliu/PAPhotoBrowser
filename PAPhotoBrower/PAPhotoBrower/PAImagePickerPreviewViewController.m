@@ -22,6 +22,9 @@ alpha:1.0]
 
 @property (strong,nonatomic) UIButton *bottomBarRightBtn;
 @property (strong,nonatomic) UILabel *bottomBarSelectedLabel;
+
+@property (nonatomic,strong) UIButton *originSendBtn;
+
 @property (strong,nonatomic) UIView *bottomToolBarView;
 @property (strong,nonatomic) ALAsset *currentAsset;
 @property (nonatomic) CGSize cellSize;
@@ -29,6 +32,8 @@ alpha:1.0]
 @property (nonatomic) CGFloat selectionSpacing;
 @property (nonatomic,strong) UIButton *navLeftBtn;
 @property (nonatomic,strong) UIButton *rightBarBtn;
+
+@property (nonatomic, strong) NSString * originSizeStr;
 
 @end
 
@@ -57,10 +62,24 @@ static NSString * const reuseIdentifier = @"Cell";
     
     self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.showsVerticalScrollIndicator = NO;
-    [self.collectionView scrollToItemAtIndexPath:self.jumpIndexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+    
+    if (self.jumpIndexPath.row >= 0) {
+        
+        [self.collectionView scrollToItemAtIndexPath:self.jumpIndexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+    }
     self.collectionView.pagingEnabled = YES;
     [self.collectionView registerClass:[PAImagePickerPreviewCell class] forCellWithReuseIdentifier:@"identifier"];
     
+    self.currentAsset = self.asserts[0];
+    
+    if (self.currentAsset) {
+        
+        CGImageRef ref = [[self.currentAsset  defaultRepresentation]fullResolutionImage];
+        UIImage *img = [[UIImage alloc]initWithCGImage:ref];
+        NSData * data = UIImageJPEGRepresentation(img, 1.0);
+        
+        [self.originSendBtn setTitle:[NSString stringWithFormat:@"原图: %.2fM", data.length / (1000 * 1.0 * 1000 * 1.0)] forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark -- Private Method
@@ -79,7 +98,6 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.rightBarBtn addTarget:self action:@selector(rightBarBtnPressed) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightBarBtn];
     self.navigationItem.rightBarButtonItem = rightBarItem;
-
     UIButton *btn = [self setLeftBarItem:@"icon_back" accessibilityHint:@"Tap Double Back" accesssibilityLabel:@"Back"];
     [btn addTarget:self action:@selector(popVCwithAnimation) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -87,6 +105,8 @@ static NSString * const reuseIdentifier = @"Cell";
 - (UIButton *)setLeftBarItem:(NSString *)imageName accessibilityHint:(NSString *)hint accesssibilityLabel:(NSString *)label
 {
     UIImage *image = [UIImage imageNamed:imageName];
+    //    UIImage *imageHighlight = [UIHelper image:image withAlpha:PA_BARBUTTON_HIGHLIGHT_ALPHA];
+    
     UIImage *imageHighlight;
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setImage:image forState:UIControlStateNormal];
@@ -96,6 +116,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [button setAdjustsImageWhenHighlighted:NO];
     button.frame= CGRectMake(0.0, 0.0, 48, image.size.height);
     button.imageEdgeInsets = UIEdgeInsetsMake(0, -42, 0, 0);
+    
     UIBarButtonItem *forward = [[UIBarButtonItem alloc] initWithCustomView:button];
     forward.accessibilityHint = hint;
     forward.accessibilityLabel = label;
@@ -136,11 +157,57 @@ static NSString * const reuseIdentifier = @"Cell";
     self.bottomBarSelectedLabel.textAlignment = NSTextAlignmentCenter;
     [self.bottomToolBarView addSubview:self.bottomBarSelectedLabel];
     
+    
+    //! @author Dylan - 2015-1-4
+    
+    self.originSendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.originSendBtn.frame = CGRectMake(10, self.bottomToolBarView.frame.size.height / 2 - 20 / 2, 90, 20);
+    [self.originSendBtn setImage:[UIImage imageNamed:@"photo_localUnselected_tag"] forState:UIControlStateNormal];
+    [self.originSendBtn setImage:[UIImage imageNamed:@"photo_localSelected_tag"] forState:UIControlStateSelected];
+    [self.originSendBtn setTitleColor:UIColorFromRGB(0xffa015) forState:UIControlStateNormal];
+    [self.originSendBtn setTitle:@"原图 0.0M" forState:UIControlStateNormal];
+    self.originSendBtn.titleLabel.font = [UIFont systemFontOfSize:12.];
+    self.originSendBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
+    [self.originSendBtn addTarget:self action:@selector(originSendButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.bottomToolBarView addSubview:self.originSendBtn];
+    
     if (self.selectedAsserts.count > 0) {
         [self.bottomBarSelectedLabel setHidden:NO];
     } else {
         [self.bottomBarSelectedLabel setHidden:YES];
     }
+}
+
+- (void)originSendButtonAction {
+    
+    if ([self.originSendBtn isSelected]) {
+        
+        [self.originSendBtn setSelected:NO];
+        
+        // 缩略图
+        
+        CGImageRef ref = [self.currentAsset thumbnail];
+        UIImage *img = [[UIImage alloc]initWithCGImage:ref];
+        
+    } else {
+        
+        [self.originSendBtn setSelected:YES];
+        
+        // 原图
+        
+        CGImageRef ref = [[self.currentAsset  defaultRepresentation]fullResolutionImage];
+        
+        UIImage *img = [[UIImage alloc]initWithCGImage:ref];
+        NSData * data = UIImageJPEGRepresentation(img, 1.0);
+    }
+    
+    [UIView animateWithDuration:.1 animations:^{
+        
+        self.originSendBtn.transform = CGAffineTransformMakeScale(1.1, 1.1);
+    } completion:^(BOOL finished) {
+        
+        self.originSendBtn.transform = CGAffineTransformIdentity;
+    }];
 }
 
 - (void)rightBarBtnPressed
@@ -275,13 +342,37 @@ static NSString * const reuseIdentifier = @"Cell";
         [self.bottomToolBarView setHidden:NO];
         self.navigationController.navigationBar.alpha = 1.0;
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-         self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
         
     } else {
         [self.bottomToolBarView setHidden:YES];
         self.navigationController.navigationBar.alpha = 0.0;
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
+    NSInteger index = scrollView.contentOffset.x / [UIScreen mainScreen].bounds.size.width;
+    
+    self.currentAsset = self.asserts[index];
+    
+    if (self.currentAsset) {
+        
+        //  获取缩略图：
+        
+        //        CGImageRef ref = [self.currentAsset thumbnail];
+        //        
+        //        UIImage *img = [[UIImage alloc]initWithCGImage:ref];
+        
+        // 获取高清相片：
+        
+        CGImageRef ref = [[self.currentAsset  defaultRepresentation]fullResolutionImage];
+        UIImage *img = [[UIImage alloc]initWithCGImage:ref];
+        NSData * data = UIImageJPEGRepresentation(img, 1.0);
+        
+        [self.originSendBtn setTitle:[NSString stringWithFormat:@"原图: %.2fM", data.length / (1000 * 1.0 * 1000 * 1.0)] forState:UIControlStateNormal];
     }
 }
 
