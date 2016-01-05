@@ -8,6 +8,7 @@
 
 #import "PAImagePickerPreviewViewController.h"
 #import "PAImagePickerPreviewCell.h"
+#import "PAVideoPickerPreviewCell.h"
 
 #define UIColorFromRGB(rgbValue) \
 [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
@@ -59,7 +60,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.collectionView scrollToItemAtIndexPath:self.jumpIndexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
     self.collectionView.pagingEnabled = YES;
     [self.collectionView registerClass:[PAImagePickerPreviewCell class] forCellWithReuseIdentifier:@"identifier"];
-    
+    [self.collectionView registerClass:[PAVideoPickerPreviewCell class] forCellWithReuseIdentifier:@"video"];
 }
 
 #pragma mark -- Private Method
@@ -236,8 +237,18 @@ static NSString * const reuseIdentifier = @"Cell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     self.currentAsset = self.asserts[indexPath.row];
-    PAImagePickerPreviewCell *cell = (PAImagePickerPreviewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"identifier" forIndexPath:indexPath];
-    [cell bindData:self.asserts[indexPath.row]];
+    
+    UICollectionViewCell *cell = nil;
+    
+    NSString *extenName = [[[[[self.currentAsset defaultRepresentation] filename] componentsSeparatedByString:@"."] lastObject] lowercaseString];
+    if ([extenName isEqualToString:@"mp4"] || [extenName isEqualToString:@"mov"]) {
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"video" forIndexPath:indexPath];
+        [(PAVideoPickerPreviewCell*)cell bindData:self.asserts[indexPath.row]];
+        
+    }else{
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"identifier" forIndexPath:indexPath];
+        [(PAImagePickerPreviewCell*)cell bindData:self.asserts[indexPath.row]];
+    }
     
     BOOL isAssetExist = NO;
     for (ALAsset *asset in self.selectedAsserts) {
