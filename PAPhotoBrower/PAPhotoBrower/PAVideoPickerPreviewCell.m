@@ -19,6 +19,7 @@
 
 @implementation PAVideoPickerPreviewCell
 {
+    AVPlayerItem *playItem;
     CGSize videoSize;
 }
 -(instancetype)initWithFrame:(CGRect)frame{
@@ -35,6 +36,9 @@
 }
 -(void)videoPlayDidEnd:(NSNotification *)nofification{
     [self.player pause];
+    self.playBtn.hidden = NO;
+    self.playBtn.selected = NO;
+    [playItem seekToTime:kCMTimeZero];
 }
 -(void)bindData:(ALAsset *)asset{
     [self.player pause];
@@ -43,7 +47,7 @@
     ALAssetRepresentation *representation = [asset defaultRepresentation];
     videoSize = [representation dimensions];
     
-    AVPlayerItem *playItem = [AVPlayerItem playerItemWithURL:[representation url]];
+    playItem = [AVPlayerItem playerItemWithURL:[representation url]];
     [self.player replaceCurrentItemWithPlayerItem:playItem];
 }
 -(void)layoutSubviews{
@@ -77,6 +81,7 @@
 -(AVPlayer *)player{
     if (!_player) {
         _player = [[AVPlayer alloc] init];
+        _player.rate = 1.0f;
     }
     return _player;
 }
